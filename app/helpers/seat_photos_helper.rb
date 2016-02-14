@@ -1,0 +1,2 @@
+module SeatPhotosHelper
+end

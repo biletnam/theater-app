@@ -11,7 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211014338) do
+ActiveRecord::Schema.define(version: 20160214192301) do
+
+  create_table "event_seats", force: :cascade do |t|
+    t.string   "status",             limit: 255
+    t.integer  "scheduled_event_id", limit: 4
+    t.integer  "seat_id",            limit: 4
+    t.integer  "user_id",            limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",                limit: 255
+    t.text     "featured_performers", limit: 65535
+    t.string   "event_type",          limit: 255
+    t.integer  "venue_id",            limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.integer  "venue_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scheduled_events", force: :cascade do |t|
+    t.date     "date"
+    t.time     "time"
+    t.integer  "event_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seat_photos", force: :cascade do |t|
+    t.string   "image",         limit: 255
+    t.string   "caption",       limit: 255
+    t.boolean  "default_photo",             default: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "seat_id",       limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seats", force: :cascade do |t|
+    t.string   "section",     limit: 255
+    t.string   "seat_row",    limit: 255
+    t.integer  "seat_number", limit: 4
+    t.integer  "venue_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -44,6 +97,7 @@ ActiveRecord::Schema.define(version: 20160211014338) do
     t.integer  "user_id",            limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "website",            limit: 255
   end
 
 end

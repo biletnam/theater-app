@@ -43,7 +43,12 @@
 
   <div>
     <p class="label_tag"><%= label_tag "Phone Number:" %></p>
-    <%= text_field_tag :phone, @venue.phone %>
+    <%= text_field_tag :phone, @venue.phone, placeholder: "XXX-XXX-XXXX" %>
+  </div>
+
+  <div>
+    <p class="label_tag"><%= label_tag "Website:" %></p>
+    <%= text_field_tag :website, @venue.website %>
   </div>
 
   <div>

@@ -1,9 +1,15 @@
 class Venue < ActiveRecord::Base
 
+  has_many :events
+  has_many :seats
+  has_many :reviews
+  belongs_to :user
+
   validates :name, :street_address, :city, :state, :zip_code, :phone, :user_id, presence: true
   
+  
   def full_address
-    venue_address = street_address + "\n" + city + ", " + state + zip_code
+    "#{street_address}, #{city}, #{state} #{zip_code}"
   end
 
 end

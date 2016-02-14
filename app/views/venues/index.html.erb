@@ -1,1 +1,8 @@
-<h2>in progress</h2>
+<h1>Venues</h1>
+
+<% @venues.each do |venue| %>
+  <h3><%= link_to venue.name, "/venues/#{venue.id}" %></h3>
+  <h5><%= venue.full_address %></h5>
+  <hr>
+<% end %>
+

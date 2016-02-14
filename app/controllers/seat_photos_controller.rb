@@ -1,0 +1,2 @@
+class SeatPhotosController < ApplicationController
+end
