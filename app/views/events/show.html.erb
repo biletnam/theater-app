@@ -1,1 +1,48 @@
-<h1>Events Happening at <%= 
+<% if @scheduled_event.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@scheduled_event.errors.count, "error") %> prohibited this product from being added to your cart:</h2>
+ 
+    <ul>
+    <% @scheduled_event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<h1><%= @event.name %> at <%= @event.venue.name %></h1>
+
+<h4>Event Type: <%= @event.event_type %></h4>
+<h4>Description: </h4><%= @event.description %>
+
+
+<% if current_user && current_user.vendor %>
+
+<h3>Please Add Individual Scheduled Event Details</h3>
+
+<%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events", method: :post do %>
+
+  <div>
+    <p class="label_tag"><%= label_tag "Date:" %></p>
+    <input id="name" name="name" type="date" />
+  </div>
+
+  <div>
+    <p class="label_tag"><%= label_tag "Time:" %></p>
+    <%= time_field_tag :time, @scheduled_event.time %>
+  </div>
+
+  <div>
+    <p class="label_tag"><%= label_tag "Buy Tickets Link:" %></p>
+    <%= text_field_tag :buy_ticket_link, @scheduled_event.buy_ticket_link %>
+  </div>
+
+  <div id="submit-new"><%= submit_tag "Submit Scheduled Event" %></div>
+
+<% end %>
+<% end %>
+
+
+
+

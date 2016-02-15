@@ -1,0 +1,12 @@
+<h1>All Events </h1>
+
+<% @events.each do |event| %>
+  <h3><%= link_to event.name, "/venues/#{event.venue_id}/events/#{event.id}" %></h3>
+  <h5><%= event.venue.name %></h5>
+  <h5><%= event.venue.full_address %></h5>
+  <hr>
+<% end %>
+
+
+
+

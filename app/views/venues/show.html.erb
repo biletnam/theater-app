@@ -1,3 +1,15 @@
+<% if @event.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this product from being added to your cart:</h2>
+ 
+    <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2><%= @venue.name %></h2>
 
 <div id="venue-default-photo">
@@ -26,6 +38,8 @@
     </tr>
   </table>
 
+<% if current_user && current_user.vendor %>
+
 <h3>Add Events</h3>
 
 <%= form_tag "/venues/#{@venue.id}/events", method: :post do %>
@@ -45,6 +59,12 @@
     <%= text_field_tag :event_type, @event.event_type %>
   </div>
 
+  <div>
+    <p class="label_tag"><%= label_tag "Description:" %></p>
+    <%= text_field_tag :description, @event.description %>
+  </div>
+
   <div id="submit-new"><%= submit_tag "Submit Event" %></div>
 
+<% end %>
 <% end %>

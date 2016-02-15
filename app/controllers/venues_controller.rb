@@ -1,6 +1,7 @@
 class VenuesController < ApplicationController
 
 before_action :authenticate_admin!, only: [:new, :create]
+before_action :authenticate_vendor!, only: [:new, :create]
 
   def index
     @venues = Venue.all
@@ -8,7 +9,6 @@ before_action :authenticate_admin!, only: [:new, :create]
   
   def new
     @venue = Venue.new
-
   end
 
   def create
@@ -33,7 +33,7 @@ before_action :authenticate_admin!, only: [:new, :create]
 
   def show
     @venue = Venue.find(params[:id])
-    @event = @venue.events.new
+    @event = @venue.events.new unless @event
 
   end
 

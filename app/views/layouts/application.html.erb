@@ -10,8 +10,14 @@
 
 <div><%= link_to "Venues", "/venues" %></div>
 
-<% if current_user.admin || current_user.vendor %>
-<div><%= link_to "Add New Venue", "/venues/new" %></div>
+<div> | <% Venue.all.each do |venue| %>
+  <%= link_to venue.name, "/venues/#{venue.id}" %> | 
+<% end %></div>
+
+<div><%= link_to "All Events", "/events" %></div>
+
+<% if current_user && current_user.vendor %>
+  <div><%= link_to "Add New Venue", "/venues/new" %></div>
 <% end %>
 
 <% if user_signed_in? %>
