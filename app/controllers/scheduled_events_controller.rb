@@ -1,5 +1,4 @@
 class ScheduledEventsController < ApplicationController
-end
 
 before_action :authenticate_admin!, only: [:new, :create]
 before_action :authenticate_vendor!, only: [:new, :create]
@@ -23,7 +22,7 @@ before_action :authenticate_vendor!, only: [:new, :create]
 
     if @scheduled_event.save
       flash[:success] = "Scheduled Event Successfully Added."
-      redirect_to "/venues/#{@scheduled_event.event_id}"
+      redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
     else 
       render "events/show"
     end

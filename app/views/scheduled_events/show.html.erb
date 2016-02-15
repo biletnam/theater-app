@@ -1,0 +1,7 @@
+<h2>Scheduled Event Details</h2>
+
+<h4>Show: <%= @scheduled_event.event.name %></h4>
+<h4>Description: </h4><%= @scheduled_event.event.description %>
+<h4>Date: <%= @scheduled_event.date %></h4>
+<h4>Time: <%= @scheduled_event.time %></h4>
+<%= link_to "Buy Tickets", @scheduled_event.buy_ticket_link, :class =>"btn btn-default btn-sm active" %>

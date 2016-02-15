@@ -32,6 +32,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @scheduled_event = @event.scheduled_events.new unless @scheduled_event
+    @scheduled_events = ScheduledEvent.where(event_id: params[:id])
   end
 
 end

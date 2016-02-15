@@ -26,9 +26,9 @@ Rails.application.routes.draw do
   post '/venues/:id/events' => 'events#create'
   get '/venues/:id/events/:id' => 'events#show'
 
-  get '/venues/:id/events/:id/scheduled_events' => 'events#index'
-  post '/venues/:id/events/:id/scheduled_events' => 'events#create'
-  get '/venues/:id/events/:id/scheduled_events/:id' => 'events#show'
+  get '/venues/:id/events/:id/scheduled_events' => 'scheduled_events#index'
+  post '/venues/:id/events/:id/scheduled_events' => 'scheduled_events#create'
+  get '/venues/:id/events/:id/scheduled_events/:id' => 'scheduled_events#show'
 
 
 end

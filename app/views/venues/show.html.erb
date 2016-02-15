@@ -24,19 +24,26 @@
 
 <h3>Upcoming Events</h3>
 
-  <table>
-    <tr>
-      <td>Show</td>
-      <td>Date</td>
-      <td>Time</td>
-    </tr>
+<table>
+  <tr>
+    <td>Show</td>
+    <td>Date</td>
+    <td>Time</td>
+    <td></td>
+  </tr>
 
+ <% @events.each do |event| %>
+   <% all_scheduled_events = event.scheduled_events %>
+   <% all_scheduled_events.each do |scheduled_event|%>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><%= scheduled_event.event.name %></td>
+      <td><%= scheduled_event.date %></td>
+      <td><%= scheduled_event.time %></td>
+      <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link %></td>
     </tr>
-  </table>
+  <% end %>
+<% end %>
+</table>
 
 <% if current_user && current_user.vendor %>
 
@@ -61,7 +68,7 @@
 
   <div>
     <p class="label_tag"><%= label_tag "Description:" %></p>
-    <%= text_field_tag :description, @event.description %>
+    <%= text_area_tag :description, @event.description, :size => "50 x 5" %>
   </div>
 
   <div id="submit-new"><%= submit_tag "Submit Event" %></div>
