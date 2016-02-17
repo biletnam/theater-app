@@ -35,7 +35,7 @@
  <% @events.each do |event| %>
    <% event.scheduled_events.each do |scheduled_event|%>
     <tr>
-      <td><%= scheduled_event.event.name %></td>
+      <td><%= link_to scheduled_event.event.name, "/venues/#{@venue.id}/events/#{scheduled_event.event.id}" %></td>
       <td><%= scheduled_event.friendly_date %></td>
       <td><%= scheduled_event.friendly_time %></td>
       <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link %></td>

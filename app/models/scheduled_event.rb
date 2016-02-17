@@ -7,14 +7,14 @@ class ScheduledEvent < ActiveRecord::Base
   # validates :date, :time, presence: true
 
   def friendly_date
-    if date != nil
-      date.strftime("%b %e, %Y")
+    if date_time != nil
+      date_time.strftime("%b %e, %Y")
     end
   end
 
   def friendly_time
-    if time != nil
-      time.strftime("%I:%M %p")
+    if date_time != nil
+      date_time.strftime("%I:%M %p")
     end
   end
 

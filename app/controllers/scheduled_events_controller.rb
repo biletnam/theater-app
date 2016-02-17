@@ -13,8 +13,7 @@ before_action :authenticate_vendor!, only: [:new, :create]
 
   def create
     @scheduled_event = ScheduledEvent.new(
-      date: "#{params[:scheduled_event]["date(1i)"]}-#{params[:scheduled_event]["date(2i)"]}-#{params[:scheduled_event]["date(3i)"]}",
-      time: params[:time],
+      date_time: "#{params[:scheduled_event]["date_time(1i)"]}-#{params[:scheduled_event]["date_time(2i)"]}-#{params[:scheduled_event]["date_time(3i)"]} #{params[:scheduled_event]["date_time(4i)"]}:#{params[:scheduled_event]["date_time(5i)"]}",
       buy_ticket_link: params[:buy_ticket_link],
       event_id: params[:id])
 
@@ -35,3 +34,4 @@ before_action :authenticate_vendor!, only: [:new, :create]
   end
 
 end
+
