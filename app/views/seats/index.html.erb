@@ -1,1 +1,23 @@
 <h2>Seating Information for <%= @venue.name %></h2>
+
+<div>
+
+  <table>
+    <tr>
+      <td>Section</td>
+      <td>Row</td>
+      <td>Seat Number</td>
+      <td>Views</td>
+    </tr>
+  <% @seats.each do |seat| %>
+    <tr>
+      <td width="100px"><%= seat.section %></td>
+      <td width="40px"><%= seat.seat_row %></td>
+      <td width="100px"><%= seat.seat_number %></td>
+      <td><%= %></td>    
+    </tr>
+  <% end %>
+  </table>
+
+</div>
+

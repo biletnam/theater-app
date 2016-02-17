@@ -42,5 +42,10 @@ Rails.application.routes.draw do
   get 'venues/:id/seats/new' => 'seats#new'
   post 'venues/:id/seats' => 'seats#create'
 
+  get '/seats/:id/seat_photos' => 'seat_photos#index'
+  get '/seats/:id/seat_photos/new' => 'seat_photos#new'
+  post '/seats/:id/seat_photos' => 'seat_photos#create'
+  post '/seats/:id/seat_photos/:id' => 'seat_photos#show'
+
 
 end
