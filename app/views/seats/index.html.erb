@@ -8,13 +8,17 @@
       <td>Row</td>
       <td>Seat Number</td>
       <td>Views</td>
+      <% if user_signed_in? %>
+      <td>Add Photo</td>
+      <% end %>
     </tr>
   <% @seats.each do |seat| %>
     <tr>
       <td width="100px"><%= seat.section %></td>
       <td width="40px"><%= seat.seat_row %></td>
       <td width="100px"><%= seat.seat_number %></td>
-      <td><%= %></td>    
+      <td width="60px"><%= link_to "photos", "/seats/#{seat.id}/seat_photos/" %></td>    
+      <td width="100px"><%= link_to "add new", "/seats/#{seat.id}/seat_photos/new" if user_signed_in? %></td>    
     </tr>
   <% end %>
   </table>
