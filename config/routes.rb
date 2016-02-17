@@ -38,5 +38,9 @@ Rails.application.routes.draw do
   patch 'venues/:id/reviews/:id' => 'reviews#update'
   delete 'venues/:id/reviews/:id' => 'reviews#destroy'
 
+  get 'venues/:id/seats' => 'seats#index'
+  get 'venues/:id/seats/new' => 'seats#new'
+  post 'venues/:id/seats' => 'seats#create'
+
 
 end

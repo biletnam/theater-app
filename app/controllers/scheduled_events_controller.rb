@@ -17,12 +17,10 @@ before_action :authenticate_vendor!, only: [:new, :create]
       buy_ticket_link: params[:buy_ticket_link],
       event_id: params[:id])
 
-      @scheduled_event.update(time: @scheduled_event.friendly_time)
-
     @event = Event.find(params[:id])
 
     if @scheduled_event.save
-      flash[:success] = "Scheduled Event Successfully Added."
+      flash[:success] = "Scheduled event successfully added."
       redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
     else 
       render "events/show"

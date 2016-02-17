@@ -21,6 +21,7 @@
 <% if @venue.website != nil %>
   <h4>Website: <%= link_to "#{@venue.website}", @venue.website %></h4>
 <% end %>
+<%= link_to "View Seating Information", "/venues/#{@venue.id}/seats", :class =>"btn btn-default btn-sm active" %>
 
 <h3>Upcoming Events</h3>
 
