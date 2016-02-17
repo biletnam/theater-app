@@ -13,10 +13,12 @@ before_action :authenticate_vendor!, only: [:new, :create]
 
   def create
     @scheduled_event = ScheduledEvent.new(
-      date: params[:date],
+      date: "#{params[:scheduled_event]["date(1i)"]}-#{params[:scheduled_event]["date(2i)"]}-#{params[:scheduled_event]["date(3i)"]}",
       time: params[:time],
       buy_ticket_link: params[:buy_ticket_link],
       event_id: params[:id])
+
+      @scheduled_event.update(time: @scheduled_event.friendly_time)
 
     @event = Event.find(params[:id])
 

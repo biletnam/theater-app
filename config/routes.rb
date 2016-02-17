@@ -30,5 +30,13 @@ Rails.application.routes.draw do
   post '/venues/:id/events/:id/scheduled_events' => 'scheduled_events#create'
   get '/venues/:id/events/:id/scheduled_events/:id' => 'scheduled_events#show'
 
+  get 'venues/:id/reviews' => 'reviews#index'
+  get 'venues/:id/reviews/new' => 'reviews#new'
+  post 'venues/:id/reviews' => 'reviews#create'
+  get 'venues/:id/reviews/:id' => 'reviews#show'
+  get 'venues/:id/reviews/:id/edit' => 'reviews#edit'
+  patch 'venues/:id/reviews/:id' => 'reviews#update'
+  delete 'venues/:id/reviews/:id' => 'reviews#destroy'
+
 
 end

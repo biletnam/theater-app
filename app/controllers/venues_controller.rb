@@ -34,9 +34,8 @@ before_action :authenticate_vendor!, only: [:new, :create]
   def show
     @venue = Venue.find(params[:id])
     @event = @venue.events.new unless @event
-
     @events = Event.where(venue_id: params[:id])
-
+    @reviews = Review.where(venue_id: params[:id])
   end
 
   def edit

@@ -1,7 +1,7 @@
 class Venue < ActiveRecord::Base
 
   has_many :events
-  has_many :scheduled_events, through: :events
+
   has_many :seats
   has_many :reviews
   belongs_to :user

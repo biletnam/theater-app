@@ -4,6 +4,6 @@ class Event < ActiveRecord::Base
   belongs_to :venue
 
   validates :name, :event_type, :description, presence: true
-  
+
 
 end
