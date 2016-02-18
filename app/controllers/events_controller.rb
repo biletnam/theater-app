@@ -18,13 +18,17 @@ class EventsController < ApplicationController
       event_type: params[:event_type],
       description: params[:description],
       venue_id: params[:id])
-
-    @venue = Venue.find(params[:id])
     
     if @event.save
       flash[:success] = "Event Added. Please add individual event details"
       redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
     else
+      @venue = Venue.find(params[:id])
+      @events = @venue.events
+      @reviews = @venue.reviews
+      @restaurants = @venue.restaurants
+
+      flash[:warning] = "event not saved"
       render "venues/show"
     end
   end

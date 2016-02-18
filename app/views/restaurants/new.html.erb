@@ -1,0 +1,39 @@
+<h2>Enter Restaurant near <%= @restaurant.venue.name %></h2>
+
+<%= form_tag "/venues/#{@restaurant.venue_id}/restaurants", method: :post do %>
+
+  <div><%= label_tag "Name:" %></div>
+  <div><%= text_field_tag :name, @restaurant.name %></div>
+
+   <div><%= label_tag "Food Type:" %></div>
+  <div><%= text_field_tag :food_type, @restaurant.food_type %></div>
+
+   <div><%= label_tag "Hours:" %></div>
+  <div><%= text_field_tag :hours, @restaurant.hours %></div>
+
+   <div><%= label_tag "Phone:" %></div>
+  <div><%= text_field_tag :phone, @restaurant.phone, placeholder: "XXX-XXX-XXXX" %></div>
+
+   <div><%= label_tag "Website URL:" %></div>
+  <div><%= text_field_tag :website, @restaurant.website %></div>
+
+   <div><%= label_tag "Menu Link:" %></div>
+  <div><%= text_field_tag :menu, @restaurant.menu %></div>
+
+   <div><%= label_tag "Street Address:" %></div>
+  <div><%= text_field_tag :street_address, @restaurant.street_address %></div>
+
+   <div><%= label_tag "City:" %></div>
+  <div><%= text_field_tag :city, @restaurant.city %></div>
+
+   <div><%= label_tag "State:" %></div>
+  <div><%= text_field_tag :state, @restaurant.state %></div>
+
+   <div><%= label_tag "Zip:" %></div>
+  <div><%= text_field_tag :zip_code, @restaurant.zip_code %></div>
+
+  <div><%= hidden_field_tag :venue_id, @restaurant.venue_id %></div>
+
+  <div><%= submit_tag "Submit" %></div>
+
+<% end %> 

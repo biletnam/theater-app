@@ -14,5 +14,4 @@ class ApplicationController < ActionController::Base
       redirect_to "/" unless current_user && current_user.vendor
   end
 
-
 end

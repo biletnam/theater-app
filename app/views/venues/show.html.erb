@@ -1,6 +1,18 @@
-<% if @event.errors.any? %>
+<% if @venue.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this product from being added to your cart:</h2>
+    <h2><%= pluralize(@venue.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @venue.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @event && @event.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@event.errors.count, "error") %></h2>
  
     <ul>
     <% @event.errors.full_messages.each do |msg| %>
@@ -13,7 +25,11 @@
 <h2><%= @venue.name %></h2>
 
 <div id="venue-default-photo">
-  <img src="http://s23.postimg.org/h1xvhiszf/image_coming_soon_gray_bg.png"/>
+<% if @venue.image %>
+  <%= image_tag @venue.image, :style => 'max-height: 300px;' %>
+<% else %>
+  <img src="http://s23.postimg.org/h1xvhiszf/image_coming_soon_gray_bg.png" />
+<% end %>
 </div>
 
 <h4>Address: <%= @venue.full_address %></h4>
@@ -34,13 +50,15 @@
   </tr>
 
  <% @events.each do |event| %>
-   <% event.scheduled_events.each do |scheduled_event|%>
+  <% event.scheduled_events.each do |scheduled_event|%>
+  <% if scheduled_event.date_time >= Time.now %>
     <tr>
       <td><%= link_to scheduled_event.event.name, "/venues/#{@venue.id}/events/#{scheduled_event.event.id}" %></td>
       <td><%= scheduled_event.friendly_date %></td>
       <td><%= scheduled_event.friendly_time %></td>
       <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link %></td>
     </tr>
+  <% end %>
   <% end %>
 <% end %>
 </table>
@@ -73,8 +91,24 @@
 
 <% @reviews.each do |review| %>
   <div> 
-    <%= review.content %>
-    <br>user: <%= review.user.email %>
+    <h6>user: <%= review.user.email %></h6>
+    <div style="margin-top:-8px;margin-left:10px;">"<%= review.content %>"</div>
+    <hr style="margin-top:8px;">
+  </div>
+
+<% end %>
+
+<h3>Restaurants Nearby</h3>
+<% if current_user && current_user.vendor %>
+  <%= link_to "Add Restaurant", "/venues/#{@venue.id}/restaurants/new", :class =>"btn btn-default btn-xs active" %>
+<% end %>
+
+<% @restaurants.each do |restaurant| %>
+  <div> 
+    <h5><%= restaurant.name %></h5>
+    <%= restaurant.full_address %>
+    <br><%= restaurant.food_type %>
+    <hr>
   </div>
 
 <% end %>

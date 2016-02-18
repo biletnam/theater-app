@@ -1,7 +1,7 @@
 class VenuesController < ApplicationController
 
-before_action :authenticate_admin!, only: [:new, :create]
-before_action :authenticate_vendor!, only: [:new, :create]
+before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def index
     @venues = Venue.all
@@ -33,9 +33,10 @@ before_action :authenticate_vendor!, only: [:new, :create]
 
   def show
     @venue = Venue.find(params[:id])
-    @event = @venue.events.new unless @event
+    @event = Event.new 
     @events = Event.where(venue_id: params[:id])
     @reviews = Review.where(venue_id: params[:id])
+    @restaurants = Restaurant.where(venue_id: params[:id])
   end
 
   def edit
@@ -56,12 +57,17 @@ before_action :authenticate_vendor!, only: [:new, :create]
       website: params[:website],
       user_id: current_user.id)
 
+    flash[:success] = "Venue Edited"
+
     render :show
   end
 
   def destroy
     @venue = Venue.find(params[:id])
     @venue.destroy
+
+    redirect_to "/venues"
+
   end
 
 end

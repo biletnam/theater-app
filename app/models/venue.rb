@@ -1,9 +1,9 @@
 class Venue < ActiveRecord::Base
 
   has_many :events
-
   has_many :seats
   has_many :reviews
+  has_many :restaurants
   belongs_to :user
 
   validates :name, :street_address, :city, :state, :zip_code, :phone, :user_id, presence: true

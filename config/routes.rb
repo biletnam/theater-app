@@ -47,5 +47,13 @@ Rails.application.routes.draw do
   post '/seats/:id/seat_photos' => 'seat_photos#create'
   post '/seats/:id/seat_photos/:id' => 'seat_photos#show'
 
+  get 'venues/:id/restaurants' => 'restaurants#index'
+  get 'venues/:id/restaurants/new' => 'restaurants#new'
+  post 'venues/:id/restaurants' => 'restaurants#create'
+  get 'venues/:id/restaurants/:id' => 'restaurants#show'
+  get 'venues/:id/restaurants/:id/edit' => 'restaurants#edit'
+  patch 'venues/:id/restaurants/:id' => 'restaurants#update'
+  delete 'venues/:id/restaurants/:id' => 'restaurants#destroy'
+
 
 end
