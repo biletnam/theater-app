@@ -45,8 +45,7 @@
     <td></td>
   </tr>
 
-<% @events.each do |event| %>
-  <% event.scheduled_events.order(:date_time).each do |scheduled_event|%>
+<% @scheduled_events.each do |scheduled_event|%>
     <% if scheduled_event.date_time >= Time.now %>
       <tr>
         <td><%= link_to scheduled_event.event.name, "/venues/#{@venue.id}/events/#{scheduled_event.event.id}" %></td>
@@ -55,7 +54,6 @@
         <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link %></td>
       </tr>
     <% end %>
-  <% end %>
 <% end %>
 </table>
 
