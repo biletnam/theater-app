@@ -23,8 +23,12 @@ Rails.application.routes.draw do
   delete '/venues/:id' => 'venues#destroy'
 
   get '/events' => 'events#index'
-  post '/venues/:id/events' => 'events#create'
-  get '/venues/:id/events/:id' => 'events#show'
+  get 'venues/:id/events/new' => 'events#new'
+  post 'venues/:id/events' => 'events#create'
+  get 'venues/:id/events/:id' => 'events#show'
+  get 'venues/:id/events/:id/edit' => 'events#edit'
+  patch 'venues/:id/events/:id' => 'events#update'
+  delete 'venues/:id/events/:id' => 'events#destroy'
 
   get '/venues/:id/events/:id/scheduled_events' => 'scheduled_events#index'
   post '/venues/:id/events/:id/scheduled_events' => 'scheduled_events#create'

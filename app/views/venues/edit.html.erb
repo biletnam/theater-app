@@ -1,6 +1,6 @@
 <% if @venue.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@venue.errors.count, "error") %> prohibited this product from being added to your cart:</h2>
+    <h2><%= pluralize(@venue.errors.count, "error") %></h2>
  
     <ul>
     <% @venue.errors.full_messages.each do |msg| %>
@@ -10,61 +10,40 @@
   </div>
 <% end %>
 
-<div id="venue-new">
-
 <h2>Enter New Venue Information</h2>
 
 <%= form_tag "/venues/#{@venue.id}", method: :patch do %>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Name:" %></p>
-    <%= text_field_tag :name, @venue.name %>
-  </div>
+  <div><%= label_tag "Name:" %></div>
+  <div><%= text_field_tag :name, @venue.name %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Street Address:" %></p>
-    <%= text_field_tag :street_address, @venue.street_address %>
-  </div>
+  <div><%= label_tag "Street Address:" %></div>
+  <div><%= text_field_tag :street_address, @venue.street_address %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "City:" %></p>
-    <%= text_field_tag :city, @venue.city %>
-  </div>
+  <div><%= label_tag "City:" %></div>
+  <div><%= text_field_tag :city, @venue.city %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "State:" %></p>
-    <%= text_field_tag :state, @venue.state %>
-  </div>
+  <div><%= label_tag "State:" %></div>
+  <%= text_field_tag :state, @venue.state %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Zip Code:" %></p>
-    <%= text_field_tag :zip_code, @venue.zip_code %>
-  </div>
+  <div><%= label_tag "Zip Code:" %></div>
+  <div><%= text_field_tag :zip_code, @venue.zip_code %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Phone Number:" %></p>
-    <%= text_field_tag :phone, @venue.phone, placeholder: "XXX-XXX-XXXX" %>
-  </div>
+  <div><%= label_tag "Phone Number:" %></div>
+  <div><%= text_field_tag :phone, @venue.phone, placeholder: "XXX-XXX-XXXX" %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Website:" %></p>
-    <%= text_field_tag :website, @venue.website %>
-  </div>
+  <div><%= label_tag "Website:" %></div>
+  <div><%= text_field_tag :website, @venue.website %></div>
 
-  <div>
-    <p class="label_tag"><%= label_tag "Venue Image URL:" %></p>
-    <%= text_field_tag :image, @venue.image %>
-  </div>
+  <div><%= label_tag "Venue Image URL:" %></div>
+  <div><%= text_field_tag :image, @venue.image %></div>
 
-  <div>
-    <%= hidden_field_tag :user_id, current_user.id %>
-  </div>
+  <div><%= hidden_field_tag :user_id, current_user.id %></div>
 
-  <div id="submit-new"><%= submit_tag "Update" %></div>
+  <div><%= submit_tag "Update" %></div>
 
 <% end %>
 
-</div>
 
 
 

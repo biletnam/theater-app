@@ -8,7 +8,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
   end
   
   def new
-    @venue = Venue.new
+    @venue = Venue.new unless @venue
   end
 
   def create
@@ -21,6 +21,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       latitude_longitude: params[:latitude_longitude],
       phone: params[:phone],
       website: params[:website],
+      image: params[:image],
       user_id: current_user.id)
 
     if @venue.save
@@ -46,7 +47,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
   def update
     @venue = Venue.find(params[:id])
 
-    @venue.update(
+    if @venue.update(
       name: params[:name],
       street_address: params[:street_address],
       city: params[:city],
@@ -55,18 +56,26 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       latitude_longitude: params[:latitude_longitude],
       phone: params[:phone],
       website: params[:website],
+      image: params[:image],
       user_id: current_user.id)
 
-    flash[:success] = "Venue Edited"
-
-    render :show
+      flash[:success] = "Venue Edited"
+      redirect_to "/venues/#{@venue.id}"
+    else
+      render :edit
+    end
   end
 
   def destroy
     @venue = Venue.find(params[:id])
-    @venue.destroy
 
-    redirect_to "/venues"
+    if @venue.destroy
+      flash[:success] = "Venue deleted."
+      redirect_to "/venues"
+    else
+      flash[:warning] = "Unable to delete venue."
+      redirect_to "/venues"
+    end
 
   end
 

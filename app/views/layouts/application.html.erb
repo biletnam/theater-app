@@ -10,9 +10,11 @@
 
 <div><%= link_to "Venues", "/venues" %></div>
 
-<div> | <% Venue.all.each do |venue| %>
-  <%= link_to venue.name, "/venues/#{venue.id}" %> | 
-<% end %></div>
+<div> 
+  <% Venue.all.each do |venue| %>
+    <%= link_to venue.name, "/venues/#{venue.id}" %> 
+  <% end %>
+</div>
 
 <div><%= link_to "All Events", "/events" %></div>
 
@@ -26,8 +28,6 @@
   <%= link_to "Sign Up", "/users/sign_up" %>
   <%= link_to "Sign In", "/users/sign_in" %>
 <% end %>
-
-
 
 
 

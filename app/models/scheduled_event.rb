@@ -4,7 +4,7 @@ class ScheduledEvent < ActiveRecord::Base
   has_many :seats, through: :event_seats
   belongs_to :event
 
-  # validates :date, :time, presence: true
+  validates :date_time, presence: true
 
   def friendly_date
     if date_time != nil
@@ -17,6 +17,8 @@ class ScheduledEvent < ActiveRecord::Base
       date_time.strftime("%I:%M %p")
     end
   end
+
+
 
 end
 

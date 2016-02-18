@@ -1,14 +1,15 @@
 class EventsController < ApplicationController
 
-  before_action :authenticate_admin!, only: [:new, :create]
-  before_action :authenticate_vendor!, only: [:new, :create]
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @events = Event.all
   end
 
   def new
-    @event = Event.new
+    @event = Event.new unless @event
+    @venue = Venue.find(params[:id])
   end
 
   def create
@@ -20,16 +21,13 @@ class EventsController < ApplicationController
       venue_id: params[:id])
     
     if @event.save
-      flash[:success] = "Event Added. Please add individual event details"
+      flash[:success] = "Event added. Please add individual event details."
       redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
     else
       @venue = Venue.find(params[:id])
-      @events = @venue.events
-      @reviews = @venue.reviews
-      @restaurants = @venue.restaurants
-
+      
       flash[:warning] = "event not saved"
-      render "venues/show"
+      render :new
     end
   end
 
@@ -37,6 +35,43 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @scheduled_event = @event.scheduled_events.new unless @scheduled_event
     @scheduled_events = ScheduledEvent.where(event_id: params[:id])
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+    @venue = @event.venue
+  end
+
+  def update
+    @event = Event.find(params[:id])
+
+    if @event.update(
+      name: params[:name],
+      featured_performers: params[:featured_performers],
+      event_type: params[:event_type],
+      description: params[:description],
+      venue_id: params[:id])
+    
+      flash[:success] = "Event updated. Please edit individual scheduled events if necessary."
+      redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
+    else
+      @venue = Venue.find(params[:id])
+      
+      flash[:warning] = "Event not saved"
+      render :edit
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+   
+    if @event.destroy
+      flash[:success] = "Event deleted."
+      redirect_to "/events"
+    else
+      flash[:warning] = "Unable to delete event."
+      redirect_to "/events"
+    end
   end
 
 end
