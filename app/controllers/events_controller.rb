@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
-
-  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -34,12 +33,13 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @scheduled_event = @event.scheduled_events.new unless @scheduled_event
-    @scheduled_events = ScheduledEvent.where(event_id: params[:id])
+    @scheduled_events = ScheduledEvent.order_by_date_event(@event.id)
+
   end
 
   def edit
-    @event = Event.find(params[:id])
-    @venue = @event.venue
+      @event = Event.find(params[:id])
+      @venue = @event.venue
   end
 
   def update

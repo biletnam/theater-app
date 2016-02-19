@@ -1,0 +1,29 @@
+<% if @scheduled_event.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@scheduled_event.errors.count, "error") %> prohibited this product from being added to your cart:</h2>
+ 
+    <ul>
+    <% @scheduled_event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h3>Edit Scheduled Event Details</h3>
+
+  <%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events/#{@scheduled_event.id}", method: :patch do %>
+
+  <div>
+    <%= label_tag "Date/Time of Event:" %>
+    <%= datetime_select :scheduled_event, :date_time, ampm: true %>
+  </div>
+
+  <div>
+    <%= label_tag "Buy Tickets Link:" %>
+    <%= text_field_tag :buy_ticket_link, @scheduled_event.buy_ticket_link %>
+  </div>
+
+  <div id="submit-new"><%= submit_tag "Update Scheduled Event" %></div>
+
+  <% end %>

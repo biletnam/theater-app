@@ -19,8 +19,12 @@ class ScheduledEvent < ActiveRecord::Base
     end
   end
 
-  def self.order_by_date(venue_id)
+  def self.order_by_date_venue(venue_id)
     order(:date_time).where(venue_id: venue_id)
+  end
+
+  def self.order_by_date_event(event_id)
+    order(:date_time).where(event_id: event_id)
   end
 
 end

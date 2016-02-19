@@ -35,7 +35,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
   def show
     @venue = Venue.find(params[:id])
     @events = Event.where(venue_id: @venue.id)
-    @scheduled_events = ScheduledEvent.order_by_date(@venue.id)
+    @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
     @reviews = Review.where(venue_id: params[:id])
     @restaurants = Restaurant.where(venue_id: params[:id])
   end
