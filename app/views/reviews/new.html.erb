@@ -1,3 +1,15 @@
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2>Enter New Review for <%= @review.venue.name %></h2>
 
 <%= form_tag "/venues/#{@review.venue_id}/reviews", method: :post do %>

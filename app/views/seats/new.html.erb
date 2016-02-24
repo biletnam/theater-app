@@ -1,3 +1,15 @@
+<% if @seat && @seat.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@seat.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @seat.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2>Add New Seat Information for <%= @venue.name %></h2>
 
 <%= form_tag "/venues/#{@venue.id}/seats", method: :post do %>

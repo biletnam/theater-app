@@ -1,0 +1,27 @@
+<% if @seat && @seat.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@seat.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @seat.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Edit Seat Information for <%= @venue.name %></h2>
+
+<%= form_tag "/venues/#{@venue.id}/seats/#{@seat.id}", method: :patch do %>
+
+  <div><%= label_tag "Section" %></div>
+  <div><%= text_field_tag :section, @seat.section %></div>
+  <div><%= label_tag "Row" %></div>
+  <div><%= text_field_tag :seat_row, @seat.seat_row %></div>
+  <div><%= label_tag "Seat Number" %></div>
+  <div><%= text_field_tag :seat_number, @seat.seat_number %></div>
+  <div><%= hidden_field_tag :venue_id, @venue.id %></div>
+
+  <div><%= submit_tag "Update" %></div>
+
+<% end %> 

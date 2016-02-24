@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218221948) do
+ActiveRecord::Schema.define(version: 20160221203600) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20160218221948) do
   end
 
   create_table "seat_photos", force: :cascade do |t|
-    t.text     "image",         limit: 65535
+    t.string   "image",         limit: 255
     t.string   "caption",       limit: 255
-    t.boolean  "default_photo",               default: false
+    t.boolean  "default_photo",             default: false
     t.integer  "user_id",       limit: 4
     t.integer  "seat_id",       limit: 4
     t.datetime "created_at"

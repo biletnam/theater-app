@@ -1,0 +1,30 @@
+<% if @seat_photo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@seat_photo.errors.count, "error") %></h2>
+    <ul>
+    <% @seat_photo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Update Seat Photo</h2>
+
+<%= form_tag "/seats/#{@seat.id}/seat_photos/#{@seat_photo.id}", method: :patch do %>
+  
+  <h4>Section: <%= @seat.section %></h4>
+  <h4>Row: <%= @seat.seat_row %></h4>
+  <h4>Seat: <%= @seat.seat_number %></h4>
+
+  <div><%= label_tag "Photo caption" %></div>
+  <div><%= text_field_tag :caption, @seat_photo.caption %></div>
+  <div><%= hidden_field_tag :default_photo, @seat_photo.default_photo %></div>
+  <div><%= hidden_field_tag :seat_id, @seat.id %></div>
+
+  <h4>Uploaded Image: </h4>
+  <%= image_tag @seat_photo.image.thumb.url %>
+
+  <div><%= submit_tag "Update" %></div>
+
+<% end %> 
