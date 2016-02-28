@@ -1,20 +1,41 @@
 $(function() {
+
+
   
 var canvas = document.getElementById("seating")
 var stage = new createjs.Stage(canvas);
 
 var vstage = new createjs.Shape();
   vstage.graphics.beginStroke("#000");
-  vstage.graphics.setStrokeStyle(1, "square");
-  vstage.graphics.drawRoundRect(10,10,409,80, 10);
+  vstage.graphics.setStrokeStyle(2, "square");
+  vstage.graphics.drawRoundRect(10,10,399,70, 10);
   stage.addChild(vstage);
   stage.update();
 
 var stageText = new createjs.Text("Stage", "20px Helvetica", "#848484");
  stageText.x = 184;
- stageText.y = 55;
+ stageText.y = 50;
  stageText.textBaseline = "alphabetic";
  stage.addChild(stageText);
+
+var vhouseLeft = new createjs.Shape();
+  vhouseLeft.graphics.beginStroke("#000");
+  vhouseLeft.graphics.setStrokeStyle(2, "square");
+  vhouseLeft.graphics.drawRoundRect(10,94,186,129,10);
+  stage.addChild(vhouseLeft);
+  stage.update();
+
+var rightfronttable4 = new createjs.Shape();
+  rightfronttable4.graphics.beginFill("#bbb").drawRect(163,104,14,14);
+  stage.addChild(rightfronttable4);
+
+var rightfronttable5 = new createjs.Shape();
+  rightfronttable5.graphics.beginFill("#bbb").drawRect(68,104,14,14);
+  stage.addChild(rightfronttable5);
+
+var rightfronttable6 = new createjs.Shape();
+  rightfronttable6.graphics.beginFill("#bbb").drawRect(125,104,14,14);
+  stage.addChild(rightfronttable6);
 
 var seat = new createjs.Shape();
   
@@ -138,7 +159,7 @@ var seat5 = new createjs.Shape();
 
 var seat6 = new createjs.Shape();
 
-  seat6.graphics.beginFill("#5e80ae").drawCircle(121,130,7);
+  seat6.graphics.beginFill("#5e80ae").drawCircle(122,130,7);
 
   stage.enableMouseOver();
 
@@ -231,6 +252,25 @@ var seat9 = new createjs.Shape();
 
   stage.addChild(seat9);
   stage.update();
+
+var vhouseRight = new createjs.Shape();
+  vhouseRight.graphics.beginStroke("#000");
+  vhouseRight.graphics.setStrokeStyle(2, "square");
+  vhouseRight.graphics.drawRoundRect(223,94,186,129,10);
+  stage.addChild(vhouseRight);
+  stage.update();
+
+var rightfronttable1 = new createjs.Shape();
+  rightfronttable1.graphics.beginFill("#bbb").drawRect(262,104,14,14);
+  stage.addChild(rightfronttable1);
+
+var rightfronttable2 = new createjs.Shape();
+  rightfronttable2.graphics.beginFill("#bbb").drawRect(300,104,14,14);
+  stage.addChild(rightfronttable2);
+
+var rightfronttable3 = new createjs.Shape();
+  rightfronttable3.graphics.beginFill("#bbb").drawRect(357,104,14,14);
+  stage.addChild(rightfronttable3);
 
 var seatright1 = new createjs.Shape();
 
@@ -1183,6 +1223,503 @@ var seatright38 = new createjs.Shape();
   stage.update();
 
 
+var vhouseRightLev1 = new createjs.Shape();
+  vhouseRightLev1.graphics.beginStroke("#000");
+  vhouseRightLev1.graphics.setStrokeStyle(2, "square");
+  vhouseRightLev1.graphics.drawRoundRect(223,228,186,34,10);
+  stage.addChild(vhouseRightLev1);
+  stage.update();
+
+var seatright39 = new createjs.Shape();
+
+  seatright39.graphics.beginFill("#5e80ae").drawCircle(259,245,7);
+
+  stage.enableMouseOver();
+
+  seatright39.on('mouseover', function(event) { 
+    seatright39.graphics.beginFill("DeepSkyBlue").drawCircle(259, 245, 7);
+    stage.update(event);
+  });
+
+  seatright39.on('mouseout', function(event) { 
+    seatright39.graphics.beginFill("#5e80ae").drawCircle(259, 245, 7);
+    stage.update(event);
+  });
+
+  seatright39.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/39/seat_photos/");
+    // alert("seatright39 clicked");
+  });
+
+  stage.addChild(seatright39);
+  stage.update();
+
+var seatright40 = new createjs.Shape();
+
+  seatright40.graphics.beginFill("#5e80ae").drawCircle(278,245,7);
+
+  stage.enableMouseOver();
+
+  seatright40.on('mouseover', function(event) { 
+    seatright40.graphics.beginFill("DeepSkyBlue").drawCircle(278, 245, 7);
+    stage.update(event);
+  });
+
+  seatright40.on('mouseout', function(event) { 
+    seatright40.graphics.beginFill("#5e80ae").drawCircle(278, 245, 7);
+    stage.update(event);
+  });
+
+  seatright40.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/40/seat_photos/");
+    // alert("seatright40 clicked");
+  });
+
+  stage.addChild(seatright40);
+  stage.update();
+
+var table4 = new createjs.Shape();
+  table2.graphics.beginFill("#bbb").drawRect(290,238,14,14);
+  stage.addChild(table2);
+  stage.update();
+
+var seatright41 = new createjs.Shape();
+
+  seatright41.graphics.beginFill("#5e80ae").drawCircle(316,245,7);
+
+  stage.enableMouseOver();
+
+  seatright41.on('mouseover', function(event) { 
+    seatright41.graphics.beginFill("DeepSkyBlue").drawCircle(316, 245, 7);
+    stage.update(event);
+  });
+
+  seatright41.on('mouseout', function(event) { 
+    seatright41.graphics.beginFill("#5e80ae").drawCircle(316, 245, 7);
+    stage.update(event);
+  });
+
+  seatright41.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/41/seat_photos/");
+    // alert("seatright41 clicked");
+  });
+
+  stage.addChild(seatright41);
+  stage.update();
+
+var seatright42 = new createjs.Shape();
+
+  seatright42.graphics.beginFill("#5e80ae").drawCircle(335,245,7);
+
+  stage.enableMouseOver();
+
+  seatright42.on('mouseover', function(event) { 
+    seatright42.graphics.beginFill("DeepSkyBlue").drawCircle(335, 245, 7);
+    stage.update(event);
+  });
+
+  seatright42.on('mouseout', function(event) { 
+    seatright42.graphics.beginFill("#5e80ae").drawCircle(335, 245, 7);
+    stage.update(event);
+  });
+
+  seatright42.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/42/seat_photos/");
+    // alert("seatright42 clicked");
+  });
+
+  stage.addChild(seatright42);
+  stage.update();
+
+var seatright43 = new createjs.Shape();
+
+  seatright43.graphics.beginFill("#5e80ae").drawCircle(354,245,7);
+
+  stage.enableMouseOver();
+
+  seatright43.on('mouseover', function(event) { 
+    seatright43.graphics.beginFill("DeepSkyBlue").drawCircle(354, 245, 7);
+    stage.update(event);
+  });
+
+  seatright43.on('mouseout', function(event) { 
+    seatright43.graphics.beginFill("#5e80ae").drawCircle(354, 245, 7);
+    stage.update(event);
+  });
+
+  seatright43.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/43/seat_photos/");
+    // alert("seatright43 clicked");
+  });
+
+  stage.addChild(seatright43);
+  stage.update();
+
+var seatright44 = new createjs.Shape();
+
+  seatright44.graphics.beginFill("#5e80ae").drawCircle(373,245,7);
+
+  stage.enableMouseOver();
+
+  seatright44.on('mouseover', function(event) { 
+    seatright44.graphics.beginFill("DeepSkyBlue").drawCircle(373, 245, 7);
+    stage.update(event);
+  });
+
+  seatright44.on('mouseout', function(event) { 
+    seatright44.graphics.beginFill("#5e80ae").drawCircle(373, 245, 7);
+    stage.update(event);
+  });
+
+  seatright44.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/44/seat_photos/");
+    // alert("seatright44 clicked");
+  });
+
+  stage.addChild(seatright44);
+  stage.update();
+
+var vhouseRightLev2 = new createjs.Shape();
+  vhouseRightLev2.graphics.beginStroke("#000");
+  vhouseRightLev2.graphics.setStrokeStyle(2, "square");
+  vhouseRightLev2.graphics.drawRoundRect(223,267,186,34,10);
+  stage.addChild(vhouseRightLev2);
+  stage.update();
+
+var seatright45 = new createjs.Shape();
+
+  seatright45.graphics.beginFill("#5e80ae").drawCircle(259,284,7);
+
+  stage.enableMouseOver();
+
+  seatright45.on('mouseover', function(event) { 
+    seatright45.graphics.beginFill("DeepSkyBlue").drawCircle(259, 284, 7);
+    stage.update(event);
+  });
+
+  seatright45.on('mouseout', function(event) { 
+    seatright45.graphics.beginFill("#5e80ae").drawCircle(259, 284, 7);
+    stage.update(event);
+  });
+
+  seatright45.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/45/seat_photos/");
+    // alert("seatright45 clicked");
+  });
+
+  stage.addChild(seatright45);
+  stage.update();
+
+var seatright46 = new createjs.Shape();
+
+  seatright46.graphics.beginFill("#5e80ae").drawCircle(278,284,7);
+
+  stage.enableMouseOver();
+
+  seatright46.on('mouseover', function(event) { 
+    seatright46.graphics.beginFill("DeepSkyBlue").drawCircle(278, 284, 7);
+    stage.update(event);
+  });
+
+  seatright46.on('mouseout', function(event) { 
+    seatright46.graphics.beginFill("#5e80ae").drawCircle(278, 284, 7);
+    stage.update(event);
+  });
+
+  seatright46.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/46/seat_photos/");
+    // alert("seatright46 clicked");
+  });
+
+  stage.addChild(seatright46);
+  stage.update();
+
+var table4 = new createjs.Shape();
+  table2.graphics.beginFill("#bbb").drawRect(290,277,14,14);
+  stage.addChild(table2);
+  stage.update();
+
+var seatright47 = new createjs.Shape();
+
+  seatright47.graphics.beginFill("#5e80ae").drawCircle(316,284,7);
+
+  stage.enableMouseOver();
+
+  seatright47.on('mouseover', function(event) { 
+    seatright47.graphics.beginFill("DeepSkyBlue").drawCircle(316, 284, 7);
+    stage.update(event);
+  });
+
+  seatright47.on('mouseout', function(event) { 
+    seatright47.graphics.beginFill("#5e80ae").drawCircle(316, 284, 7);
+    stage.update(event);
+  });
+
+  seatright47.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/47/seat_photos/");
+    // alert("seatright47 clicked");
+  });
+
+  stage.addChild(seatright47);
+  stage.update();
+
+var seatright48 = new createjs.Shape();
+
+  seatright48.graphics.beginFill("#5e80ae").drawCircle(335,284,7);
+
+  stage.enableMouseOver();
+
+  seatright48.on('mouseover', function(event) { 
+    seatright48.graphics.beginFill("DeepSkyBlue").drawCircle(335, 284, 7);
+    stage.update(event);
+  });
+
+  seatright48.on('mouseout', function(event) { 
+    seatright48.graphics.beginFill("#5e80ae").drawCircle(335, 284, 7);
+    stage.update(event);
+  });
+
+  seatright48.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/48/seat_photos/");
+    // alert("seatright48 clicked");
+  });
+
+  stage.addChild(seatright48);
+  stage.update();
+
+var seatright49 = new createjs.Shape();
+
+  seatright49.graphics.beginFill("#5e80ae").drawCircle(354,284,7);
+
+  stage.enableMouseOver();
+
+  seatright49.on('mouseover', function(event) { 
+    seatright49.graphics.beginFill("DeepSkyBlue").drawCircle(354, 284, 7);
+    stage.update(event);
+  });
+
+  seatright49.on('mouseout', function(event) { 
+    seatright49.graphics.beginFill("#5e80ae").drawCircle(354, 284, 7);
+    stage.update(event);
+  });
+
+  seatright49.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/49/seat_photos/");
+    // alert("seatright49 clicked");
+  });
+
+  stage.addChild(seatright49);
+  stage.update();
+
+var seatright50 = new createjs.Shape();
+
+  seatright50.graphics.beginFill("#5e80ae").drawCircle(373,284,7);
+
+  stage.enableMouseOver();
+
+  seatright50.on('mouseover', function(event) { 
+    seatright50.graphics.beginFill("DeepSkyBlue").drawCircle(373, 284, 7);
+    stage.update(event);
+  });
+
+  seatright50.on('mouseout', function(event) { 
+    seatright50.graphics.beginFill("#5e80ae").drawCircle(373, 284, 7);
+    stage.update(event);
+  });
+
+  seatright50.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/50/seat_photos/");
+    // alert("seatright50 clicked");
+  });
+
+  stage.addChild(seatright50);
+  stage.update();
+
+var vhouseRightLev3 = new createjs.Shape();
+  vhouseRightLev3.graphics.beginStroke("#000");
+  vhouseRightLev3.graphics.setStrokeStyle(2, "square");
+  vhouseRightLev3.graphics.drawRoundRect(223,306,186,34,10);
+  stage.addChild(vhouseRightLev3);
+  stage.update();
+
+var seatright51 = new createjs.Shape();
+
+  seatright51.graphics.beginFill("#5e80ae").drawCircle(240,323,7);
+
+  stage.enableMouseOver();
+
+  seatright51.on('mouseover', function(event) { 
+    seatright51.graphics.beginFill("DeepSkyBlue").drawCircle(240, 323, 7);
+    stage.update(event);
+  });
+
+  seatright51.on('mouseout', function(event) { 
+    seatright51.graphics.beginFill("#5e80ae").drawCircle(240, 323, 7);
+    stage.update(event);
+  });
+
+  seatright51.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/51/seat_photos/");
+    // alert("seatright51 clicked");
+  });
+
+  stage.addChild(seatright51);
+  stage.update();
+
+var seatright52 = new createjs.Shape();
+
+  seatright52.graphics.beginFill("#5e80ae").drawCircle(259,323,7);
+
+  stage.enableMouseOver();
+
+  seatright52.on('mouseover', function(event) { 
+    seatright52.graphics.beginFill("DeepSkyBlue").drawCircle(259, 323, 7);
+    stage.update(event);
+  });
+
+  seatright52.on('mouseout', function(event) { 
+    seatright52.graphics.beginFill("#5e80ae").drawCircle(259, 323, 7);
+    stage.update(event);
+  });
+
+  seatright52.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/52/seat_photos/");
+    // alert("seatright52 clicked");
+  });
+
+  stage.addChild(seatright52);
+  stage.update();
+
+var seatright53 = new createjs.Shape();
+
+  seatright53.graphics.beginFill("#5e80ae").drawCircle(297,323,7);
+
+  stage.enableMouseOver();
+
+  seatright53.on('mouseover', function(event) { 
+    seatright53.graphics.beginFill("DeepSkyBlue").drawCircle(297, 323, 7);
+    stage.update(event);
+  });
+
+  seatright53.on('mouseout', function(event) { 
+    seatright53.graphics.beginFill("#5e80ae").drawCircle(297, 323, 7);
+    stage.update(event);
+  });
+
+  seatright53.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/53/seat_photos/");
+    // alert("seatright53 clicked");
+  });
+
+  stage.addChild(seatright53);
+  stage.update();
+
+var seatright54 = new createjs.Shape();
+
+  seatright54.graphics.beginFill("#5e80ae").drawCircle(316,323,7);
+
+  stage.enableMouseOver();
+
+  seatright54.on('mouseover', function(event) { 
+    seatright54.graphics.beginFill("DeepSkyBlue").drawCircle(316, 323, 7);
+    stage.update(event);
+  });
+
+  seatright54.on('mouseout', function(event) { 
+    seatright54.graphics.beginFill("#5e80ae").drawCircle(316, 323, 7);
+    stage.update(event);
+  });
+
+  seatright54.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/54/seat_photos/");
+    // alert("seatright54 clicked");
+  });
+
+  stage.addChild(seatright54);
+  stage.update();
+
+var seatright55 = new createjs.Shape();
+
+  seatright55.graphics.beginFill("#5e80ae").drawCircle(335,323,7);
+
+  stage.enableMouseOver();
+
+  seatright55.on('mouseover', function(event) { 
+    seatright55.graphics.beginFill("DeepSkyBlue").drawCircle(335, 323, 7);
+    stage.update(event);
+  });
+
+  seatright55.on('mouseout', function(event) { 
+    seatright55.graphics.beginFill("#5e80ae").drawCircle(335, 323, 7);
+    stage.update(event);
+  });
+
+  seatright55.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/55/seat_photos/");
+    // alert("seatright55 clicked");
+  });
+
+  stage.addChild(seatright55);
+  stage.update();
+
+var seatright56 = new createjs.Shape();
+
+  seatright56.graphics.beginFill("#5e80ae").drawCircle(354,323,7);
+
+  stage.enableMouseOver();
+
+  seatright56.on('mouseover', function(event) { 
+    seatright56.graphics.beginFill("DeepSkyBlue").drawCircle(354, 323, 7);
+    stage.update(event);
+  });
+
+  seatright56.on('mouseout', function(event) { 
+    seatright56.graphics.beginFill("#5e80ae").drawCircle(354, 323, 7);
+    stage.update(event);
+  });
+
+  seatright56.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/56/seat_photos/");
+    // alert("seatright56 clicked");
+  });
+
+  stage.addChild(seatright56);
+  stage.update();
+
+var seatright57 = new createjs.Shape();
+
+  seatright57.graphics.beginFill("#5e80ae").drawCircle(373,323,7);
+
+  stage.enableMouseOver();
+
+  seatright57.on('mouseover', function(event) { 
+    seatright57.graphics.beginFill("DeepSkyBlue").drawCircle(373, 323, 7);
+    stage.update(event);
+  });
+
+  seatright57.on('mouseout', function(event) { 
+    seatright57.graphics.beginFill("#5e80ae").drawCircle(373, 323, 7);
+    stage.update(event);
+  });
+
+  seatright57.on('click', function(event) { 
+    window.open("http://localhost:3000/seats/57/seat_photos/");
+    // alert("seatright57 clicked");
+  });
+
+  stage.addChild(seatright57);
+  stage.update();
+
+
+
+
+
+var vhouseRightLev4 = new createjs.Shape();
+  vhouseRightLev4.graphics.beginStroke("#000");
+  vhouseRightLev4.graphics.setStrokeStyle(2, "square");
+  vhouseRightLev4.graphics.drawRoundRect(223,345,186,34,10);
+  stage.addChild(vhouseRightLev4);
+  stage.update();
 
 
 
