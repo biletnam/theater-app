@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221203600) do
+ActiveRecord::Schema.define(version: 20160227215837) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160221203600) do
     t.integer  "seat_id",       limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sg_venue_id",   limit: 4
   end
 
   create_table "seats", force: :cascade do |t|
@@ -82,6 +83,45 @@ ActiveRecord::Schema.define(version: 20160221203600) do
     t.integer  "venue_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sg_venue_id", limit: 4
+  end
+
+  create_table "sg_seat_photos", force: :cascade do |t|
+    t.string   "image",         limit: 255
+    t.string   "caption",       limit: 255
+    t.boolean  "default_photo",             default: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "sg_seat_id",    limit: 4
+    t.integer  "sg_venue_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sg_seats", force: :cascade do |t|
+    t.string   "section",     limit: 255
+    t.string   "seat_row",    limit: 255
+    t.string   "seat_number", limit: 255
+    t.integer  "venue_id",    limit: 4
+    t.integer  "sg_venue_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sg_venues", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "street_address",     limit: 255
+    t.string   "zip_code",           limit: 255
+    t.string   "latitude_longitude", limit: 255
+    t.float    "latitude",           limit: 24
+    t.float    "longitude",          limit: 24
+    t.string   "phone",              limit: 255
+    t.integer  "user_id",            limit: 4
+    t.string   "website",            limit: 255
+    t.text     "image",              limit: 65535
+    t.integer  "sg_venue_id",        limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "city_state",         limit: 255
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,6 +157,9 @@ ActiveRecord::Schema.define(version: 20160221203600) do
     t.datetime "updated_at"
     t.string   "website",            limit: 255
     t.text     "image",              limit: 65535
+    t.integer  "sg_venue_id",        limit: 4
+    t.float    "latitude",           limit: 24
+    t.float    "longitude",          limit: 24
   end
 
 end

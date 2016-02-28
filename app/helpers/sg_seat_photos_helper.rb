@@ -1,0 +1,2 @@
+module SgSeatPhotosHelper
+end

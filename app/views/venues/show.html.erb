@@ -24,7 +24,7 @@
 <h4>Phone Number: <%= @venue.phone %></h4>
 
 <% if @venue.website != "" %>
-  <h4>Website: <%= link_to "#{@venue.website}", @venue.website %></h4>
+  <h4><%= link_to "Visit Venue Website", @venue.website %></h4>
 <% end %>
 
 <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
@@ -94,6 +94,17 @@
     <hr>
   </div>
 <% end %>
+
+<% @google_restaurants.each do |google_restaurant| %>
+  <div>
+    <%= link_to google_restaurant.name, "#{google_restaurant.url}" %>
+    <p><%= google_restaurant.vicinity %> 
+    <br>Price Level: <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <hr>
+  </div>
+<% end %>
+
+<footer><%= image_tag "https://developers.google.com/places/documentation/images/powered-by-google-on-white.png" %></footer>
 
 
 

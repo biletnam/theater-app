@@ -1,0 +1,44 @@
+<% if @sg_venue.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_venue.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_venue.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Enter Venue Information</h2>
+
+<%= form_tag "/sg_venues/#{@sg_venue.id}", method: :patch do %>
+
+  <div><%= label_tag "Name:" %></div>
+  <div><%= text_field_tag :name, @sg_venue.name %></div>
+
+  <div><%= label_tag "Street Address:" %></div>
+  <div><%= text_field_tag :street_address, @sg_venue.street_address %></div>
+
+  <div><%= label_tag "City, State:" %></div>
+  <div><%= text_field_tag :city_state, @sg_venue.city_state %></div>
+
+  <div><%= label_tag "Zip Code:" %></div>
+  <div><%= text_field_tag :zip_code, @sg_venue.zip_code %></div>
+
+  <div><%= label_tag "Phone Number:" %></div>
+  <div><%= text_field_tag :phone, @sg_venue.phone, placeholder: "XXX-XXX-XXXX" %></div>
+
+  <div><%= label_tag "Website:" %></div>
+  <div><%= text_field_tag :website, @sg_venue.website %></div>
+
+  <div><%= label_tag "Venue Image URL:" %></div>
+  <div><%= text_field_tag :image, @sg_venue.image %></div>
+
+  <div><%= hidden_field_tag :user_id, current_user.id %></div>
+  <div><%= hidden_field_tag :sg_venue_id, @sg_venue.id %></div>
+
+  <div><%= submit_tag "Update" %></div>
+
+<% end %>
+

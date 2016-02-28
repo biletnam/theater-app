@@ -35,6 +35,9 @@ gem 'mini_magick'
 gem 'fog'
 
 gem 'figaro'
+gem 'unirest'
+gem 'google_places'
+gem'geocoder'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

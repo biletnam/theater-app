@@ -5,6 +5,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def index
     @venues = Venue.all
+
   end
   
   def new
@@ -30,6 +31,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     else
       render :new
     end
+
   end
 
   def show
@@ -38,6 +40,13 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
     @reviews = Review.where(venue_id: params[:id])
     @restaurants = Restaurant.where(venue_id: params[:id])
+
+    @client = GooglePlaces::Client.new(ENV["google_places_key"])
+    @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :radius => 2778 )
+    @price_level = "$"
+
+    # @sg_venue = Unirest.get("https://api.seatgeek.com/2/venues/#{@venue.sg_venue_id}").body
+    # @all_sg_theater_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
   end
 
   def edit
@@ -76,6 +85,24 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       flash[:warning] = "Unable to delete venue."
       redirect_to "/venues"
     end
+
+  end
+
+  def venue_search
+
+    @zip_for_sg = params[:zip_code]
+    @page_number = params[:page_number]
+
+    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=100&page=1").body
+    
+    @sg_zip_theater_events = sg_zip_theater_events_response["events"]
+    @sg_zip_theater_venues = []
+
+    @sg_zip_theater_events.each do |sg_zip_theater_event|
+      @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
+    end
+
+    render :venue_search
 
   end
 
