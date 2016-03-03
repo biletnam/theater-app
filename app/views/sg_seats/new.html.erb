@@ -1,0 +1,28 @@
+<% if @sg_seat && @sg_seat.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_seat.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_seat.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Add New Seat Information for <%= @sg_db_venue.name %></h2>
+
+<%= form_tag "/sg_db_venues/#{@sg_db_venue.id}/sg_seats", method: :post do %>
+
+  <div><%= label_tag "Section" %></div>
+  <div><%= text_field_tag :section, @sg_seat.section %></div>
+  <div><%= label_tag "Row" %></div>
+  <div><%= text_field_tag :seat_row, @sg_seat.seat_row %></div>
+  <div><%= label_tag "Seat Number" %></div>
+  <div><%= text_field_tag :seat_number, @sg_seat.seat_number %></div>
+  <div><%= hidden_field_tag :sg_venue_id, @sg_db_venue.id %></div>
+  <div><%= hidden_field_tag :sg_db_venue_id, @sg_db_venue.id %></div>
+
+  <div><%= submit_tag "Submit" %></div>
+
+<% end %> 

@@ -1,0 +1,2 @@
+module SgDbVenuesHelper
+end

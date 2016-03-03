@@ -6,6 +6,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+  <script src="https://s3.amazonaws.com/<%= ENV["aws_bucket_js"] %>/seating.js"></script>
 </head>
 <body>
 

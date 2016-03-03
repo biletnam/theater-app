@@ -2,7 +2,7 @@
 
 <h2>Enter Venue Information</h2>
 
-<%= form_tag "/sg_venues", method: :post do %>
+<%= form_tag "/sg_db_venues", method: :post do %>
 
   <div><%= label_tag "Name:" %></div>
   <div><%= text_field_tag :name, @sg_venue.name %></div>
@@ -13,8 +13,14 @@
   <div><%= label_tag "City, State:" %></div>
   <div><%= text_field_tag :city_state, @sg_venue.city_state %></div>
 
+  <div><%= label_tag "City:" %></div>
+  <div><%= text_field_tag :city %></div>
+
+  <div><%= label_tag "State:" %></div>
+  <div><%= text_field_tag :state %></div>
+
   <div><%= label_tag "Zip Code:" %></div>
-  <div><%= text_field_tag :zip_code, @sg_venue.zip_code { |row|  } %></div>
+  <div><%= text_field_tag :zip_code, @sg_venue.zip_code %></div>
 
   <div><%= label_tag "Latitude:" %></div>
   <div><%= text_field_tag :latitude, @sg_venue.latitude %></div>
@@ -30,9 +36,11 @@
 
   <div><%= label_tag "Venue Image URL:" %></div>
   <div><%= text_field_tag :image %></div>
-
+  
+  <div><%= label_tag "User Id:" %></div>
   <div><%= text_field_tag :user_id, current_user.id %></div>
-  <div><%= text_field_tag :id, @sg_venue.id %></div>
+  <div><%= hidden_field_tag :id, @sg_venue.id %></div>
+  <div><%= label_tag "SeatGeek Venue Id:" %></div>
   <div><%= text_field_tag :sg_venue_id, @sg_venue.sg_venue_id %></div>
 
   <div><%= submit_tag "Submit" %></div>

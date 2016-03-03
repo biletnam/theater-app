@@ -14,7 +14,6 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
 
   def create
     
-    
     @sg_venue = SgVenue.new(
       name: params[:name],
       street_address: params[:street_address],
@@ -38,9 +37,14 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
   end
 
   def show
-    @sg_venue = SgVenue.find(params[:id])
-    # @all_sg_venue_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
 
+    if SgDbVenue.where(id: params[:id]) != []
+      redirect_to "/sg_db_venues/#{params[:id]}"
+    else
+      @sg_venue = SgVenue.find(params[:id])
+    end
+
+    # @all_sg_venue_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
   end
 
   def edit

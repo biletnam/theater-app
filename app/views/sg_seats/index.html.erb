@@ -1,0 +1,35 @@
+
+<h2>Seating Information for <%= @sg_db_venue.name %></h2>
+
+
+  <canvas id="seating" width="500" height="500">This browser does not support the canvas element</canvas>
+
+<% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
+  <div>
+    <%= link_to "Add Seat", "/sg_db_venues/#{@sg_db_venue.id}/sg_seats/new", :class =>"btn btn-default btn-xs active" %>
+  </div>
+<% end %>
+
+<div>
+  <table>
+    <tr>
+      <td>Section</td>
+      <td>Row</td>
+      <td>Seat Number</td>
+      <td>Views</td>
+    </tr>
+  <% @sg_seats.each do |sg_seat| %>
+    <tr>
+      <td width="100px"><%= sg_seat.section %></td>
+      <td width="40px"><%= sg_seat.seat_row %></td>
+      <td width="100px"><%= sg_seat.seat_number %></td>
+      <td width="60px"><%= link_to "photos", "/sg_seats/#{sg_seat.id}/sg_seat_photos/" %></td>    
+      <td width="100px"><%= link_to "add photo", "/sg_seats/#{sg_seat.id}/sg_seat_photos/new" if user_signed_in? %></td> 
+      <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
+         <td><%= link_to "edit seat", "/sg_db_venues/#{@sg_db_venue.id}/sg_seats/#{sg_seat.id}/edit", :class =>"btn btn-default btn-xs active" %></td>
+         <td><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/<%= sg_seat.sg_db_venue_id %>/seats/<%= sg_seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete seat</a></td>
+      <% end %> 
+    </tr>
+  <% end %>
+  </table>
+</div>

@@ -38,8 +38,8 @@ class EventsController < ApplicationController
   end
 
   def edit
-      @event = Event.find(params[:id])
-      @venue = @event.venue
+    @event = Event.find(params[:id])
+    @venue = @event.venue
   end
 
   def update

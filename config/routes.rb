@@ -77,4 +77,19 @@ Rails.application.routes.draw do
   delete '/sg_venues/:id' => 'sg_venues#destroy'
   post '/sg_venue_search' => 'sg_venues#sg_venue_search'
 
+  get '/sg_db_venues' => 'sg_db_venues#index'
+  get '/sg_db_venues/new' => 'sg_db_venues#new'
+  post '/sg_db_venues' => 'sg_db_venues#create'
+  get '/sg_db_venues/:id' => 'sg_db_venues#show'
+  get '/sg_db_venues/:id/edit' => 'sg_db_venues#edit'
+  patch '/sg_db_venues/:id' => 'sg_db_venues#update'
+  delete '/sg_db_venues/:id' => 'sg_db_venues#destroy'
+
+  get '/sg_db_venues/:id/sg_seats' => 'sg_seats#index'
+  get '/sg_db_venues/:id/sg_seats/new' => 'sg_seats#new'
+  post '/sg_db_venues/:id/sg_seats' => 'sg_seats#create'
+  get '/sg_db_venues/:id/sg_seats/:id/edit' => 'sg_seats#edit'
+  patch '/sg_db_venues/:id/sg_seats/:id' => 'sg_seats#update'
+  delete '/sg_db_venues/:id/sg_seats/:id' => 'sg_seats#destroy'
+
 end
