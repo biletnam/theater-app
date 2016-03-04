@@ -1,0 +1,24 @@
+<% if @sg_review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_review.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Enter New Review for <%= @sg_review.sg_db_venue.name %></h2>
+
+<%= form_tag "/sg_db_venues/#{@sg_review.sg_db_venue_id}/sg_reviews", method: :post do %>
+
+  <div><%= label_tag "Tell us about your experience at #{@sg_review.sg_db_venue.name}" %></div>
+  <div><%= text_area_tag :content, nil, :size => "50 x 3" %></div>
+  <div><%= hidden_field_tag :sg_db_venue_id, @sg_review.sg_db_venue.id %></div>
+  <div><%= hidden_field_tag :sg_venue_id, @sg_review.sg_db_venue_id %></div>
+
+  <div><%= submit_tag "Submit Review" %></div>
+
+<% end %> 

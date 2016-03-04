@@ -1,0 +1,16 @@
+<h2>Seat Photo</h2>
+
+
+<% @sg_seat_photos.each do |sg_seat_photo| %>
+  <div>
+    <%= image_tag sg_seat_photo.image.medium.url %>
+    <br><%= sg_seat_photo.sg_seat.section %>, Row: <%= sg_seat_photo.sg_seat.seat_row %>, Seat: <%= sg_seat_photo.sg_seat.seat_number%>
+    <br><em>"<%= sg_seat_photo.caption %>"</em>
+  <div>
+
+
+
+<% end %>
+
+</body>
+</html>

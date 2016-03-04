@@ -1,0 +1,25 @@
+<% if @sg_seat_photo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_seat_photo.errors.count, "error") %></h2>
+    <ul>
+    <% @sg_seat_photo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Add New Photo for Seat</h2>
+
+<%= form_tag "/sg_seats/#{@sg_seat.id}/sg_seat_photos", multipart: true, method: :post do %>
+
+  <div><%= label_tag "Upload Image" %></div>
+  <div><%= file_field_tag :image %></div>
+  <div><%= label_tag "Photo caption" %></div>
+  <div><%= text_field_tag :caption, @sg_seat_photo.caption %></div>
+  <div><%= hidden_field_tag :default_photo, @sg_seat_photo.default_photo %></div>
+  <div><%= hidden_field_tag :sg_seat_id, @sg_seat.id %></div>
+
+  <div><%= submit_tag "Submit Photo" %></div>
+
+<% end %> 

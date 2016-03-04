@@ -4,8 +4,19 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
 before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def index
-    @venues = Venue.all
+    @all_venues = []
+    @sorted_venues = @all_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
 
+    @venues = Venue.all
+    @sg_db_venues = SgDbVenue.all
+
+    @venues.each do |venue|
+      @all_venues << venue
+    end
+
+    @sg_db_venues.each do |sg_db_venue|
+      @all_venues << sg_db_venue
+    end
   end
   
   def new
@@ -35,18 +46,23 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
   end
 
   def show
-    @venue = Venue.find(params[:id])
-    @events = Event.where(venue_id: @venue.id)
-    @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
-    @reviews = Review.where(venue_id: params[:id])
-    @restaurants = Restaurant.where(venue_id: params[:id])
 
-    @client = GooglePlaces::Client.new(ENV["google_places_key"])
-    @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :radius => 2778 )
-    @price_level = "$"
+    if SgDbVenue.where(id: params[:id]) != []
+      redirect_to "/sg_db_venues/#{params[:id]}"
+    else
+      @venue = Venue.find(params[:id])
+      @events = Event.where(venue_id: @venue.id)
+      @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
+      @reviews = Review.where(venue_id: params[:id])
+      @restaurants = Restaurant.where(venue_id: params[:id])
 
-    # @sg_venue = Unirest.get("https://api.seatgeek.com/2/venues/#{@venue.sg_venue_id}").body
-    # @all_sg_theater_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
+      @client = GooglePlaces::Client.new(ENV["google_places_key"])
+      @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :radius => 2778 )
+      @price_level = "$"
+
+      # @sg_venue = Unirest.get("https://api.seatgeek.com/2/venues/#{@venue.sg_venue_id}").body
+      # @all_sg_theater_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
+    end
   end
 
   def edit
@@ -93,16 +109,26 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     @zip_for_sg = params[:zip_code]
     # @page_number = params[:page_number]
 
-    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=100&page=1").body
+    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=400&page=1").body
     
     @sg_zip_theater_events = sg_zip_theater_events_response["events"]
     @sg_zip_theater_venues = []
 
-    @sg_zip_theater_events.each do |sg_zip_theater_event|
-      @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
+    if @sg_zip_theater_events
+      @zip_venues = Venue.where(zip_code: params[:zip_code])
+
+      @zip_venues.each do |zip_venue|
+        @sg_zip_theater_venues << zip_venue
+      end
+
+      @sg_zip_theater_events.each do |sg_zip_theater_event|
+        @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
+      end
+    else 
+      flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
     end
 
-    @sg_db_venues = SgDbVenue.all
+    # @sg_db_venues = SgDbVenue.all
 
     render :venue_search
 

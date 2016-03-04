@@ -1,0 +1,62 @@
+<% if @sg_db_venue.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_db_venue.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_db_venue.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Enter New Venue Information</h2>
+
+<%= form_tag "/sg_db_venues/#{@sg_db_venue.id}", method: :patch do %>
+
+  <div><%= label_tag "Name:" %></div>
+  <div><%= text_field_tag :name, @sg_db_venue.name %></div>
+
+  <div><%= label_tag "Street Address:" %></div>
+  <div><%= text_field_tag :street_address, @sg_db_venue.street_address %></div>
+
+  <div><%= label_tag "City:" %></div>
+  <div><%= text_field_tag :city, @sg_db_venue.city %></div>
+
+  <div><%= label_tag "State:" %></div>
+  <%= text_field_tag :state, @sg_db_venue.state %></div>
+
+  <div><%= label_tag "Zip Code:" %></div>
+  <div><%= text_field_tag :zip_code, @sg_db_venue.zip_code %></div>
+
+  <div><%= label_tag "Latitude:" %></div>
+  <div><%= text_field_tag :latitude, @sg_db_venue.latitude %></div>
+
+  <div><%= label_tag "Longitude:" %></div>
+  <div><%= text_field_tag :longitude, @sg_db_venue.longitude %></div>
+
+  <div><%= label_tag "Phone Number:" %></div>
+  <div><%= text_field_tag :phone, @sg_db_venue.phone, placeholder: "XXX-XXX-XXXX" %></div>
+
+  <div><%= label_tag "Website:" %></div>
+  <div><%= text_field_tag :website, @sg_db_venue.website %></div>
+
+  <div><%= label_tag "Venue Image URL:" %></div>
+  <div><%= text_field_tag :image, @sg_db_venue.image %></div>
+  
+  <div><%= label_tag "Venue User Id:" %></div>
+  <div><%= text_field_tag :user_id, current_user.id %></div>
+
+  <div><%= label_tag "Sg Venue Id:" %></div>
+  <div><%= text_field_tag :sg_venue_id, @sg_db_venue.sg_venue_id %></div>
+
+  <div><%= submit_tag "Update" %></div>
+
+<% end %>
+
+
+
+
+
+
+

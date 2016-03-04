@@ -37,7 +37,7 @@ class SgSeatPhotosController < ApplicationController
     if current_user && current_user.admin || current_user && current_user.id == @sg_seat_photo.user_id
       render :show
     else
-      redirect_to "/sg_venues"
+      redirect_to "/sg_venues/#{@sg_seat.sg_db_venue.id}/sg_seats"
     end
   end
 
@@ -55,7 +55,7 @@ class SgSeatPhotosController < ApplicationController
       redirect_to "/sg_seats/#{@sg_seat.id}/sg_seat_photos/#{@sg_seat_photo.id}"
     else 
       flash[:warning] = "Unable to update seat photo caption."
-      redirect_to "/sg_seats/#{@sg_seat.id}/sg_seat_photos/#{@sg_seat_photo.id}"
+      render :edit
     end  
 
   end

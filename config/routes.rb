@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   patch '/venues/:id/events/:id/scheduled_events/:id' => 'scheduled_events#update'
   delete '/venues/:id/events/:id/scheduled_events/:id' => 'scheduled_events#destroy'
 
-
   get '/venues/:id/reviews/new' => 'reviews#new'
   post '/venues/:id/reviews' => 'reviews#create'
   get '/venues/:id/reviews/:id/edit' => 'reviews#edit'
@@ -91,5 +90,19 @@ Rails.application.routes.draw do
   get '/sg_db_venues/:id/sg_seats/:id/edit' => 'sg_seats#edit'
   patch '/sg_db_venues/:id/sg_seats/:id' => 'sg_seats#update'
   delete '/sg_db_venues/:id/sg_seats/:id' => 'sg_seats#destroy'
+
+  get '/sg_seats/:id/sg_seat_photos' => 'sg_seat_photos#index'
+  get '/sg_seats/:id/sg_seat_photos/new' => 'sg_seat_photos#new'
+  post '/sg_seats/:id/sg_seat_photos' => 'sg_seat_photos#create'
+  get '/sg_seats/:id/sg_seat_photos/:id' => 'sg_seat_photos#show'
+  get '/sg_seats/:id/sg_seat_photos/:id/edit' => 'sg_seat_photos#edit'
+  patch '/sg_seats/:id/sg_seat_photos/:id' => 'sg_seat_photos#update'
+  delete '/sg_seats/:id/sg_seat_photos/:id' => 'sg_seat_photos#destroy'
+
+  get '/sg_db_venues/:id/sg_reviews/new' => 'sg_reviews#new'
+  post '/sg_db_venues/:id/sg_reviews' => 'sg_reviews#create'
+  get '/sg_db_venues/:id/sg_reviews/:id/edit' => 'sg_reviews#edit'
+  patch '/sg_db_venues/:id/sg_reviews/:id' => 'sg_reviews#update'
+  delete '/sg_db_venues/:id/sg_reviews/:id' => 'sg_reviews#destroy'
 
 end
