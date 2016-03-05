@@ -1,0 +1,2 @@
+module SgScheduledEventsHelper
+end

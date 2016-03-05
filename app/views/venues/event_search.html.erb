@@ -3,18 +3,18 @@
 <% @zip_events.each do |zip_event| %>
   <% if zip_event.class == ScheduledEvent %>
     <% if zip_event.friendly_date > Time.now %>
-      <h3><%= link_to zip_event.event.name, "/venues/#{zip_event.venue_id}/events/#{zip_event.id}" %></h3>
+      <h3><%= link_to zip_event.event.name, "/venues/#{zip_event.venue_id}/events/#{zip_event.event.id}" %></h3>
       <%= zip_event.venue.name %>
       <br><%= zip_event.venue.full_address %>
       <br><%= zip_event.friendly_date %>, <%= zip_event.friendly_time %>
       <hr>
     <% end %>
   <% else %>
-    <h3><%= link_to zip_event["title"], "/sg_venues/#{zip_event["venue"]["id"]}" %></h3>
-    <%= zip_event["venue"]["name"] %>
-    <br><%= zip_event["venue"]["address"] %>, <%= zip_event["venue"]["extended_address"] %>
-    <br><%= zip_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %>, <%= zip_event["datetime_local"].to_datetime.strftime("%I:%M %p") %>
-    <hr>
+    <h3><%= link_to zip_event.name, "/sg_venues/#{zip_event.sg_venue_id}" %></h3>
+    <%= zip_event.venue_name %>
+      <br><%= zip_event.full_address %>
+      <br><%= zip_event.friendly_date %>, <%= zip_event.friendly_time %>
+      <hr>
   <% end %>
 <% end %>
 

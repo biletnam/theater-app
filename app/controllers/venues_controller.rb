@@ -5,8 +5,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def index
     @all_venues = []
-    @sorted_venues = @all_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
-
+    
     @venues = Venue.all
     @sg_db_venues = SgDbVenue.all
 
@@ -17,6 +16,8 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     @sg_db_venues.each do |sg_db_venue|
       @all_venues << sg_db_venue
     end
+
+    @sorted_venues = @all_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
   end
   
   def new
@@ -122,8 +123,10 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       end
 
       @sg_zip_theater_events.each do |sg_zip_theater_event|
-        @zip_events << sg_zip_theater_event
+        @zip_events << SgScheduledEvent.new(sg_zip_theater_event)
       end
+
+      @sorted_events = @zip_events.sort! { |a,b| a.date_time <=> b.date_time}
     else 
       flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
     end

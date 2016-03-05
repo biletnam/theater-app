@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304063257) do
+ActiveRecord::Schema.define(version: 20160305100712) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -111,6 +111,25 @@ ActiveRecord::Schema.define(version: 20160304063257) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sg_scheduled_events", force: :cascade do |t|
+    t.integer  "sg_event_id",     limit: 4
+    t.string   "buy_ticket_link", limit: 255
+    t.integer  "sg_venue_id",     limit: 4
+    t.datetime "date_time"
+    t.datetime "date"
+    t.datetime "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "city_state",      limit: 255
+    t.string   "street_address",  limit: 255
+    t.string   "zip_code",        limit: 255
+    t.string   "venue_name",      limit: 255
+    t.string   "name",            limit: 255
+    t.decimal  "lowest_price",                precision: 8, scale: 2
+    t.decimal  "highest_price",               precision: 8, scale: 2
+    t.decimal  "average_price",               precision: 8, scale: 2
   end
 
   create_table "sg_seat_photos", force: :cascade do |t|
