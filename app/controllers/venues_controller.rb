@@ -104,18 +104,20 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   end
 
-  def venue_search
+  def venue_search # name search and events including zipcode searched but not in radius
 
-    @zip_for_sg = params[:zip_code]
+    @zip_for_sg = params[:search]
     # @page_number = params[:page_number]
 
-    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=400&page=1").body
+    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&q=#{params[:search]}&per_page=100&page=1").body
     
     @sg_zip_theater_events = sg_zip_theater_events_response["events"]
     @sg_zip_theater_venues = []
 
-    if @sg_zip_theater_events
-      @zip_venues = Venue.where(zip_code: params[:zip_code])
+    if params[:search] == ""
+      flash[:warning] = "Please enter a query in the search field"
+    elsif @sg_zip_theater_events
+      @zip_venues = Venue.where("zip_code LIKE ? OR name LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
 
       @zip_venues.each do |zip_venue|
         @sg_zip_theater_venues << zip_venue
@@ -124,8 +126,10 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @sg_zip_theater_events.each do |sg_zip_theater_event|
         @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
       end
-    else 
-      flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
+
+      if @sg_zip_theater_venues == []
+        flash[:warning] = "Your search returned no results"
+      end
     end
 
     # @sg_db_venues = SgDbVenue.all
@@ -133,5 +137,35 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     render :venue_search
 
   end
+
+  # def venue_search
+
+  #   @zip_for_sg = params[:search]
+  #   # @page_number = params[:page_number]
+
+  #   sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=100&page=1").body
+    
+  #   @sg_zip_theater_events = sg_zip_theater_events_response["events"]
+  #   @sg_zip_theater_venues = []
+
+  #   if @sg_zip_theater_events
+  #     @zip_venues = Venue.where(zip_code: params[:search])
+
+  #     @zip_venues.each do |zip_venue|
+  #       @sg_zip_theater_venues << zip_venue
+  #     end
+
+  #     @sg_zip_theater_events.each do |sg_zip_theater_event|
+  #       @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
+  #     end
+  #   else 
+  #     flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
+  #   end
+
+  #   # @sg_db_venues = SgDbVenue.all
+
+  #   render :venue_search
+
+  # end
 
 end
