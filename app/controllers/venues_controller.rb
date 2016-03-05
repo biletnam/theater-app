@@ -42,7 +42,6 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     else
       render :new
     end
-
   end
 
   def show
@@ -101,6 +100,37 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       flash[:warning] = "Unable to delete venue."
       redirect_to "/venues"
     end
+  end
+
+  def event_search
+
+    @zip_for_sg = params[:search]
+    # @page_number = params[:page_number]
+
+    sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=100&page=1").body
+    
+    @sg_zip_theater_events = sg_zip_theater_events_response["events"]
+    @zip_events = []
+   
+    if @sg_zip_theater_events
+      @zip_venues = Venue.where(zip_code: params[:search])
+
+      @zip_venues.each do |venue|
+        venue.events.each do |event|
+          @zip_events << event
+        end
+      end
+
+      @sg_zip_theater_events.each do |sg_zip_theater_event|
+        @zip_events << sg_zip_theater_event
+      end
+    else 
+      flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
+    end
+
+    # @sg_db_venues = SgDbVenue.all
+
+    render :event_search
 
   end
 
@@ -132,10 +162,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       end
     end
 
-    # @sg_db_venues = SgDbVenue.all
-
     render :venue_search
-
   end
 
   # def venue_search

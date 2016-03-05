@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   delete '/venues/:id/restaurants/:id' => 'restaurants#destroy'
 
   post '/sg_venue_search' => 'venues#venue_search'
+  post '/sg_event_search' => 'venues#event_search'
   
   get '/sg_venues' => 'sg_venues#index'
   get '/sg_venues/new/:id' => 'sg_venues#new'

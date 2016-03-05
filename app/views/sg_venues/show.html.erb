@@ -23,6 +23,28 @@
   <%= link_to "Create Venue Using SG Information", "/sg_venues/new/#{@sg_venue.id}", :class =>"btn btn-default btn-xs active" %>
 <% end %>
 
+<h3>Upcoming Events</h3>
+
+<table>
+  <tr>
+    <td><strong>Show</strong></td>
+    <td><strong>Date</strong></td>
+    <td><strong>Time</strong></td>
+  </tr>
+<% @sg_events.each do |sg_event| %>
+  <tr>
+    <td><%= sg_event["title"] %></td>
+    
+    <td><%= sg_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %></td>
+    <td><%= sg_event["datetime_local"].to_datetime.strftime("%I:%M %p") %></td>
+    <td><%= link_to "Buy Tickets", sg_event["url"] %></td>
+  </tr>
+<% end %>
+</table>
+
+<h3>Venue Reviews</h3>
+  <p>No reviews for this venue at this time</p>
+
 <h3>Restaurants Nearby</h3>
 <% @google_restaurants.each do |google_restaurant| %>
   <div>

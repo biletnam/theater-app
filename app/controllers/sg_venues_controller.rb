@@ -42,6 +42,10 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
       redirect_to "/sg_db_venues/#{params[:id]}"
     else
       @sg_venue = SgVenue.find(params[:id])
+      @sg_reviews = SgReview.where(sg_venue_id: @sg_venue.id)
+
+      sg_event_response = Unirest.get("https://api.seatgeek.com/2/events?venue.id=#{@sg_venue.id}&per_page=10&page=1").body
+      @sg_events = sg_event_response["events"]
 
       @client = GooglePlaces::Client.new(ENV["google_places_key"])
       @google_restaurants = @client.spots(@sg_venue.latitude, @sg_venue.longitude, :types => 'restaurant', :radius => 2778 )

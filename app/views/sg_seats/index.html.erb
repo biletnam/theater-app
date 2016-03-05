@@ -1,7 +1,6 @@
 
 <h2>Seating Information for <%= @sg_db_venue.name %></h2>
 
-
   <canvas id="seating" width="500" height="500">This browser does not support the canvas element</canvas>
 
 <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>

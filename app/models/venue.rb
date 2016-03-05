@@ -1,6 +1,7 @@
 class Venue < ActiveRecord::Base
 
   has_many :events
+  has_many :scheduled_events
   has_many :seats
   has_many :reviews
   has_many :restaurants

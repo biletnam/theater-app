@@ -7,7 +7,7 @@ class SgReviewsController < ApplicationController
   end
 
   def new
-    @sg_review = SgReview.new(sg_db_venue_id: params[:id])
+    @sg_review = SgReview.new(sg_db_venue_id: params[:id], sg_venue_id: params[:id])
   end
 
   def create

@@ -3,10 +3,10 @@ class SgVenue < ActiveRecord::Base
   attr_reader :id
   attr_accessor :name, :street_address, :city_state, :zip_code, :latitude, :longitude, :phone, :website, :image, :sg_venue_id, :user_id 
 
-  has_many :events
-  has_many :seats
-  has_many :reviews
-  has_many :restaurants
+  # has_many :events
+  # has_many :seats
+  has_many :sg_reviews
+  # has_many :restaurants
 
   belongs_to :user
 

@@ -11,10 +11,13 @@
 <body>
 
 <%= form_tag "/sg_venue_search", class: "navbar-form navbar-left" do %>
-
-  <%= text_field_tag :search, nil, placeholder: "Name or Zip Code" %>
-
+  <%= text_field_tag :search, nil, placeholder: "Theater Name or Zip Code" %>
   <%= submit_tag "Search Theaters" %>
+<% end %>
+<br>
+<%= form_tag "/sg_event_search", class: "navbar-form navbar-left" do %>
+  <%= text_field_tag :search, nil, placeholder: "Zip Code" %>
+  <%= submit_tag "Search Events" %>
 <% end %>
 
 <div><%= link_to "Venues", "/venues" %></div>

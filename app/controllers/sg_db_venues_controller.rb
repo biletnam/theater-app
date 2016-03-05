@@ -39,9 +39,12 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
 
   def show
     @sg_db_venue = SgDbVenue.find(params[:id])
-    # @events = Event.where(venue_id: @venue.id)
+    # @sg_events = Event.where(venue_id: @venue.id)
+    sg_event_response = Unirest.get("https://api.seatgeek.com/2/events?venue.id=#{@sg_db_venue.id}&per_page=10&page=1").body
+    @sg_events = sg_event_response["events"]
     # @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
     @sg_reviews = SgReview.where(sg_db_venue_id: params[:id])
+
     # @restaurants = Restaurant.where(venue_id: params[:id])
 
     @client = GooglePlaces::Client.new(ENV["google_places_key"])
