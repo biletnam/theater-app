@@ -116,8 +116,8 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @zip_venues = Venue.where(zip_code: params[:search])
 
       @zip_venues.each do |venue|
-        venue.events.each do |event|
-          @zip_events << event
+        venue.scheduled_events.each do |scheduled_event|
+          @zip_events << scheduled_event
         end
       end
 
