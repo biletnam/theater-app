@@ -38,6 +38,12 @@ gem 'figaro'
 gem 'unirest'
 gem 'google_places'
 gem'geocoder'
+gem 'thematic'
+# gem 'paloma'
+gem 'gon'
+gem 'rabl'
+gem 'rabl-rails'
+gem 'will_paginate', '~> 3.0.6'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

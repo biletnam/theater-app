@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<div>
+<div id="sg-venue-seats-table">
   <table>
     <tr>
       <td>Section</td>
@@ -19,7 +19,7 @@
     </tr>
   <% @sg_seats.each do |sg_seat| %>
     <tr>
-      <td width="100px"><%= sg_seat.section %></td>
+      <td width="100px"><%= sg_seat.seat_section %></td>
       <td width="40px"><%= sg_seat.seat_row %></td>
       <td width="100px"><%= sg_seat.seat_number %></td>
       <td width="60px"><%= link_to "photos", "/sg_seats/#{sg_seat.id}/sg_seat_photos/" %></td>    
@@ -31,4 +31,5 @@
     </tr>
   <% end %>
   </table>
+  <div class="pagination-bar"><%= will_paginate @seats %></div>
 </div>

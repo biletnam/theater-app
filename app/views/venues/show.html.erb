@@ -78,28 +78,17 @@
 <% end %>
 
 <h3>Restaurants Nearby</h3>
-<% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-  <%= link_to "Add Restaurant", "/venues/#{@venue.id}/restaurants/new", :class =>"btn btn-default btn-xs active" %>
-<% end %>
-
-<% @restaurants.each do |restaurant| %>
-  <div> 
-    <h5><%= link_to restaurant.name, "/venues/#{@venue.id}/restaurants/#{restaurant.id}" %></h5>
-    <%= restaurant.full_address %>
-    <br><%= restaurant.food_type %>
-     <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-      <%= link_to "edit restaurant", "/venues/#{@venue.id}/restaurants/#{restaurant.id}/edit", :class =>"btn btn-default btn-xs active" %>
-      <a data-confirm="Are you sure you want to delete this restaurant?" data-method="delete" href="/venues/<%= restaurant.venue_id %>/restaurants/<%= restaurant.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete restaurant</a>
-    <% end %>
-    <hr>
-  </div>
-<% end %>
 
 <% @google_restaurants.each do |google_restaurant| %>
   <div>
-    <%= link_to google_restaurant.name, "#{google_restaurant.url}" %>
+    <%= link_to google_restaurant.name, "/restaurant_details/#{google_restaurant.place_id}" %>
     <p><%= google_restaurant.vicinity %> 
-    <br>Price Level: <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <br>Price Level: 
+    <% if google_restaurant.price_level %>
+      <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <% else %>
+      unavailable | Rating: <%= google_restaurant.rating %></p>
+    <% end %>
     <hr>
   </div>
 <% end %>

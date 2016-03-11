@@ -15,11 +15,15 @@
 <%= form_tag "/venues/#{@venue.id}/seats", method: :post do %>
 
   <div><%= label_tag "Section" %></div>
-  <div><%= text_field_tag :section, @seat.section %></div>
+  <div><%= text_field_tag :seat_section, @seat.seat_section %></div>
   <div><%= label_tag "Row" %></div>
   <div><%= text_field_tag :seat_row, @seat.seat_row %></div>
   <div><%= label_tag "Seat Number" %></div>
   <div><%= text_field_tag :seat_number, @seat.seat_number %></div>
+  <div><%= label_tag "Row Id" %></div>
+  <div><%= text_field_tag :row_id, @seat.row_id %></div>
+  <div><%= label_tag "Section Id" %></div>
+  <div><%= text_field_tag :section_id, @seat.section_id %></div>
   <div><%= hidden_field_tag :venue_id, @venue.id %></div>
 
   <div><%= submit_tag "Submit" %></div>

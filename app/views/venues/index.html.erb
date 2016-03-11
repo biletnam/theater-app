@@ -3,7 +3,7 @@
 <% @sorted_venues.each do |venue| %>
 
   <h3><%= link_to venue.name, "/venues/#{venue.id}" %></h3>
-  <h5><%= venue.full_address %></h5>
+  <p><%= venue.full_address %></p>
 
     <% if current_user && current_user.admin %>
       <% if venue.class == Venue %>
@@ -17,4 +17,5 @@
   <hr>
 
 <% end %>
+
 

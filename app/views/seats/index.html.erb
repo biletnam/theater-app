@@ -1,6 +1,6 @@
+<%= include_gon %>
 
 <h2>Seating Information for <%= @venue.name %></h2>
-
 
   <canvas id="seating" width="500" height="500">This browser does not support the canvas element</canvas>
 
@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<div>
+<div id="venue-seats-table">
   <table>
     <tr>
       <td>Section</td>
@@ -20,7 +20,7 @@
     </tr>
   <% @seats.each do |seat| %>
     <tr>
-      <td width="100px"><%= seat.section %></td>
+      <td width="100px"><%= seat.seat_section %></td>
       <td width="40px"><%= seat.seat_row %></td>
       <td width="100px"><%= seat.seat_number %></td>
       <td width="60px"><%= link_to "photos", "/seats/#{seat.id}/seat_photos/" %></td>    
@@ -32,4 +32,9 @@
     </tr>
   <% end %>
   </table>
+  <div class="pagination-bar"><%= will_paginate @seats %></div>
 </div>
+
+
+
+

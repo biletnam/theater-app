@@ -15,7 +15,7 @@
 <%= form_tag "/sg_db_venues/#{@sg_db_venue.id}/sg_seats", method: :post do %>
 
   <div><%= label_tag "Section" %></div>
-  <div><%= text_field_tag :section, @sg_seat.section %></div>
+  <div><%= text_field_tag :seat_section, @sg_seat.seat_section %></div>
   <div><%= label_tag "Row" %></div>
   <div><%= text_field_tag :seat_row, @sg_seat.seat_row %></div>
   <div><%= label_tag "Seat Number" %></div>

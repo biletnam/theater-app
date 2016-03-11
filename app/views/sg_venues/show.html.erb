@@ -50,8 +50,12 @@
   <div>
     <%= link_to google_restaurant.name, "#{google_restaurant.url}" %>
     <p><%= google_restaurant.vicinity %> 
-    <br>Price Level: <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
-    <hr>
+    <br>Price Level:
+    <% if google_restaurant.price_level %>
+      <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <% else %>
+      unavailable | Rating: <%= google_restaurant.rating %></p>
+    <% end %>
   </div>
 <% end %>
 

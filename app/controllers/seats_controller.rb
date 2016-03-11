@@ -4,8 +4,28 @@ class SeatsController < ApplicationController
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @seats = Seat.where(venue_id: params[:id])
+    @seats = Seat.where(venue_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
     @venue = Venue.find(params[:id])
+
+
+
+    # seating chart gon gem work
+
+    @section_data_for_js = []
+
+    @sections = @venue.sections
+    
+
+    gon.venue = @venue
+    gon.section_count = @venue.sections.count
+    section_data = []
+
+
+
+
+
+    gon.seats = @seats
+
   end
 
   def new
@@ -15,10 +35,12 @@ class SeatsController < ApplicationController
 
   def create
     @seat = Seat.new(
-      section: params[:section],
+      seat_section: params[:seat_section],
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
-      venue_id: params[:venue_id])
+      venue_id: params[:venue_id],
+      row_id: params[:row_id],
+      section_id: params[:section_id])
 
     @venue = Venue.find(params[:id])
 
@@ -40,10 +62,12 @@ class SeatsController < ApplicationController
     @venue = @seat.venue
 
     if @seat.update(
-      section: params[:section],
+      seat_section: params[:seat_section],
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
-      venue_id: params[:venue_id])
+      venue_id: params[:venue_id],
+      row_id: params[:row_id],
+      section_id: params[:section_id])
 
       flash[:success] = "Seat updated."
       redirect_to "/venues/#{@seat.venue_id}/seats"

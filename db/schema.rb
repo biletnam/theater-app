@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305100712) do
+ActiveRecord::Schema.define(version: 20160306061125) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 20160305100712) do
     t.datetime "updated_at"
   end
 
+  create_table "rows", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.integer  "number_seats", limit: 4
+    t.integer  "venue_id",     limit: 4
+    t.integer  "section_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scheduled_events", force: :cascade do |t|
     t.integer  "event_id",        limit: 4
     t.datetime "created_at"
@@ -77,13 +86,23 @@ ActiveRecord::Schema.define(version: 20160305100712) do
   end
 
   create_table "seats", force: :cascade do |t|
-    t.string   "section",     limit: 255
-    t.string   "seat_row",    limit: 255
-    t.integer  "seat_number", limit: 4
+    t.string   "seat_section", limit: 255
+    t.string   "seat_row",     limit: 255
+    t.integer  "seat_number",  limit: 4
+    t.integer  "venue_id",     limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sg_venue_id",  limit: 4
+    t.integer  "row_id",       limit: 4
+    t.integer  "section_id",   limit: 4
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "number_rows", limit: 4
     t.integer  "venue_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sg_venue_id", limit: 4
   end
 
   create_table "sg_db_venues", force: :cascade do |t|
@@ -144,7 +163,7 @@ ActiveRecord::Schema.define(version: 20160305100712) do
   end
 
   create_table "sg_seats", force: :cascade do |t|
-    t.string   "section",        limit: 255
+    t.string   "seat_section",   limit: 255
     t.string   "seat_row",       limit: 255
     t.string   "seat_number",    limit: 255
     t.integer  "venue_id",       limit: 4

@@ -35,8 +35,7 @@
   </tr>
 <% @sg_events.each do |sg_event| %>
   <tr>
-    <td><%= sg_event["title"] %></td>
-    
+    <td><%= sg_event["title"] %></td> 
     <td><%= sg_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %></td>
     <td><%= sg_event["datetime_local"].to_datetime.strftime("%I:%M %p") %></td>
     <td><%= link_to "Buy Tickets", sg_event["url"] %></td>
@@ -68,7 +67,12 @@
   <div>
     <%= link_to google_restaurant.name, "#{google_restaurant.url}" %>
     <p><%= google_restaurant.vicinity %> 
-    <br>Price Level: <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <br>Price Level:
+    <% if google_restaurant.price_level %>
+      <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <% else %>
+      unavailable | Rating: <%= google_restaurant.rating %></p>
+    <% end %>
     <hr>
   </div>
 <% end %>

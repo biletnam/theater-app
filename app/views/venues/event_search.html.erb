@@ -1,20 +1,28 @@
 <h1>Events matching "<%= @zip_for_sg %>"</h1>
 
-<% @zip_events.each do |zip_event| %>
-  <% if zip_event.class == ScheduledEvent %>
-    <% if zip_event.friendly_date > Time.now %>
-      <h3><%= link_to zip_event.event.name, "/venues/#{zip_event.venue_id}/events/#{zip_event.event.id}" %></h3>
-      <%= zip_event.venue.name %>
-      <br><%= zip_event.venue.full_address %>
-      <br><%= zip_event.friendly_date %>, <%= zip_event.friendly_time %>
+
+<% if @zip_for_sg == "" %>
+  <p><%= @no_result_message %></p>
+<% elsif @sg_zip_theater_events %>
+
+  <% @zip_events.each do |zip_event| %>
+    <% if zip_event.class == ScheduledEvent %>
+      <% if zip_event.friendly_date > Time.now %>
+        <h3><%= link_to zip_event.event.name, "/venues/#{zip_event.venue_id}/events/#{zip_event.event.id}" %></h3>
+        <strong><%= zip_event.venue.name %></strong>
+        <br><%= zip_event.venue.full_address %>
+        <br><%= zip_event.friendly_date %> || <%= zip_event.friendly_time %>
+        <hr>
+      <% end %>
+    <% else %>
+      <h3><%= link_to zip_event.name, "/sg_venues/#{zip_event.sg_venue_id}" %></h3>
+      <strong><%= zip_event.venue_name %></strong>
+      <br><%= zip_event.full_address %>
+      <br><%= zip_event.friendly_date %> || <%= zip_event.friendly_time %>
       <hr>
     <% end %>
-  <% else %>
-    <h3><%= link_to zip_event.name, "/sg_venues/#{zip_event.sg_venue_id}" %></h3>
-    <%= zip_event.venue_name %>
-      <br><%= zip_event.full_address %>
-      <br><%= zip_event.friendly_date %>, <%= zip_event.friendly_time %>
-      <hr>
   <% end %>
-<% end %>
+<% else %>
+  <p><%= @no_result_message %></p>
 
+<% end %>

@@ -65,9 +65,11 @@ Rails.application.routes.draw do
   patch '/venues/:id/restaurants/:id' => 'restaurants#update'
   delete '/venues/:id/restaurants/:id' => 'restaurants#destroy'
 
-  post '/sg_venue_search' => 'venues#venue_search'
-  post '/sg_event_search' => 'venues#event_search'
-  
+  post '/venue_search_result' => 'venues#venue_search'
+  get '/venue_search_bar' => 'venues#venue_search_bar'
+  post '/event_search_result' => 'venues#event_search'  
+  get '/restaurant_details/:place_id' => 'venues#restaurant_details'
+
   get '/sg_venues' => 'sg_venues#index'
   get '/sg_venues/new/:id' => 'sg_venues#new'
   post '/sg_venues' => 'sg_venues#create'

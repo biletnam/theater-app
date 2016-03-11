@@ -13,7 +13,7 @@
 
 <%= form_tag "/sg_seats/#{@sg_seat.id}/sg_seat_photos/#{@sg_seat_photo.id}", method: :patch do %>
   
-  <h4>Section: <%= @sg_seat.section %></h4>
+  <h4>Section: <%= @sg_seat.seat_section %></h4>
   <h4>Row: <%= @sg_seat.seat_row %></h4>
   <h4>Seat: <%= @sg_seat.seat_number %></h4>
 

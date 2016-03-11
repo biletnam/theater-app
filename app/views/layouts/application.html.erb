@@ -4,21 +4,34 @@
   <title>TheaterApp</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+
   <%= csrf_meta_tags %>
+
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-  <script src="https://s3.amazonaws.com/<%= ENV["aws_bucket_js"] %>/seating.js"></script>
+
+
 </head>
 <body>
 
-<%= form_tag "/sg_venue_search", class: "navbar-form navbar-left" do %>
-  <%= text_field_tag :search, nil, placeholder: "Theater Name or Zip Code" %>
-  <%= submit_tag "Search Theaters" %>
-<% end %>
-<br>
-<%= form_tag "/sg_event_search", class: "navbar-form navbar-left" do %>
-  <%= text_field_tag :search, nil, placeholder: "Zip Code" %>
-  <%= submit_tag "Search Events" %>
-<% end %>
+<nav class="fixed-nav-bar">
+	<div "nav-container">
+		<div id="nav-logo"><%= image_tag('seat_scoop_work_logo_white_100.png') %></div>
+		<a href="/venue_search_bar" id="venueNavLink"><div id="nav-venues" onclick="venueLink()"> Venues </div></a>
+		<div id="nav-events">Events</div>
+	</div>
+</nav>
+
+
+<div id="app-content">
+
+
+
+<div>
+  <%= form_tag "/event_search_result", class: "navbar-form navbar-left" do %>
+    <%= text_field_tag :search, nil, placeholder: "Zip Code" %>
+    <div><%= submit_tag "Search Events" %></div>
+  <% end %>
+</div>
 
 <div><%= link_to "Venues", "/venues" %></div>
 
@@ -50,6 +63,7 @@
 <% end %>
 
 <%= yield %>
+</div>
 
 </body>
 </html>

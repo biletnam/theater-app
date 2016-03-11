@@ -18,6 +18,12 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     end
 
     @sorted_venues = @all_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
+  
+    respond_to do |format|
+      format.html
+      format.json { render json: @venue }
+    end
+
   end
   
   def new
@@ -128,7 +134,12 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
       @sorted_events = @zip_events.sort! { |a,b| a.date_time <=> b.date_time}
     else 
-      flash[:warning] = "Search for '#{@zip_for_sg}' returned no results"
+      if params[:search] == ""
+        flash[:warning] = "Please enter a valid query in the search field"
+        @no_result_message = "Your search returned no results"
+      else
+        @no_result_message = "Your search returned no results"
+      end
     end
 
     # @sg_db_venues = SgDbVenue.all
@@ -148,7 +159,8 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     @sg_zip_theater_venues = []
 
     if params[:search] == ""
-      flash[:warning] = "Please enter a query in the search field"
+      flash[:warning] = "Please enter a valid query in the search field"
+      @no_result_message = "Your search returned no results"
     elsif @sg_zip_theater_events
       @zip_venues = Venue.where("zip_code LIKE ? OR name LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
 
@@ -160,12 +172,25 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
         @sg_zip_theater_venues << SgVenue.new(sg_zip_theater_event["venue"])
       end
 
+      gon.sg_zip_theater_venues = @sg_zip_theater_venues
+
       if @sg_zip_theater_venues == []
-        flash[:warning] = "Your search returned no results"
+        flash[:warning] = "Please enter a valid query in the search field"
+        @no_result_message = "Your search returned no results"
       end
     end
 
-    render :venue_search
+    render :venue_search_result
+  end
+
+  def venue_search_bar
+  end
+
+  def restaurant_details
+    @restaurant_place_id = params[:place_id]
+    google_restaurant_data = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@restaurant_place_id}&key=#{ENV['google_places_key']}").body
+    @google_restaurant = google_restaurant_data["result"]
+
   end
 
   # def venue_search

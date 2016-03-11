@@ -1,10 +1,15 @@
 <h2>Seat Photo</h2>
 
 
+<% if user_signed_in? %>
+  <p><a href="/seats/<%= @seat.id %>/seat_photos/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">Add Seat Photo</a></p>
+<% end %>
+
+
 <% @seat_photos.each do |seat_photo| %>
   <div>
     <%= image_tag seat_photo.image.medium.url %>
-    <br><%= seat_photo.seat.section %>, Row: <%= seat_photo.seat.seat_row %>, Seat: <%= seat_photo.seat.seat_number%>
+    <br><%= seat_photo.seat.seat_section %>, Row: <%= seat_photo.seat.seat_row %>, Seat: <%= seat_photo.seat.seat_number%>
     <br><em>"<%= seat_photo.caption %>"</em>
   <div>
 

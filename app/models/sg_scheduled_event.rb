@@ -14,8 +14,8 @@ attr_accessor :sg_event_id, :sg_venue_id, :venue_name, :street_address, :city_st
     @sg_venue_id = hash["venue"]["id"]
     @venue_name = hash["venue"]["name"]
     @street_address = hash["venue"]["address"]
-    @city_state = hash["display_location"]
-    @zip_code = hash["postal_code"]
+    @city_state = hash["venue"]["display_location"]
+    @zip_code = hash["venue"]["postal_code"]
     @buy_ticket_link = hash["url"]
     @name = hash["title"]
     @date_time = hash["datetime_local"].to_datetime

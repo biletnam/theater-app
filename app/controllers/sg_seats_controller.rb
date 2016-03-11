@@ -4,7 +4,7 @@ class SgSeatsController < ApplicationController
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @sg_seats = SgSeat.where(sg_db_venue_id: params[:id])
+    @sg_seats = SgSeat.where(sg_db_venue_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
     @sg_db_venue = SgDbVenue.find(params[:id])
   end
 
@@ -15,7 +15,7 @@ class SgSeatsController < ApplicationController
 
   def create
     @sg_seat = SgSeat.new(
-      section: params[:section],
+      seat_section: params[:seat_section],
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
       sg_venue_id: params[:sg_venue_id],
@@ -41,7 +41,7 @@ class SgSeatsController < ApplicationController
     @sg_db_venue = @sg_seat.sg_db_venue
 
     if @sg_seat.update(
-      section: params[:section],
+      seat_section: params[:seat_section],
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
       sg_venue_id: params[:sg_venue_id],
