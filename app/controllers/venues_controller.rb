@@ -188,9 +188,17 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def restaurant_details
     @restaurant_place_id = params[:place_id]
+    @google_places_key = ENV["google_places_key"]
     google_restaurant_data = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@restaurant_place_id}&key=#{ENV['google_places_key']}").body
     @google_restaurant = google_restaurant_data["result"]
-
+    
+    @photos_array = @google_restaurant["photos"]
+    @photo_url_array = []
+    @photos_array.each do |photo_data|
+      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=#{photo_data["photo_reference"]}&key=#{@google_places_key}"
+      @photo_url_array << photo_url
+    end
+    # @first_image_ref = @photos_array[1]["photo_reference"]
   end
 
   # def venue_search
