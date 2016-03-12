@@ -198,7 +198,10 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=#{photo_data["photo_reference"]}&key=#{@google_places_key}"
       @photo_url_array << photo_url
     end
-    # @first_image_ref = @photos_array[1]["photo_reference"]
+
+    gon.restaurant_lat = @google_restaurant["geometry"]["location"]["lat"]
+    gon.restaurant_lon = @google_restaurant["geometry"]["location"]["lng"]
+    gon.restaurant_place_id = @restaurant_place_id
   end
 
   # def venue_search
