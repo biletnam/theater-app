@@ -63,9 +63,15 @@
 <% end %>
 
 <h3>Restaurants Nearby</h3>
+
+<div id="dvMap" style="width: 500px; height: 400px">
+</div>
+
+<div id="restaurant-results">
+
 <% @google_restaurants.each do |google_restaurant| %>
   <div>
-    <%= link_to google_restaurant.name, "#{google_restaurant.url}" %>
+    <%= link_to google_restaurant.name, "/restaurant_details/#{google_restaurant.place_id}" %> 
     <p><%= google_restaurant.vicinity %> 
     <br>Price Level:
     <% if google_restaurant.price_level %>
@@ -73,11 +79,64 @@
     <% else %>
       unavailable | Rating: <%= google_restaurant.rating %></p>
     <% end %>
-    <hr>
   </div>
 <% end %>
+</div>
 
 <footer><%= image_tag "https://developers.google.com/places/documentation/images/powered-by-google-on-white.png" %></footer>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&key=<%= ENV['google_maps_js_key'] %>"></script><script type="text/javascript">
+    var venueLat = <%= @sg_db_venue.latitude %>;
+    var venueLon = <%= @sg_db_venue.longitude %>;
+    var markers = [];
+
+    <% @google_restaurants.each do |google_restaurant| %>
+      var hash = {
+        "title": '<%= google_restaurant.name %>',
+        "lat": '<%= google_restaurant.lat %>',
+        "lng": '<%= google_restaurant.lng %>',
+        "description": '<%= google_restaurant.name %> <br><%= google_restaurant.vicinity %>'
+      };
+
+      markers.push(hash);
+    <% end %>
+
+    window.onload = function () {
+        LoadMap();
+    }
+    function LoadMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(venueLat, venueLon),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+        //Create and open InfoWindow.
+        var infoWindow = new google.maps.InfoWindow();
+
+        for (var i = 0; i < markers.length; i++) {
+            var data = markers[i];
+            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: data.title
+            });
+
+            //Attach click event to the marker.
+            (function (marker, data) {
+                google.maps.event.addListener(marker, "click", function (e) {
+                    //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                    infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
+                    infoWindow.open(map, marker);
+                });
+            })(marker, data);
+        }
+    }
+</script>
+
+
 
 
 

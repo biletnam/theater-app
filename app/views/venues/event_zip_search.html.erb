@@ -1,0 +1,7 @@
+<div id="event-search-bar">
+  <%= form_tag "/event_search_result" do %>
+  <div id="event-search-field"><%= text_field_tag :search, nil, placeholder: "zip code" %>
+  <div id="event-search-button"><%= button_tag "", type: 'submit', class: "btn btn-default glyphicon glyphicon-search pull-right" %></div>
+  </div>
+  <% end %>
+</div>

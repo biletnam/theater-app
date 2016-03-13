@@ -1,0 +1,21 @@
+<div id="venue-zip-search-result">
+  <h1>Venues matching "<%= @zip_for_sg %>"</h1>
+
+  <% if @zip_for_sg == "" %>
+    <p><%= @no_result_message %></p>
+  <% else %>
+    <% @sg_zip_theater_venues.uniq.each do |sg_zip_theater_venue| %>
+      <% if sg_zip_theater_venue.class == SgVenue %>
+        <h3><%= link_to sg_zip_theater_venue.name, "/sg_venues/#{sg_zip_theater_venue.id}" %></h3>
+        <%= sg_zip_theater_venue.street_address %>, <%= sg_zip_theater_venue.city_state %>
+      <% elsif sg_zip_theater_venue.class == Venue %>
+        <h3><%= link_to sg_zip_theater_venue.name, "/venues/#{sg_zip_theater_venue.id}" %></h3>
+        <%= sg_zip_theater_venue.full_address %>
+      <% end %>
+      <hr>
+    <% end %>
+    <% if @sg_zip_theater_venues == [] %>
+      <p><%= @no_result_message %></p>
+    <% end %>
+  <% end %>
+</div>

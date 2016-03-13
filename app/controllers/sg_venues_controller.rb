@@ -37,7 +37,6 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
   end
 
   def show
-
     if SgDbVenue.where(id: params[:id]) != []
       redirect_to "/sg_db_venues/#{params[:id]}"
     else
@@ -48,12 +47,9 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
       @sg_events = sg_event_response["events"]
 
       @client = GooglePlaces::Client.new(ENV["google_places_key"])
-      @google_restaurants = @client.spots(@sg_venue.latitude, @sg_venue.longitude, :types => 'restaurant', :radius => 2778 )
+      @google_restaurants = @client.spots(@sg_venue.latitude, @sg_venue.longitude, :types => 'restaurant', :distance => 2778 )
       @price_level = "$"
     end
-
-
-    # @all_sg_venue_events = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater").body
   end
 
   def edit
@@ -93,8 +89,6 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
       flash[:warning] = "Unable to delete venue."
       redirect_to "/sg_venues"
     end
-
   end
-
   
 end

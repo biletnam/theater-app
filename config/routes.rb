@@ -22,6 +22,14 @@ Rails.application.routes.draw do
   patch '/venues/:id' => 'venues#update'
   delete '/venues/:id' => 'venues#destroy'
 
+  get '/venue_name_search' => 'venues#venue_name_search'
+  post '/venue_name_search_result' => 'venues#venue_name_search_result'
+  get '/venue_zip_search' => 'venues#venue_zip_search'
+  post '/venue_zip_search_result' => 'venues#venue_zip_search_result'
+  get '/event_search' => 'venues#event_zip_search'  
+  post '/event_search_result' => 'venues#event_search'
+  get '/restaurant_details/:place_id' => 'venues#restaurant_details'
+
   get '/events' => 'events#index'
   get 'venues/:id/events/new' => 'events#new'
   post '/venues/:id/events' => 'events#create'
@@ -64,11 +72,6 @@ Rails.application.routes.draw do
   get '/venues/:id/restaurants/:id/edit' => 'restaurants#edit'
   patch '/venues/:id/restaurants/:id' => 'restaurants#update'
   delete '/venues/:id/restaurants/:id' => 'restaurants#destroy'
-
-  post '/venue_search_result' => 'venues#venue_search'
-  get '/venue_search_bar' => 'venues#venue_search_bar'
-  post '/event_search_result' => 'venues#event_search'  
-  get '/restaurant_details/:place_id' => 'venues#restaurant_details'
 
   get '/sg_venues' => 'sg_venues#index'
   get '/sg_venues/new/:id' => 'sg_venues#new'

@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#venue-search-bar {
+#venue-search-bar, #event-search-bar {
   #search {
     height: 60px;
     width: 600px;
@@ -22,10 +22,12 @@
   // #venue-search-button {
   //   display: inline-block;
 
-    button {
-      height: 60px;
-      width: 60px;
-    }
+  button {
+    height: 60px;
+    width: 60px;
+    position: relative;
+
+  }
   // }
 
   // }
@@ -36,6 +38,30 @@
   #map {
     height: 400px;
     width: 500px;
-    background-color: #ccc;
+    border: 3px solid #bbb;
+    border-radius: 3px;
   }
+
+  #carousel-example-generic {
+    img {
+      max-height: 200px;
+      max-width: 300px;
+      display: block;
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    width: 500px;
+    height: 300px;
+    padding: 10px;
+    border: 3px solid #bbb;
+    border-radius: 3px;
+    display: block;
+    margin: auto;
+  }
+
+  li {
+    border: solid 1px #bbb;
+  }
+  
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306061125) do
+ActiveRecord::Schema.define(version: 20160313065333) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 20160306061125) do
     t.integer  "sg_venue_id",        limit: 4
     t.float    "latitude",           limit: 24
     t.float    "longitude",          limit: 24
+    t.string   "twitter_handle",     limit: 255
   end
 
 end

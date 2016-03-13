@@ -1,0 +1,7 @@
+<div id="venue-search-bar">
+  <%= form_tag "/venue_name_search_result" do %>
+  <div id="venue-search-field"><%= text_field_tag :search, nil, placeholder: "theater name" %>
+  <div id="venue-search-button"><%= button_tag "", type: 'submit', class: "btn btn-default glyphicon glyphicon-search pull-right" %></div>
+  </div>
+  <% end %>
+</div>
