@@ -120,6 +120,7 @@
 
   #app-content {
     margin-top: 100px;
+    margin-bottom: 40px;
     position: static;
   }
 canvas {
@@ -178,4 +179,27 @@ canvas {
   *:first-child + html .pagination {
     overflow: hidden; }
 }
+
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000000;
+    width: 100%;
+    height: 40px;
+    background-color: #2e6ab1;
+    border-top: solid 3px #bbb;
+  
+  #sg-logo, #google-logo {
+    padding: 3px;
+    margin-top: 5px;
+    margin-left: 10px;
+    display: inline-block;
+  }
+
+
+}
+
 

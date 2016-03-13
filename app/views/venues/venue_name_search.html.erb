@@ -1,29 +1,28 @@
-<body onload="init()">
+<body onload="initSearchTabs()">
 <div id="venue-searching">
 
-<ul id="tabs">
-  <li><a href="#venue-name">Search By Name</a></li>
-  <li><a href="#venue-zip">Search By Zip</a></li>
-</ul>
+  <ul id="tabs">
+    <li><a href="#name">Search By Name</a></li>
+    <li><a href="#zip">Search By Zip</a></li>
+  </ul>
 
-<div class="venue-search-bar tabContent" id="venue-name">
-  <%= form_tag "/venue_name_search_result" do %>
-  <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by name" %>
- <%= button_tag "Search" %>
+  <div class="venue-search-bar tabContent" id="name">
+    <%= form_tag "/venue_name_search_result" do %>
+    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by name" %>
+   <%= button_tag "Search" %>
+    </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
 
-<div class="venue-search-bar tabContent" id="venue-zip">
-  <%= form_tag "/venue_zip_search_result" do %>
-  <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by zip code" %>
-  <%= button_tag "Search" %>
+  <div class="venue-search-bar tabContent" id="zip">
+    <%= form_tag "/venue_zip_search_result" do %>
+    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by zip code" %>
+    <%= button_tag "Search" %>
+    </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
 
 </div>
-
 </body>
 
     

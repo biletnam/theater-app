@@ -1,7 +1,18 @@
-<div id="event-search-bar">
-  <%= form_tag "/event_search_result" do %>
-  <div id="event-search-field"><%= text_field_tag :search, nil, placeholder: "zip code" %>
-  <%= button_tag "Search" %></
+<body onload="initSearchTabs()">
+<div id="event-searching">
+
+  <ul id="tabs">
+    <li><a href="#zip">Search By Zip</a></li>
+  </ul>
+
+  <div class="event-search-bar tabContent" id="zip">
+    <%= form_tag "/event_search_result" do %>
+    <div id="event-search-field"><%= text_field_tag :search, nil, placeholder: "search by zip code" %>
+    <%= button_tag "Search" %></div>
+    </div>
+    <% end %>
   </div>
-  <% end %>
+
 </div>
+</body>
+

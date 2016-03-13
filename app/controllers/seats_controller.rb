@@ -7,7 +7,7 @@ class SeatsController < ApplicationController
     @seats = Seat.where(venue_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
     @venue = Venue.find(params[:id])
 
-
+    @sections = @venue.sections
 
     # seating chart gon gem work
 
@@ -19,11 +19,6 @@ class SeatsController < ApplicationController
     gon.venue = @venue
     gon.section_count = @venue.sections.count
     section_data = []
-
-
-
-
-
     gon.seats = @seats
 
   end

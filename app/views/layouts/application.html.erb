@@ -7,9 +7,6 @@
   <%= csrf_meta_tags %>
 
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-
-
-
 </head>
 <body>
 
@@ -21,12 +18,9 @@
 	</div>
 </nav>
 
-
 <div id="app-content">
 
 	<div><%= link_to "Venues", "/venues" %></div>
-	<div><%= link_to "Venue Zip Search", "/venue_zip_search" %></div>
-
 	<div> 
 	  <% Venue.all.each do |venue| %>
 	    <%= link_to venue.name, "/venues/#{venue.id}" %> 
@@ -55,7 +49,14 @@
 	<% end %>
 
 	<%= yield %>
-</div>
 
+	<footer class="fixed-footer">
+		<div "footer-container">
+			<div id="sg-logo"><%= image_tag('powered_by_google_on_non_white.png') %></div>
+			<div id="google-logo"><%= image_tag('seat_geek_logo_102.png') %></div>
+		</div>
+	</footer>
+
+</div>
 </body>
 </html>

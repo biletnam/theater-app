@@ -1,7 +1,7 @@
 var tabLinks = new Array();
 var contentDivs = new Array();
 
-function init() {
+function initSearchTabs() {
 
   // Grab the tab links and content divs from the page
   var tabListItems = document.getElementById('tabs').childNodes;
