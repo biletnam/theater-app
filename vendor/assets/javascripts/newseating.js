@@ -1,7 +1,10 @@
 $(function() {
 
-window.callSeating = function(sections, rows, seats){
+
+window.callSeating = function(){
+
   console.log("seating function started");
+  console.log(gon.sections[0].rows[0].number_seats);
 
   var seatColor = "#5e80ae";
   var seatHoverColor = "DeepSkyBlue";
@@ -17,11 +20,13 @@ window.callSeating = function(sections, rows, seats){
   var stage = new createjs.Stage(canvas);
   stage.enableMouseOver();
 
-  for(var i = 0; i < sections; i++){
-    console.log(sections);
-    // var sectionRowCount = sections[i].number_rows;
-    for(var j = 0; j < rows;j++ ){
-      // console.log(sectionRowCount);
+  var sections = gon.sections
+
+  for(var i = 0; i < sections.length; i++){
+    console.log(sections.length);
+    var rows = gon.sections[i].rows;
+    for(var j = 0; j < rows.length;j++ ){
+      var seats = rows[j].number_seats;
       for(var k = 0; k < seats; k++){
 
         var seat = new createjs.Shape();
@@ -51,7 +56,8 @@ window.callSeating = function(sections, rows, seats){
       }
     xCircle = 12;
     yCircle += 19; 
-    } 
+    }
+
   }
 
 stage.update();
