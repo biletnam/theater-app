@@ -1,7 +1,29 @@
-<div id="venue-search-bar">
+<body onload="init()">
+<div id="venue-searching">
+
+<ul id="tabs">
+  <li><a href="#venue-name">Search By Name</a></li>
+  <li><a href="#venue-zip">Search By Zip</a></li>
+</ul>
+
+<div class="venue-search-bar tabContent" id="venue-name">
   <%= form_tag "/venue_name_search_result" do %>
-  <div id="venue-search-field"><%= text_field_tag :search, nil, placeholder: "theater name" %>
-  <div id="venue-search-button"><%= button_tag "", type: 'submit', class: "btn btn-default glyphicon glyphicon-search pull-right" %></div>
+  <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by name" %>
+ <%= button_tag "Search" %>
   </div>
   <% end %>
 </div>
+
+<div class="venue-search-bar tabContent" id="venue-zip">
+  <%= form_tag "/venue_zip_search_result" do %>
+  <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by zip code" %>
+  <%= button_tag "Search" %>
+  </div>
+  <% end %>
+</div>
+
+</div>
+
+</body>
+
+    
