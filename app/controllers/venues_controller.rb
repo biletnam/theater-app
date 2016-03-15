@@ -70,8 +70,8 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @gp_restaurants = []
       gp_api_restaurants_response["results"].each do |restaurant|
         @gp_restaurants << GpRestaurant.new(restaurant)
-      @price_level = "$"
       end
+      @price_level = "$"
     end
   end
 
