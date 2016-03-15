@@ -72,15 +72,16 @@
 <% @gp_restaurants.each do |gp_restaurant| %>
   <div>
     <%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %> 
-    <p><%= gp_restaurant.vicinity %> 
+    <p><strong><%= gp_restaurant.vicinity %> </strong>
     <br>Price Level:
     <% if gp_restaurant.price_level && gp_restaurant.rating %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %></p>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %>
     <% elsif gp_restaurant.price_level %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable </p>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable 
     <% else %>
-      unavailable | Rating: <%= gp_restaurant.rating %></p>
+      unavailable | Rating: <%= gp_restaurant.rating %>
     <% end %>
+    <br>Distance from venue: <%= Geocoder::Calculations.distance_between([@sg_db_venue.latitude,@sg_db_venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles</p>
   </div>
 <% end %>
 </div>
