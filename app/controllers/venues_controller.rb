@@ -64,14 +64,13 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
       # @client = GooglePlaces::Client.new(ENV["google_places_key"])
       # @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :distance => 2778 )
-      @price_level = "$"
-
       gon.google_restaurants = @google_restaurants
 
       gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@venue.latitude},#{@venue.longitude}&rankby=distance&type=restaurant&key=#{ENV["google_places_key"]}").body
       @gp_restaurants = []
       gp_api_restaurants_response["results"].each do |restaurant|
         @gp_restaurants << GpRestaurant.new(restaurant)
+      @price_level = "$"
       end
     end
   end
