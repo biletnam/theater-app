@@ -88,15 +88,16 @@
 <% @gp_restaurants.each do |gp_restaurant| %>
   <div>
     <%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %> 
-    <p><%= gp_restaurant.vicinity %> 
+    <p><strong><%= gp_restaurant.vicinity %></strong>
     <br>Price Level:
     <% if gp_restaurant.price_level && gp_restaurant.rating %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %></p>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %>
     <% elsif gp_restaurant.price_level %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable </p>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable
     <% else %>
-      unavailable | Rating: <%= gp_restaurant.rating %></p>
+      unavailable | Rating: <%= gp_restaurant.rating %>
     <% end %>
+    <br>Distance from venue: <%= Geocoder::Calculations.distance_between([@venue.latitude,@venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles</p>
   </div>
 <% end %>
 </div>
@@ -126,7 +127,7 @@
     function LoadMap() {
         var mapOptions = {
             center: new google.maps.LatLng(venueLat, venueLon),
-            zoom: 17,
+            zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
