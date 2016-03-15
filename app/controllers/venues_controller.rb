@@ -59,21 +59,20 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @events = Event.where(venue_id: @venue.id)
       @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
       @reviews = Review.where(venue_id: params[:id])
-      @restaurants = Restaurant.where(venue_id: params[:id])
+      # @restaurants = Restaurant.where(venue_id: params[:id])
       @twitter = @venue.twitter_handle
 
-      @client = GooglePlaces::Client.new(ENV["google_places_key"])
-      @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :distance => 2778 )
+      # @client = GooglePlaces::Client.new(ENV["google_places_key"])
+      # @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :distance => 2778 )
       @price_level = "$"
 
       gon.google_restaurants = @google_restaurants
 
-      gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@venue.latitude},#{@venue.longitude}&rankby=distance&type=restaurant&key=AIzaSyDfKUee1ndAvgm8ZFbwSKrZD1-7P-UjD5c").body
+      gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@venue.latitude},#{@venue.longitude}&rankby=distance&type=restaurant&key=#{ENV["google_places_key"]}").body
       @gp_restaurants = []
       gp_api_restaurants_response["results"].each do |restaurant|
         @gp_restaurants << GpRestaurant.new(restaurant)
       end
-
     end
   end
 
@@ -238,7 +237,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     google_restaurant_data = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@restaurant_place_id}&key=#{ENV['google_places_key']}").body
     @google_restaurant = google_restaurant_data["result"]
     
-    @photos_array = @google_restaurant["photos"]
+    @photos_array = @google_restaurant["photos"] if @google_restaurant
     @photo_url_array = []
 
     if @photos_array

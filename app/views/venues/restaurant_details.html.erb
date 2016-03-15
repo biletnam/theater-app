@@ -56,24 +56,32 @@
     <br><%= @google_restaurant["formatted_phone_number"] %></p>
 
   <h4>Hours</h4>
-  <p><%= @google_restaurant["opening_hours"]["weekday_text"][0] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][1] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][2] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][3] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][4] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][5] %>
-  <br><%= @google_restaurant["opening_hours"]["weekday_text"][6] %></p>
+  <% if @google_restaurant["opening_hours"] %>
+    <p><%= @google_restaurant["opening_hours"]["weekday_text"][0] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][1] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][2] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][3] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][4] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][5] %>
+    <br><%= @google_restaurant["opening_hours"]["weekday_text"][6] %></p>
+  <% else %>
+  <p>Hours unavailable</p>
+  <% end %>
 
   <h4>Reviews</h4>
   <% if @google_restaurant["rating"] %>
     <h5>Average Rating: <%= @google_restaurant["rating"] %></h5>
   <% end %>
   <div>
+  <% if @google_restaurant["reviews"] %>
     <%= @google_restaurant["reviews"].each do |review_array| %>
       <%= review_array.each do |review| %>
       <%= review %>
       <% end %>
     <% end %>
+  <% else %>
+    <p>Reviews unavailable</p>
+  <% end %>
   </div>
 
   <div id="map"></div>

@@ -43,8 +43,11 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
     @sg_events = sg_event_response["events"]
     @sg_reviews = SgReview.where(sg_db_venue_id: params[:id])
 
-    @client = GooglePlaces::Client.new(ENV["google_places_key"])
-    @google_restaurants = @client.spots(@sg_db_venue.latitude, @sg_db_venue.longitude, :types => 'restaurant', :distance => 2778 )
+    gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@sg_db_venue.latitude},#{@sg_db_venue.longitude}&rankby=distance&type=restaurant&key=#{ENV["google_places_key"]}").body
+    @gp_restaurants = []
+    gp_api_restaurants_response["results"].each do |restaurant|
+      @gp_restaurants << GpRestaurant.new(restaurant)
+    end
     @price_level = "$"
   end
 

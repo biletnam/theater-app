@@ -52,15 +52,17 @@
 
 <div id="restaurant-results">
 
-<% @google_restaurants.each do |google_restaurant| %>
+<% @gp_restaurants.each do |gp_restaurant| %>
   <div>
-    <%= link_to google_restaurant.name, "/restaurant_details/#{google_restaurant.place_id}" %> 
-    <p><%= google_restaurant.vicinity %> 
+    <%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %> 
+    <p><%= gp_restaurant.vicinity %> 
     <br>Price Level:
-    <% if google_restaurant.price_level %>
-      <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <% if gp_restaurant.price_level && gp_restaurant.rating %>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %></p>
+    <% elsif gp_restaurant.price_level %>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable </p>
     <% else %>
-      unavailable | Rating: <%= google_restaurant.rating %></p>
+      unavailable | Rating: <%= gp_restaurant.rating %></p>
     <% end %>
   </div>
 <% end %>
@@ -74,12 +76,12 @@
     var venueLon = <%= @sg_venue.longitude %>;
     var markers = [];
 
-    <% @google_restaurants.each do |google_restaurant| %>
+    <% @gp_restaurants.each do |gp_restaurant| %>
       var hash = {
-        "title": '<%= google_restaurant.name %>',
-        "lat": '<%= google_restaurant.lat %>',
-        "lng": '<%= google_restaurant.lng %>',
-        "description": '<%= google_restaurant.name %> <br><%= google_restaurant.vicinity %>'
+        "title": '<%= gp_restaurant.name %>',
+        "lat": '<%= gp_restaurant.lat %>',
+        "lng": '<%= gp_restaurant.lng %>',
+        "description": '<%= gp_restaurant.name %> <br><%= gp_restaurant.vicinity %>'
       };
 
       markers.push(hash);
@@ -91,7 +93,7 @@
     function LoadMap() {
         var mapOptions = {
             center: new google.maps.LatLng(venueLat, venueLon),
-            zoom: 14,
+            zoom: 17,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);

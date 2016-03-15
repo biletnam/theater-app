@@ -46,8 +46,11 @@ before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destr
       sg_event_response = Unirest.get("https://api.seatgeek.com/2/events?venue.id=#{@sg_venue.id}&per_page=10&page=1").body
       @sg_events = sg_event_response["events"]
 
-      @client = GooglePlaces::Client.new(ENV["google_places_key"])
-      @google_restaurants = @client.spots(@sg_venue.latitude, @sg_venue.longitude, :types => 'restaurant', :distance => 2778 )
+      gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@sg_venue.latitude},#{@sg_venue.longitude}&rankby=distance&type=restaurant&key=#{ENV["google_places_key"]}").body
+      @gp_restaurants = []
+      gp_api_restaurants_response["results"].each do |restaurant|
+        @gp_restaurants << GpRestaurant.new(restaurant)
+      end
       @price_level = "$"
     end
   end
