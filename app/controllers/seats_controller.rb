@@ -14,7 +14,11 @@ class SeatsController < ApplicationController
     @section_data_for_js = []
 
     @sections = @venue.sections
-    gon.sections = @sections.as_json(:include => [:rows, :seats])
+    gon.sections = @sections.as_json(:include => [:rows])
+    @rows = Row.where(venue_id: @venue.id)
+    gon.venue_rows = @rows.as_json(:include => [:seats])
+
+
 
     gon.venue = @venue
     gon.section_count = @venue.sections.count

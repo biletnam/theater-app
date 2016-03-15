@@ -16,7 +16,7 @@
 <% if @venue.image != "" %>
   <%= image_tag @venue.image, :style => 'max-height: 300px;' %>
 <% else %>
-  <img src="http://s23.postimg.org/h1xvhiszf/image_coming_soon_gray_bg.png"/>
+  <%= image_tag('image-unavailable.png') %>
 <% end %>
 </div>
 
@@ -79,20 +79,23 @@
 
 <h3>Restaurants Nearby</h3>
 
+
 <div id="dvMap" style="width: 500px; height: 400px">
 </div>
 
 <div id="restaurant-results">
 
-<% @google_restaurants.each do |google_restaurant| %>
+<% @gp_restaurants.each do |gp_restaurant| %>
   <div>
-    <%= link_to google_restaurant.name, "/restaurant_details/#{google_restaurant.place_id}" %> 
-    <p><%= google_restaurant.vicinity %> 
+    <%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %> 
+    <p><%= gp_restaurant.vicinity %> 
     <br>Price Level:
-    <% if google_restaurant.price_level %>
-      <%= @price_level * google_restaurant.price_level.to_i %> | Rating: <%= google_restaurant.rating %></p>
+    <% if gp_restaurant.price_level && gp_restaurant.rating %>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %></p>
+    <% elsif gp_restaurant.price_level %>
+      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable </p>
     <% else %>
-      unavailable | Rating: <%= google_restaurant.rating %></p>
+      unavailable | Rating: <%= gp_restaurant.rating %></p>
     <% end %>
   </div>
 <% end %>
@@ -106,12 +109,12 @@
     var venueLon = <%= @venue.longitude %>;
     var markers = [];
 
-    <% @google_restaurants.each do |google_restaurant| %>
+    <% @gp_restaurants.each do |gp_restaurant| %>
       var hash = {
-        "title": '<%= google_restaurant.name %>',
-        "lat": '<%= google_restaurant.lat %>',
-        "lng": '<%= google_restaurant.lng %>',
-        "description": '<%= google_restaurant.name %> <br><%= google_restaurant.vicinity %>'
+        "title": '<%= gp_restaurant.name %>',
+        "lat": '<%= gp_restaurant.lat %>',
+        "lng": '<%= gp_restaurant.lng %>',
+        "description": '<%= gp_restaurant.name %> <br><%= gp_restaurant.vicinity %>'
       };
 
       markers.push(hash);

@@ -10,7 +10,7 @@ window.callSeating = function(){
   var seatHoverColor = "DeepSkyBlue";
   var seatFillColor = "#5e80ae";
   var radius = 7;
-  var xCircle = 12;
+  var xCircleOrigin = 12;
   var yCircle = 130;
 
   console.log(sections);
@@ -24,14 +24,14 @@ window.callSeating = function(){
 
   for(var i = 0; i < sections.length; i++){
     console.log(sections.length);
+
     var rows = gon.sections[i].rows;
     for(var j = 0; j < rows.length;j++ ){
       var seats = rows[j].number_seats;
       for(var k = 0; k < seats; k++){
 
         var seat = new createjs.Shape();
-
-        xCircle += 19;
+        xCircle = xCircleOrigin + 19;
 
         seat.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);
 
@@ -46,6 +46,14 @@ window.callSeating = function(){
             stage.update(event);
           });
 
+          // s.on('mouseover', function(event) {
+          //   stage.canvas.title = 'put your tooltip text here';
+          // });
+
+          // s.on('mouseout', function(event) {
+          //   stage.canvas.title = 'put your tooltip text here';
+          // });
+
           s.on('click', function(event) { 
             window.open("http://localhost:3000/seats/1/seat_photos/");
           });
@@ -54,10 +62,13 @@ window.callSeating = function(){
 
         stage.addChild(seat);
       }
-    xCircle = 12;
-    yCircle += 19; 
+      
+        xCircle = xCircleOrigin;
+        yCircle += 19; 
+      
     }
-
+    xCircle = 240;
+    // yCircle = 130;
   }
 
 stage.update();

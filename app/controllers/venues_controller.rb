@@ -67,6 +67,13 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @price_level = "$"
 
       gon.google_restaurants = @google_restaurants
+
+      gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@venue.latitude},#{@venue.longitude}&rankby=distance&type=restaurant&key=AIzaSyDfKUee1ndAvgm8ZFbwSKrZD1-7P-UjD5c").body
+      @gp_restaurants = []
+      gp_api_restaurants_response["results"].each do |restaurant|
+        @gp_restaurants << GpRestaurant.new(restaurant)
+      end
+
     end
   end
 
@@ -233,9 +240,12 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     
     @photos_array = @google_restaurant["photos"]
     @photo_url_array = []
-    @photos_array.each do |photo_data|
-      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=#{photo_data["photo_reference"]}&key=#{@google_places_key}"
-      @photo_url_array << photo_url
+
+    if @photos_array
+      @photos_array.each do |photo_data|
+        photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=#{photo_data["photo_reference"]}&key=#{@google_places_key}"
+        @photo_url_array << photo_url
+      end
     end
 
     gon.restaurant_lat = @google_restaurant["geometry"]["location"]["lat"]
