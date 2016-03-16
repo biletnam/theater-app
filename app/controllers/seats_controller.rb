@@ -8,22 +8,10 @@ class SeatsController < ApplicationController
     @venue = Venue.find(params[:id])
 
     @sections = @venue.sections
-
-    # seating chart gon gem work
-
-    @section_data_for_js = []
-
-    @sections = @venue.sections
-    gon.sections = @sections.as_json(:include => [:rows])
+    # gon.sections = @sections.as_json(:include => [:rows])
     @rows = Row.where(venue_id: @venue.id)
-    gon.venue_rows = @rows.as_json(:include => [:seats])
 
-
-
-    gon.venue = @venue
-    gon.section_count = @venue.sections.count
-    section_data = []
-    gon.seats = @seats
+    @seat_data = @sections.to_json({:include => {:rows => {:methods => :seats}}})
 
   end
 
