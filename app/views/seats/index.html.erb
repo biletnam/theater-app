@@ -2,7 +2,8 @@
 
 <h2>Seating Information for <%= @venue.name %></h2>
 
-  <canvas id="seating" width="1000" height="500">This browser does not support the canvas element</canvas>
+  <canvas id="seating" width="1200" height="600">This browser does not support the canvas element</canvas>
+  <canvas id="tooltip" width="200" height="100">This browser does not support the canvas element</canvas>
 
 <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
   <div>
@@ -37,7 +38,8 @@
 
 <script>
   $(function(){
-    window.seatData = <%= @seat_data.html_safe %>
+    window.seatData = <%= @seat_data.html_safe %>;
+
     callSeating();
   });
 </script>

@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
 
-before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+before_action :authenticate_admin!, only: [:destroy]
 before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
   def index
