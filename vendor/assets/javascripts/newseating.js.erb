@@ -42,20 +42,10 @@ $(function() {
           var seatPhotos = seat.seat_photos;
           var photo = seatPhotos[0];
           var img = new Image();
+          
           if(photo){
-            img.src = photo.image.medium.url
+            img.src = photo.image.medium.url;
           }
-
-      //     var images = new Array()
-      // function preload() {
-      //   for (i = 0; i < preload.arguments.length; i++) {
-      //     images[i] = new Image()
-      //     images[i].src = preload.arguments[i]
-      //   }
-      // }
-      // preload(
-      //   seatPhotos
-      // )
           
           chair.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);
           var tip;

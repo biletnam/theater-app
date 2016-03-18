@@ -50,20 +50,16 @@
     </a>
   </div>
 
-  <h4>Details</h4>
+  <h4>Location</h4>
   <div>
     <p><%= @google_restaurant["formatted_address"] %>
     <br><%= @google_restaurant["formatted_phone_number"] %></p>
 
   <h4>Hours</h4>
   <% if @google_restaurant["opening_hours"] %>
-    <p><%= @google_restaurant["opening_hours"]["weekday_text"][0] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][1] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][2] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][3] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][4] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][5] %>
-    <br><%= @google_restaurant["opening_hours"]["weekday_text"][6] %></p>
+    <% @google_restaurant["opening_hours"]["weekday_text"].each do |day| %>
+      <%= day %><br>
+    <% end %> 
   <% else %>
   <p>Hours unavailable</p>
   <% end %>
@@ -74,10 +70,10 @@
   <% end %>
   <div>
   <% if @google_restaurant["reviews"] %>
-    <%= @google_restaurant["reviews"].each do |review_array| %>
-      <%= review_array.each do |review| %>
-      <%= review %>
-      <% end %>
+    <% @google_restaurant["reviews"].each do |review| %>
+      <%= review["text"] %>
+      <hr>
+      
     <% end %>
   <% else %>
     <p>Reviews unavailable</p>
