@@ -49,6 +49,7 @@ $(function() {
           (function(c, x, y, r, photo){
             c.on('mouseover', function(event) {
               c.graphics.beginFill(seatHoverColor).drawCircle(x, y, r);
+              stage.update(event);
               seatInfo = new createjs.Shape();
               seatInfo.graphics.beginStroke("#000");
               seatInfo.graphics.beginFill("#fff");
