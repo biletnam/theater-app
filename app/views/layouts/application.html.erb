@@ -13,51 +13,51 @@
 <body>
 
 <nav class="fixed-nav-bar">
-	<div "nav-container">
-		<div id="nav-logo"><%= image_tag('seat_scoop_work_logo_white_100.png') %></div>
-		<a href="/venue_name_search" id="venueNavLink"><div id="nav-venues" onclick="venueLink()"> Venues </div></a>
-		<a href="/event_search" id="eventNavLink"><div id="nav-events">Events</div>
-	</div>
+  <div "nav-container">
+    <div id="nav-logo"><%= image_tag('seat_scoop_work_logo_white_100.png') %></div>
+    <a href="/venue_name_search" id="venueNavLink"><div id="nav-venues" onclick="venueLink()"> Venues </div></a>
+    <a href="/event_search" id="eventNavLink"><div id="nav-events">Events</div>
+  </div>
 </nav>
 
 <div id="app-content">
 
-	<div><%= link_to "Venues", "/venues" %></div>
-	<div> 
-	  <% Venue.all.each do |venue| %>
-	    <%= link_to venue.name, "/venues/#{venue.id}" %> 
-	  <% end %>
-	</div>
+  <div><%= link_to "Venues", "/venues" %></div>
+  <div> 
+    <% Venue.all.each do |venue| %>
+      <%= link_to venue.name, "/venues/#{venue.id}" %> 
+    <% end %>
+  </div>
 
-	<div><%= link_to "All Events", "/events" %></div>
+  <div><%= link_to "All Events", "/events" %></div>
 
-	<% if current_user && current_user.vendor %>
-	  <div><%= link_to "Add New Venue", "/venues/new" %></div>
-	<% end %>
+  <% if current_user && current_user.vendor %>
+    <div><%= link_to "Add New Venue", "/venues/new" %></div>
+  <% end %>
 
-	<% if user_signed_in? %>
-	  <%= link_to "Sign Out", "/users/sign_out", method: :delete if user_signed_in?%>
-	<% else %>
-	  <%= link_to "Sign Up", "/users/sign_up" %>
-	  <%= link_to "Sign In", "/users/sign_in" %>
-	<% end %>
+  <% if user_signed_in? %>
+    <%= link_to "Sign Out", "/users/sign_out", method: :delete if user_signed_in?%>
+  <% else %>
+    <%= link_to "Sign Up", "/users/sign_up" %>
+    <%= link_to "Sign In", "/users/sign_in" %>
+  <% end %>
 
 
-	<% flash.each do |name, message| %>
-	  <div class="alert alert-<%= name %> alert-dismissible" role="alert">
-	    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	    <%= message %>
-	  </div>
-	<% end %>
+  <% flash.each do |name, message| %>
+    <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <%= message %>
+    </div>
+  <% end %>
 
-	<%= yield %>
+  <%= yield %>
 
-	<footer class="fixed-footer">
-		<div "footer-container">
-			<div id="sg-logo"><%= image_tag('powered_by_google_on_non_white.png') %></div>
-			<div id="google-logo"><%= image_tag('seat_geek_logo_102.png') %></div>
-		</div>
-	</footer>
+  <footer class="fixed-footer">
+    <div "footer-container">
+      <div id="sg-logo"><%= image_tag('powered_by_google_on_non_white.png') %></div>
+      <div id="google-logo"><%= image_tag('seat_geek_logo_102.png') %></div>
+    </div>
+  </footer>
 
 </div>
 </body>

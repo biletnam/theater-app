@@ -17,10 +17,7 @@ $(function() {
     var stage = new createjs.Stage(canvas);
     stage.enableMouseOver();
 
-
     var sections = window.seatData;
-
-
 
     for(var i = 0; i < sections.length; i++){
       var section = sections[i];
@@ -42,9 +39,14 @@ $(function() {
           var seatPhotos = seat.seat_photos;
           var photo = seatPhotos[0];
           var img = new Image();
+          var noImg = new Image();
           
           if(photo){
             img.src = photo.image.medium.url;
+          }
+
+          if(unavailableImage){
+            noImg.src = "<%= asset_path('image-unavailable.png') %>";
           }
           
           chair.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);
@@ -85,6 +87,7 @@ $(function() {
                 stage.update(bitmap);
                 stage.update();
               } else {
+                var imageUrl = noImg;
                 bitmap = new createjs.Bitmap(unavailableImage);
                 bitmap.x = (event.stageX + 55);
                 bitmap.y = event.stageY + 70;
@@ -93,10 +96,6 @@ $(function() {
                 stage.addChild(bitmap);
                 stage.update(bitmap);
               }
-
-                // tip = new foo9.createjs.Tooltip("abc12", 60, 30);
-                // tip.trackMouse;
-                // stage.addChild(tip);
                 stage.update();
             });
 
@@ -106,22 +105,14 @@ $(function() {
               stage.removeChild(seatInfo, seatText, bitmap);
               stage.update();
             });
-            
-            // c.on('mouseover', function(event) {
-            //             stage.canvas.title = 'put your tooltip text here';
-            //           });
-
-            // c.on('mouseout', function(event) {
-            //   stage.canvas.title = 'put your tooltip text here';
-            // });
-            // var seat;
+           
             var seatSection = seat.seat_section;
             var seatRow = seat.seat_row;
             var seatNumber = seat.seat_number;
 
             var seatId = seat.id;
             c.on('click', function(event) { 
-              location.href("/seats/" + seatId + "/seat_photos/");
+              location.href="/seats/" + seatId + "/seat_photos/";
             });
 
           })(chair, xCircle, yCircle, radius, photo)

@@ -145,12 +145,16 @@
   }
 
   #carousel-example-generic {
+    // background-color: white;
+    
     img {
       max-height: 200px;
       max-width: 300px;
       display: block;
       margin: auto;
       margin-top: 20px;
+      border: solid 2px #bbb;
+      border-radius: 3px;
     }
 
     width: 500px;
