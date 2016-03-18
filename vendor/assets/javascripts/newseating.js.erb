@@ -3,7 +3,7 @@ $(function() {
   window.callSeating = function(){
 
     console.log("seating function started");
-    console.log(window.seatData);
+    // console.log(window.seatData);
 
     var seatColor = "#5e80ae";
     var seatHoverColor = "DeepSkyBlue";
@@ -38,12 +38,7 @@ $(function() {
           var xCircle = seat.x_offset;
           var yCircle = seat.y_offset; 
           var seatPhotos = seat.seat_photos;
-
-          if(seatPhotos != false) {
-      
-            console.log(seatPhotos[0].image.thumb.url);
-
-          }
+          var photo = seatPhotos[0];
           
           chair.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);
           var tip;
@@ -51,38 +46,40 @@ $(function() {
           var seatText;
           var bitmap;
 
-          (function(c, x, y, r){
+          (function(c, x, y, r, photo){
             c.on('mouseover', function(event) {
               c.graphics.beginFill(seatHoverColor).drawCircle(x, y, r);
-       
               seatInfo = new createjs.Shape();
               seatInfo.graphics.beginStroke("#000");
+              seatInfo.graphics.beginFill("#fff");
               seatInfo.graphics.setStrokeStyle(2, "square");
-              seatInfo.graphics.drawRoundRect(stageWidth + 20,10,300,300,10);
+              seatInfo.graphics.drawRoundRect(event.stageX + 2, event.stageY + 2, 210,180,10);
               stage.addChild(seatInfo);
               stage.update();
               
-              seatText = new createjs.Text("Section: " + seatSection + "\nRow: " + seatRow + "\nSeat: " + seatNumber, "16px Helvetica", "#aaa");
-              seatText.x = (stageWidth + 40);
-              seatText.y = 45;
+              seatText = new createjs.Text("Section: " + seatSection + "\nRow: " + seatRow + "\nSeat: " + seatNumber, "14px Helvetica", "#aaa");
+              seatText.x = (event.stageX + 20);
+              seatText.y = event.stageY + 25;
               seatText.textBaseline = "alphabetic";
               stage.addChild(seatText);
               stage.update();
 
-              if(seatPhotos != false) {
-                bitmap = new createjs.Bitmap(seatPhotos[0].image.medium.url);
-                bitmap.x = (stageWidth + 45);
-                bitmap.y = 95;
-                bitmap.scaleX = 1/2;
-                bitmap.scaleY = 1/2;
+              if(photo) {
+                var imageUrl = photo.image.medium.url;
+                bitmap = new createjs.Bitmap(imageUrl);
+                bitmap.x = (event.stageX + 42);
+                bitmap.y = event.stageY + 70;
+                bitmap.scaleX = 130/500;
+                bitmap.scaleY = 130/500;
                 stage.addChild(bitmap);
                 stage.update(bitmap);
+                stage.update();
               } else {
-                bitmap = new createjs.Bitmap(src=unavailableImage);
-                bitmap.x = (stageWidth + 68);
-                bitmap.y = 95;
-                // bitmap.scaleX = 1/2;
-                // bitmap.scaleY = 1/2;
+                bitmap = new createjs.Bitmap(unavailableImage);
+                bitmap.x = (event.stageX + 55);
+                bitmap.y = event.stageY + 70;
+                bitmap.scaleX = 1/2;
+                bitmap.scaleY = 1/2;
                 stage.addChild(bitmap);
                 stage.update(bitmap);
               }
@@ -90,7 +87,7 @@ $(function() {
                 // tip = new foo9.createjs.Tooltip("abc12", 60, 30);
                 // tip.trackMouse;
                 // stage.addChild(tip);
-                // stage.update();
+                stage.update();
             });
 
             c.on('mouseout', function(event) {
@@ -115,9 +112,9 @@ $(function() {
 
             var seatId = seat.id;
             c.on('click', function(event) { 
-              window.open("/seats/" + seatId + "/seat_photos/");
+              location.href("/seats/" + seatId + "/seat_photos/");
             });
-          })(chair, xCircle, yCircle, radius)
+          })(chair, xCircle, yCircle, radius, photo)
           sectionContainer.addChild(chair);
         }   
       }
