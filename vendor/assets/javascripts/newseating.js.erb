@@ -20,6 +20,8 @@ $(function() {
 
     var sections = window.seatData;
 
+
+
     for(var i = 0; i < sections.length; i++){
       var section = sections[i];
       var sectionContainer = new createjs.Container();
@@ -39,6 +41,21 @@ $(function() {
           var yCircle = seat.y_offset; 
           var seatPhotos = seat.seat_photos;
           var photo = seatPhotos[0];
+          var img = new Image();
+          if(photo){
+            img.src = photo.image.medium.url
+          }
+
+      //     var images = new Array()
+      // function preload() {
+      //   for (i = 0; i < preload.arguments.length; i++) {
+      //     images[i] = new Image()
+      //     images[i].src = preload.arguments[i]
+      //   }
+      // }
+      // preload(
+      //   seatPhotos
+      // )
           
           chair.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);
           var tip;
@@ -48,6 +65,8 @@ $(function() {
 
           (function(c, x, y, r, photo){
             c.on('mouseover', function(event) {
+              sectionContainer.removeChild(chair);
+              stage.update();
               c.graphics.beginFill(seatHoverColor).drawCircle(x, y, r);
               stage.update(event);
               seatInfo = new createjs.Shape();
@@ -96,7 +115,6 @@ $(function() {
               stage.update(event);
               stage.removeChild(seatInfo, seatText, bitmap);
               stage.update();
-
             });
             
             // c.on('mouseover', function(event) {
@@ -115,6 +133,7 @@ $(function() {
             c.on('click', function(event) { 
               location.href("/seats/" + seatId + "/seat_photos/");
             });
+
           })(chair, xCircle, yCircle, radius, photo)
           sectionContainer.addChild(chair);
         }   
