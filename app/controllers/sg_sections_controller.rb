@@ -1,0 +1,2 @@
+class SgSectionsController < ApplicationController
+end

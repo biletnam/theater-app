@@ -1,11 +1,29 @@
 class SgSeatsController < ApplicationController
 
-  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  # before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @sg_seats = SgSeat.where(sg_db_venue_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
     @sg_db_venue = SgDbVenue.find(params[:id])
+
+    @sections = @sg_db_venue.sg_sections
+    # gon.sections = @sections.as_json(:include => [:rows])
+    @rows = SgRow.where(sg_db_venue_id: @sg_db_venue.id)
+
+    @seat_data = @sections.to_json({:include => {:sg_rows => {:include => {:sg_seats => {:methods => :sg_seat_photos}}}}})
+    
+    if @sg_db_venue.stage_height && @sg_db_venue.stage_width && @sg_db_venue.stage_x_offset && @sg_db_venue.stage_y_offset
+      @stage_height = @sg_db_venue.stage_height
+      @stage_width = @sg_db_venue.stage_width
+      @stage_x_offset = @sg_db_venue.stage_x_offset
+      @stage_y_offset = @sg_db_venue.stage_y_offset
+
+      gon.stage_height = @stage_height
+      gon.stage_width = @stage_width
+      gon.stage_x = @stage_x_offset
+      gon.stage_y = @stage_y_offset
+    end
   end
 
   def new

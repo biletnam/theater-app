@@ -1,6 +1,6 @@
-<h1>Events near "<%= @zip_for_sg %>"</h1>
-
-
+<h2>Events near "<%= @zip_for_sg %>"</h2>
+<br>
+<p><em>Click on event for more venue information</em></p>
 <% if @zip_for_sg == "" %>
   <p><%= @no_result_message %></p>
 <% elsif @sg_zip_theater_events %>
@@ -19,6 +19,10 @@
       <strong><%= zip_event.venue_name %></strong>
       <br><%= zip_event.full_address %>
       <br><%= zip_event.friendly_date %> || <%= zip_event.friendly_time %>
+      <% if zip_event.average_price %>
+        <br>Average Price: <%= number_to_currency(zip_event.average_price) %>
+      <% end %>
+      <br><%= link_to "Checkout Tickets", zip_event.buy_ticket_link %>
       <hr>
     <% end %>
   <% end %>

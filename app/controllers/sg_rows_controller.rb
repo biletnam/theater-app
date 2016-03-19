@@ -1,0 +1,2 @@
+class SgRowsController < ApplicationController
+end

@@ -2,6 +2,8 @@ class SgDbVenue < ActiveRecord::Base
 
   has_many :sg_events
   has_many :sg_seats
+  has_many :sg_rows
+  has_many :sg_sections
   has_many :sg_reviews
   has_many :sg_restaurants
   belongs_to :user

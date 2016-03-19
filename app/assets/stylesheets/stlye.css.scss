@@ -79,7 +79,7 @@ canvas {
 
 .pagination-bar {
   .pagination {
-  background: white;
+
   cursor: default;
   /* self-clearing method: */ }
   .pagination a, .pagination span, .pagination em {
@@ -89,31 +89,31 @@ canvas {
     margin-right: 1px; }
   .pagination .disabled {
     color: #999999;
-    border: 1px solid #dddddd; }
+    border: 1px solid #31363a; }
   .pagination .current {
     font-style: normal;
     font-weight: bold;
-    background: #2e6ab1;
+    background: DeepSkyBlue;
     color: white;
-    border: 1px solid #2e6ab1; 
+    border: 1px solid DeepSkyBlue; 
     border-radius: 3px; }
   .pagination a {
     text-decoration: none;
-    color: #105cb6;
-    border: 1px solid #9aafe5; 
+    color: #31363a;
+    border: 1px solid #31363a; 
     border-radius: 3px; }
     .pagination a:hover, .pagination a:focus {
-      color: #000033;
+      color: DeepSkyBlue;
       border-color: #000033; }
   .pagination .page_info {
-    background: #2e6ab1;
+    background: DeepSkyBlue;
     color: white;
     padding: 0.4em 0.6em;
     width: 22em;
     margin-bottom: 0.3em;
     text-align: center; }
     .pagination .page_info b {
-      color: #000033;
+      color: #31363a;
       background: #6aa6ed;
       padding: 0.1em 0.25em; }
   .pagination:after {

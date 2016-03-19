@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317000505) do
+ActiveRecord::Schema.define(version: 20160319055205) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -127,6 +127,11 @@ ActiveRecord::Schema.define(version: 20160317000505) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "stage_height",   limit: 4
+    t.integer  "stage_width",    limit: 4
+    t.integer  "stage_x_offset", limit: 4
+    t.integer  "stage_y_offset", limit: 4
+    t.boolean  "seating_chart",                default: false
   end
 
   create_table "sg_reviews", force: :cascade do |t|
@@ -134,6 +139,19 @@ ActiveRecord::Schema.define(version: 20160317000505) do
     t.integer  "sg_db_venue_id", limit: 4
     t.integer  "sg_venue_id",    limit: 4
     t.integer  "user_id",        limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sg_rows", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "number_seats",   limit: 4
+    t.integer  "sg_section_id",  limit: 4
+    t.integer  "venue_id",       limit: 4
+    t.integer  "sg_venue_id",    limit: 4
+    t.integer  "sg_db_venue_id", limit: 4
+    t.integer  "x_offset",       limit: 4
+    t.integer  "y_offset",       limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -177,6 +195,22 @@ ActiveRecord::Schema.define(version: 20160317000505) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sg_db_venue_id", limit: 4
+    t.integer  "sg_row_id",      limit: 4
+    t.integer  "sg_section_id",  limit: 4
+    t.integer  "x_offset",       limit: 4
+    t.integer  "y_offset",       limit: 4
+  end
+
+  create_table "sg_sections", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "number_rows",    limit: 4
+    t.integer  "venue_id",       limit: 4
+    t.integer  "sg_venue_id",    limit: 4
+    t.integer  "sg_db_venue_id", limit: 4
+    t.integer  "x_offset",       limit: 4
+    t.integer  "y_offset",       limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sg_venues", force: :cascade do |t|
@@ -237,6 +271,7 @@ ActiveRecord::Schema.define(version: 20160317000505) do
     t.integer  "stage_height",       limit: 4
     t.integer  "stage_x_offset",     limit: 4
     t.integer  "stage_y_offset",     limit: 4
+    t.boolean  "seating_chart",                    default: false
   end
 
 end
