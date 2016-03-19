@@ -18,16 +18,22 @@
 <% end %>
 
 <h4>Event Type: </h4> <%= @event.event_type %>
-<h4>Featured Performers: </h4> <%= @event.featured_performers %>
+<% if @event.featured_performers != "" %>
+  <h4>Featured Performers: </h4> <%= @event.featured_performers %>
+<% end %>
 <h4>Description: </h4><%= @event.description %>
 
 <h3>Scheduled Events</h3>
 
-<table>
-  <tr>
-    <td>Date</td>
-    <td>Time</td>
-  </tr>
+<% if @scheduled_events[0] %>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+<% else %>
+  <p>No events currently scheduled</p>
+<% end %>
 
   <% @scheduled_events.each do |scheduled_event| %>
     <% if scheduled_event.date_time >= Time.now %>

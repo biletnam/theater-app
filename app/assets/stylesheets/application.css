@@ -104,10 +104,10 @@ h1 {
   font-size: 62px;
   line-height: 60px;
   text-transform: uppercase;
-  color: #FFFFFF;
-  text-decoration: 
+  color: #31363a;
   margin: 0;
   text-shadow:  2px 1px rgba(0,0,0,.4);
+  /*text-decoration: none;*/
 }
 
 h2 {
@@ -115,8 +115,8 @@ h2 {
   font-weight: 400;
   letter-spacing: -1px;
   line-height: 46px;
-  /*text-transform: uppercase;*/
-  color: #ffffff;
+  text-transform: uppercase;
+  color: #31363a;
   text-shadow:  1px 1px rgba(0,0,0,.4);
 }
 
@@ -159,7 +159,7 @@ a {
 
 a:hover {
   transition: all 0.35s ease-in-out;
-  color: #626c72;
+  color: DeepSkyBlue;
   text-decoration: none;
 }
 
@@ -281,7 +281,7 @@ a:hover {
    Navigation styles
    ========================================================================== */
 .navbar-inverse {
-    background-color: #2e6ab1;
+    background-color: DeepSkyBlue;
     border-color: transparent;
 
 }
@@ -364,7 +364,6 @@ a:hover {
 .nav-collapse .dropdown-menu a {
   font-weight: normal;
 }
-
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
     background-color: transparent;

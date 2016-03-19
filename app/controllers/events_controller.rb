@@ -50,12 +50,12 @@ class EventsController < ApplicationController
       featured_performers: params[:featured_performers],
       event_type: params[:event_type],
       description: params[:description],
-      venue_id: params[:id])
+      venue_id: @event.venue_id)
     
       flash[:success] = "Event updated. Please edit individual scheduled events if necessary."
       redirect_to "/venues/#{@event.venue_id}/events/#{@event.id}"
     else
-      @venue = Venue.find(params[:id])
+      @venue = @event.venue_id
       
       flash[:warning] = "Event not saved"
       render :edit

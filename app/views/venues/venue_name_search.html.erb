@@ -8,7 +8,7 @@
 
   <div class="venue-search-bar tabContent" id="name">
     <%= form_tag "/venue_name_search_result" do %>
-    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by name" %>
+    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search venues by name" %>
    <%= button_tag "Search" %>
     </div>
     <% end %>
@@ -16,7 +16,7 @@
 
   <div class="venue-search-bar tabContent" id="zip">
     <%= form_tag "/venue_zip_search_result" do %>
-    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search by zip code" %>
+    <div class="venue-search-field"><%= text_field_tag :search, nil, placeholder: "search venues by zip code" %>
     <%= button_tag "Search" %>
     </div>
     <% end %>

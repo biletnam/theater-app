@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #venue-searching, #event-searching {
+
+  margin-top: 200px;
   
   ul#tabs { 
     list-style-type: none; 
@@ -20,7 +22,7 @@
 
   ul#tabs li a { 
     color: #fff; 
-    background-color: #aaa; 
+    background-color: #31363a; 
     // border: 1px solid #c9c3ba; 
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -35,7 +37,7 @@
 
   ul#tabs li a.selected { 
     color: #fff; 
-    background-color: #2e6ab1; 
+    background-color: DeepSkyBlue; 
     font-weight: bold; 
     padding: 0.7em 0.3em 0.38em 0.3em; 
   }
@@ -47,7 +49,7 @@
     padding: 0.5em; 
     height: 120px;
     width: 760px;
-    background-color: #2e6ab1; 
+    background-color: DeepSkyBlue; 
     margin-left: auto;
     margin-right: auto;
     margin-top: -2px;
@@ -136,13 +138,6 @@
 }
 
 #google-restaurant-details {
-
-  #map {
-    height: 400px;
-    width: 500px;
-    border: 3px solid #bbb;
-    border-radius: 3px;
-  }
 
   #carousel-example-generic {
     // background-color: white;

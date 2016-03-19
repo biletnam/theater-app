@@ -24,13 +24,13 @@
   <div><%= text_field_tag :city, @venue.city %></div>
 
   <div><%= label_tag "State:" %></div>
-  <%= text_field_tag :state, @venue.state %></div>
+  <div><%= text_field_tag :state, @venue.state %></div>
 
   <div><%= label_tag "Zip Code:" %></div>
   <div><%= text_field_tag :zip_code, @venue.zip_code %></div>
 
   <div><%= label_tag "Phone Number:" %></div>
-  <div><%= text_field_tag :phone, @venue.phone, placeholder: "XXX-XXX-XXXX" %></div>
+  <div><%= text_field_tag :phone, @venue.phone, placeholder: "(XXX) XXX-XXXX" %></div>
 
   <div><%= label_tag "Website:" %></div>
   <div><%= text_field_tag :website, @venue.website %></div>

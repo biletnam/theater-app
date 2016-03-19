@@ -20,12 +20,15 @@
 <% end %>
 </div>
 
-<h4>Address: <%= @venue.full_address %></h4>
-<h4>Phone Number: <%= @venue.phone %></h4>
-
-<% if @venue.website != "" %>
-  <h4><%= link_to "Visit Venue Website", @venue.website %></h4>
-<% end %>
+<div id="venue-info">
+  <h5 id="address">Address: <%= @venue.full_address %></h5>
+  <% if @venue.phone %>
+    <h5 id="phone">Phone Number: <%= @venue.phone %></h5>
+  <% end %>
+  <% if @venue.website != "" %>
+    <h5 id="website"><%= link_to "Venue Website", @venue.website %></h5>
+  <% end %>
+</div>
 
 <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
   <a data-confirm="Are you sure you want to edit this venue?" href="/venues/<%= @venue.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Venue</a>
@@ -39,12 +42,15 @@
   <%= link_to "Add New Event", "/venues/#{@venue.id}/events/new", :class =>"btn btn-default btn-xs active" %>
 <% end %>
 
-<table>
-  <tr>
-    <td>Show</td>
-    <td>Date</td>
-    <td>Time</td>
-  </tr>
+<% if @scheduled_events[0] && @scheduled_events.last.date_time >= Time.now %>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+<% else %>
+  <p>No events currently scheduled</p>
+<% end %>
 
 <% @scheduled_events.each do |scheduled_event|%>
     <% if scheduled_event.date_time >= Time.now %>
@@ -64,40 +70,43 @@
 
 <h3>Venue Reviews</h3>
 <%= link_to "Add New Review", "/venues/#{@venue.id}/reviews/new", :class =>"btn btn-default btn-xs active" if user_signed_in? %>
-
-<% @reviews.each do |review| %>
-  <div> 
-    <h6>user: <%= review.user.user_name %></h6>
-    <div style="margin-top:-8px;margin-left:10px;">"<%= review.content %>"</div>
-    <% if current_user && current_user.admin || current_user && current_user.id == review.user_id %>
-      <%= link_to "edit review", "/venues/#{@venue.id}/reviews/#{review.id}/edit", :class =>"btn btn-default btn-xs active" %>
-      <a data-confirm="Are you sure you want to delete this review?" data-method="delete" href="/venues/<%= review.venue_id %>/reviews/<%= review.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete review</a>
-    <% end %>
-    <hr style="margin-top:8px;">
-  </div>
+<% if @reviews[0] %>
+  <% @reviews.each do |review| %>
+    <div> 
+      "<%= review.content %>"
+      <% if current_user && current_user.admin || current_user && current_user.id == review.user_id %>
+        <%= link_to "edit review", "/venues/#{@venue.id}/reviews/#{review.id}/edit", :class =>"btn btn-default btn-xs active" %>
+        <a data-confirm="Are you sure you want to delete this review?" data-method="delete" href="/venues/<%= review.venue_id %>/reviews/<%= review.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete review</a>
+      <% end %>
+      <hr style="margin-top:8px;">
+    </div>
+  <% end %>
+<% else %>
+  <p>No reviews for this venue at this time</p>
 <% end %>
 
 <h3>Restaurants Nearby</h3>
 
 
-<div id="dvMap" style="width: 500px; height: 400px">
+<div id="map" style="width: 500px; height: 400px">
 </div>
 
 <div id="restaurant-results">
 
 <% @gp_restaurants.each do |gp_restaurant| %>
   <div>
-    <%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %> 
-    <p><strong><%= gp_restaurant.vicinity %></strong>
-    <br>Price Level:
+    <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 
+    <%= gp_restaurant.vicinity %><br>
+   Price Level:
     <% if gp_restaurant.price_level && gp_restaurant.rating %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: <%= gp_restaurant.rating %>
+      <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: <%= gp_restaurant.rating %>
     <% elsif gp_restaurant.price_level %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> | Rating: unavailable
+      <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: unavailable
     <% else %>
-      unavailable | Rating: <%= gp_restaurant.rating %>
+      unavailable || Rating: <%= gp_restaurant.rating %>
     <% end %>
-    <br>Distance from venue: <%= Geocoder::Calculations.distance_between([@venue.latitude,@venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles</p>
+    <br>
+    Distance from venue: <%= Geocoder::Calculations.distance_between([@venue.latitude,@venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles
   </div>
 <% end %>
 </div>
@@ -128,7 +137,7 @@
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
         //Create and open InfoWindow.
         var infoWindow = new google.maps.InfoWindow();

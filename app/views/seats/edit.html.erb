@@ -14,16 +14,20 @@
 
 <%= form_tag "/venues/#{@venue.id}/seats/#{@seat.id}", method: :patch do %>
 
-  <div><%= label_tag "Section" %></div>
+  <div><%= label_tag "Section Name:" %></div>
   <div><%= text_field_tag :seat_section, @seat.seat_section %></div>
-  <div><%= label_tag "Row" %></div>
+  <div><%= label_tag "Row Name:" %></div>
   <div><%= text_field_tag :seat_row, @seat.seat_row %></div>
-  <div><%= label_tag "Seat Number" %></div>
+  <div><%= label_tag "Seat Number:" %></div>
   <div><%= text_field_tag :seat_number, @seat.seat_number %></div>
-  <div><%= label_tag "Row Id" %></div>
+  <div><%= label_tag "Row Id:" %></div>
   <div><%= text_field_tag :row_id, @seat.row_id %></div>
-  <div><%= label_tag "Section Id" %></div>
+  <div><%= label_tag "Section Id:" %></div>
   <div><%= text_field_tag :section_id, @seat.section_id %></div>
+  <div><%= label_tag "Seat X Offset Value:" %></div>
+  <div><%= text_field_tag :x_offset, @seat.x_offset %></div>
+  <div><%= label_tag "Seat Y Offset Value:" %></div>
+  <div><%= text_field_tag :y_offset, @seat.y_offset %></div>
   <div><%= hidden_field_tag :venue_id, @venue.id %></div>
 
   <div><%= submit_tag "Update" %></div>

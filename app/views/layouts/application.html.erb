@@ -32,7 +32,17 @@
                   <li><a href="/venue_name_search">Venue Search</a></li>
                 </ul>
               </li>
-              <li><a href="/event_search">Events</a></li>
+              <% if current_user && current_user.admin %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/events">Venue Events</a></li>
+                    <li><a href="/event_search">Event Search</a></li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><a href="/event_search">Events</a></li>
+              <% end %>
               <% if current_user && current_user.vendor %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendors <b class="caret"></b></a>
@@ -69,12 +79,6 @@
 
   <%= yield %>
 
-  <footer class="fixed-footer">
-    <div "footer-container">
-      <div id="sg-logo"><%= image_tag('powered_by_google_on_non_white.png') %></div>
-      <div id="google-logo"><%= image_tag('seat_geek_logo_102.png') %></div>
-    </div>
-  </footer>
 
 </div>
 </body>

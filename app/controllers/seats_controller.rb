@@ -38,12 +38,14 @@ class SeatsController < ApplicationController
       seat_number: params[:seat_number],
       venue_id: params[:venue_id],
       row_id: params[:row_id],
-      section_id: params[:section_id])
+      section_id: params[:section_id],
+      x_offset: params[:x_offset],
+      y_offset: params[:y_offset])
 
     @venue = Venue.find(params[:id])
 
     if @seat.save
-      flash[:success] = "Seat successfully added."
+      flash[:success] = "Seat successfully added. Add More Seats Below."
       redirect_to "/venues/#{@seat.venue_id}/seats/new"
     else 
       render :new
@@ -65,7 +67,9 @@ class SeatsController < ApplicationController
       seat_number: params[:seat_number],
       venue_id: params[:venue_id],
       row_id: params[:row_id],
-      section_id: params[:section_id])
+      section_id: params[:section_id],
+      x_offset: params[:x_offset],
+      y_offset: params[:y_offset])
 
       flash[:success] = "Seat updated."
       redirect_to "/venues/#{@seat.venue_id}/seats"
