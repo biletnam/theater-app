@@ -29,6 +29,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Venues <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/venues">Current Venues</a></li>
+                  <% if current_user && current_user.admin %>
+                    <li><a href="/all_current">All Current Venues</a></li>
+                  <% end %>
                   <li><a href="/venue_name_search">Venue Search</a></li>
                 </ul>
               </li>

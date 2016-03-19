@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
 
   get '/' => 'venues#index'
+  get '/all_current' => 'venues#full_index'
   get '/venues' => 'venues#index'
   get '/venues/new' => 'venues#new'
   post '/venues' => 'venues#create'
