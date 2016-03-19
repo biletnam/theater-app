@@ -5,5 +5,5 @@ class SgSeat < ActiveRecord::Base
   belongs_to :sg_row
   belongs_to :sg_section
 
-  validates :section, :seat_row, :seat_number, presence: true
+  validates :seat_section, :seat_row, :seat_number, presence: true
 end

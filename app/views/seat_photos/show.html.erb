@@ -1,12 +1,12 @@
 <h2> Your Uploaded Seat Photo </h2>
 
-<h4>Section: <%= @seat.seat_section %></h4>
-<h4>Row: <%= @seat.seat_row %></h4>
-<h4>Seat: <%= @seat.seat_number %></h4>
-<h4>Caption: <%= @seat_photo.caption %></h4>
-<h4>Uploaded Image: </h4>
+<h3>Section: <%= @seat.seat_section %>
+<br>Row: <%= @seat.seat_row %>
+<br>Seat: <%= @seat.seat_number %>
+<br>Caption: <%= @seat_photo.caption %></h3>
+<h5>Uploaded Image: </h5>
 <%= image_tag @seat_photo.image.medium.url %>
-
+<br><br>
 <% if current_user && current_user.admin || current_user && current_user.id == @seat_photo.user_id %> 
   <div>
     <a data-confirm="Are you sure you want to edit this photo? Photo file cannot be edited. To change photo, please delete the entry and reupload the image and caption information" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Seat Photo Info </a>

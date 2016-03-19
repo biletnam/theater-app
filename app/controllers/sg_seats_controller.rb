@@ -37,7 +37,11 @@ class SgSeatsController < ApplicationController
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
       sg_venue_id: params[:sg_venue_id],
-      sg_db_venue_id: params[:sg_db_venue_id])
+      sg_db_venue_id: params[:sg_db_venue_id],
+      sg_row_id: params[:sg_row_id],
+      sg_section_id: params[:sg_section_id],
+      x_offset: params[:x_offset],
+      y_offset: params[:y_offset])
 
     @sg_db_venue = SgDbVenue.find(params[:id])
 
@@ -63,7 +67,11 @@ class SgSeatsController < ApplicationController
       seat_row: params[:seat_row],
       seat_number: params[:seat_number],
       sg_venue_id: params[:sg_venue_id],
-      sg_db_venue_id: params[:sg_db_venue_id])
+      sg_db_venue_id: params[:sg_db_venue_id],
+      sg_row_id: params[:sg_row_id],
+      sg_section_id: params[:sg_section_id],
+      x_offset: params[:x_offset],
+      y_offset: params[:y_offset])
 
       flash[:success] = "Seat updated."
       redirect_to "/sg_db_venues/#{@sg_seat.sg_db_venue_id}/sg_seats"

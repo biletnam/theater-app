@@ -1,7 +1,17 @@
 <h2>Seat Photos</h2>
+<h3>
+Section: <%= @sg_seat.seat_section %>
+<br>Row: <%= @sg_seat.seat_row %>
+<br>Seat: <%= @sg_seat.seat_number %>
+<br></h3>
 
 <% if user_signed_in? %>
-  <p><a href="/sg_seats/<%= @sg_seat.id%>/sg_seat_photos/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">Add Seat Photo</a><p>
+  <br>
+  <p><a href="/sg_seats/<%= @sg_seat.id%>/sg_seat_photos/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">add seat photo</a>
+  <% if current_user.admin || current_user.id == @sg_seat.sg_db_venue.user_id %>
+    <%= link_to "edit seat", "/sg_db_venues/#{@sg_seat.sg_db_venue_id}/sg_seats/#{@sg_seat.id}/edit", :class =>"btn btn-default btn-xs active" %>
+    <a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/<%= @sg_seat.sg_db_venue_id %>/sg_seats/<%= @sg_seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete seat</a></p>
+  <% end %>
 <% end %>
 
 <% @sg_seat_photos.each do |sg_seat_photo| %>
