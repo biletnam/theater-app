@@ -3,8 +3,8 @@
 <% @sorted_venues.each do |venue| %>
 
   <h3><%= link_to venue.name, "/venues/#{venue.id}" %></h3>
-  <p><%= venue.full_address %></p>
-
+  <%= venue.full_address %>
+  <br><br>
     <% if current_user && current_user.admin %>
       <% if venue.class == Venue %>
         <a data-confirm="Are you sure you want to edit this venue?" href="/venues/<%= venue.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Venue</a>

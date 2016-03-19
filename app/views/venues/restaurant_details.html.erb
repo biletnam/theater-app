@@ -2,7 +2,7 @@
   
 <div id="google-restaurant-details">
 
-  <h2><%= @google_restaurant["name"] %></h2>
+  <h1><%= @google_restaurant["name"] %></h1>
 
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -50,12 +50,14 @@
     </a>
   </div>
 
-  <h4>Location</h4>
+  <h3>Location</h3>
   <div>
-    <p><%= @google_restaurant["formatted_address"] %>
-    <br><%= @google_restaurant["formatted_phone_number"] %></p>
+    <%= @google_restaurant["formatted_address"] %>
+    <br><%= @google_restaurant["formatted_phone_number"] %>
 
-  <h4>Hours</h4>
+  <div class="page-content">
+
+  <h3>Hours</h3>
   <% if @google_restaurant["opening_hours"] %>
     <% @google_restaurant["opening_hours"]["weekday_text"].each do |day| %>
       <%= day %><br>
@@ -64,7 +66,7 @@
   <p>Hours unavailable</p>
   <% end %>
 
-  <h4>Reviews</h4>
+  <h3>Reviews</h3>
   <% if @google_restaurant["rating"] %>
     <h5>Average Rating: <%= @google_restaurant["rating"] %></h5>
   <% end %>
@@ -81,6 +83,8 @@
   </div>
 
   <div id="map"></div>
+
+  </div>
 
   <script>
     function initMap() {

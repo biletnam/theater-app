@@ -69,8 +69,6 @@
 <% end %>
 </div>
 
-<footer><%= image_tag "https://developers.google.com/places/documentation/images/powered-by-google-on-white.png" %></footer>
-
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&key=<%= ENV['google_maps_js_key'] %>"></script>
 <script type="text/javascript">
     var venueLat = <%= @sg_venue.latitude %>;
