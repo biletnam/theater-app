@@ -1322,10 +1322,10 @@ p.lead {
 
 
 .back-button {
-  height: 50px;
+  height: 40px;
   background-color: DeepSkyBlue;
   color: white;
-  line-height: 35px;
+  line-height: 26px;
 }
 
 .back-button:hover {

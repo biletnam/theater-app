@@ -5,13 +5,19 @@ Section: <%= @seat.seat_section %>
 <br>Row: <%= @seat.seat_row %>
 <br>Seat: <%= @seat.seat_number %>
 <br></h3>
+<br>
+
+<% unless @seat_photos[0] %>
+  <p>No photos for this seat yet!</p>
+<% end %>
 
 <% if user_signed_in? %>
   <br>
-  <p><a href="/seats/<%= @seat.id %>/seat_photos/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">add seat photo</a>
+  <p><a href="/seats/<%= @seat.id %>/seat_photos/new" role="button" class="back-button btn btn-default">Add Seat Photo</a>
+  <a href="/venues/<%= @seat.venue_id %>/seats" role="button" class="back-button btn btn-default">Back to Seating Chart</a>
   <% if current_user.admin || current_user.id == @seat.venue.user_id %>
-    <%= link_to "edit seat", "/venues/#{@seat.venue_id}/seats/#{@seat.id}/edit", :class =>"btn btn-default btn-xs active" %>
-    <a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/<%= @seat.venue_id %>/seats/<%= @seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete seat</a></p>
+    <%= link_to "Edit Seat", "/venues/#{@seat.venue_id}/seats/#{@seat.id}/edit", :class =>"btn btn-default btn-xs active" %>
+    <a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/<%= @seat.venue_id %>/seats/<%= @seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">Delete Seat</a></p>
   <% end %>
 <% end %>
 

@@ -3,20 +3,11 @@ class VenuesController < ApplicationController
 before_action :authenticate_admin!, only: [:destroy, :full_index]
 before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
-  def index
-    @all_venues = []
+  def index   
     @all_seating_venues = []
 
     @venues = Venue.all
     @sg_db_venues = SgDbVenue.all
-
-    @venues.each do |venue|
-      @all_venues << venue
-    end
-
-    @sg_db_venues.each do |sg_db_venue|
-      @all_venues << sg_db_venue
-    end
 
     @venues.each do |venue|
       if venue.seats[0]
@@ -30,16 +21,12 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       end
     end
 
-    @sorted_venues = @all_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
     @sorted_seating_venues = @all_seating_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
     
-
     respond_to do |format|
       format.html
       format.json { render json: @venue }
     end
-
-
   end
 
   def full_index

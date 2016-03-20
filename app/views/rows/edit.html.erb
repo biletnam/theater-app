@@ -1,0 +1,31 @@
+<% if @row && @row.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@row.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @row.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Edit Row Information for <%= @venue.name %></h2>
+
+<%= form_tag "/sections/#{@section.id}/rows/#{@row.id}", method: :patch do %>
+
+  <div><%= label_tag "Row Name" %></div>
+  <div><%= text_field_tag :name, @row.name %></div>
+  <div><%= label_tag "Number of Seats" %></div>
+  <div><%= text_field_tag :number_seats, @row.number_seats %></div>
+  <div><%= label_tag "Section X Offset Value" %></div>
+  <div><%= text_field_tag :x_offset, @row.x_offset %></div>
+  <div><%= label_tag "Section Y Offset Value" %></div>
+  <div><%= text_field_tag :y_offset, @row.y_offset %></div>
+  <div><%= label_tag "Venue Id:" %></div>
+  <div><%= text_field_tag :venue_id, @venue.id %></div>
+  <div><%= label_tag "Section Id:" %></div>
+  <div><%= text_field_tag :section_id, @section.id %></div>
+  <div><%= submit_tag "Update" %></div>
+
+<% end %> 

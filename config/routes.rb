@@ -112,4 +112,19 @@ Rails.application.routes.draw do
   patch '/sg_db_venues/:id/sg_reviews/:id' => 'sg_reviews#update'
   delete '/sg_db_venues/:id/sg_reviews/:id' => 'sg_reviews#destroy'
 
+  get '/venues/:id/sections' => 'sections#index'
+  get '/venues/:id/sections/new' => 'sections#new'
+  post '/venues/:id/sections' => 'sections#create'
+  get '/venues/:id/sections/:id/edit' => 'sections#edit'
+  patch '/venues/:id/sections/:id' => 'sections#update'
+  delete '/venues/:id/sections/:id' => 'sections#destroy'
+
+  get '/sections/:id/rows' => 'rows#index'
+  get '/sections/:id/rows/new' => 'rows#new'
+  post '/sections/:id/rows/' => 'rows#create'
+  get '/sections/:id/rows/:id' => 'rows#show'
+  get '/sections/:id/rows/:id/edit' => 'rows#edit'
+  patch '/sections/:id/rows/:id' => 'rows#update'
+  delete '/sections/:id/rows/:id' => 'rows#destroy'
+
 end

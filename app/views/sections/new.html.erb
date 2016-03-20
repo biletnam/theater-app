@@ -1,0 +1,29 @@
+<% if @section && @section.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@section.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @section.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Add New Section Information for <%= @venue.name %></h2>
+
+<%= form_tag "/venues/#{@venue.id}/sections", method: :post do %>
+
+  <div><%= label_tag "Section Name" %></div>
+  <div><%= text_field_tag :name, @section.name %></div>
+  <div><%= label_tag "Number of Rows" %></div>
+  <div><%= text_field_tag :number_rows, @section.number_rows %></div>
+  <div><%= label_tag "Section X Offset Value" %></div>
+  <div><%= text_field_tag :x_offset, @section.x_offset %></div>
+  <div><%= label_tag "Section Y Offset Value" %></div>
+  <div><%= text_field_tag :y_offset, @section.y_offset %></div>
+  <div><%= label_tag "Venue Id:" %></div>
+  <div><%= text_field_tag :venue_id, @venue.id %></div>
+  <div><%= submit_tag "Submit" %></div>
+
+<% end %> 
