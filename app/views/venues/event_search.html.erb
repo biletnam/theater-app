@@ -1,6 +1,9 @@
 <h2>Events near "<%= @zip_for_sg %>"</h2>
 <br>
+<a href="/event_search" role="button" class="back-button btn btn-default">Back to Search</a>
+<br><br>
 <p><em>Click on event for more venue information</em></p>
+
 <% if @zip_for_sg == "" %>
   <p><%= @no_result_message %></p>
 <% elsif @sg_zip_theater_events %>

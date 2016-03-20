@@ -3,7 +3,8 @@
 <h3><%= @venue.name %></h3>
 <h1>Seating Chart</h1>
 <br>
-
+<a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
+<br><br>
 <% if @venue.seating_chart %>
   <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
 
@@ -38,9 +39,13 @@
     </div>
   <% end %>
 <% else %>
-  <br>
   <h3>Seating Chart Not Currently Available for This Venue</h3>
   <br>
+  <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+    <div>
+      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"btn btn-default btn-xs active" %>
+    </div>
+  <% end %>
   <% if @seats[0] %>
     <h5>Available seat information listed below</h5>
     <div id="venue-seats-table">

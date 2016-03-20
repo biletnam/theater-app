@@ -1,5 +1,7 @@
 <h2>Venues matching "<%= @search_for_sg %>"</h2>
-
+<br>
+<a href="/venue_name_search" role="button" class="back-button btn btn-default">Back to Search</a>
+<br>
 <% if @search_for_sg == "" %>
   <p><%= @no_result_message %></p>
 <% else %>

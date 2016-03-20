@@ -1301,7 +1301,6 @@ p.lead {
 }
 
 
-
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 991px) {
   
@@ -1320,6 +1319,19 @@ p.lead {
 @media (min-width: 1200px) and (max-width: 3000px) {
 
 }   
+
+
+.back-button {
+  height: 50px;
+  background-color: DeepSkyBlue;
+  color: white;
+  line-height: 35px;
+}
+
+.back-button:hover {
+  background-color: #31363a;
+  color: white;
+}
 
 
 
