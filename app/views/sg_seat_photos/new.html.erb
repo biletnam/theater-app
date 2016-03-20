@@ -22,9 +22,27 @@ Section: <%= @sg_seat.seat_section %>
   <div><%= file_field_tag :image %></div><br>
   <div><%= label_tag "Photo caption" %></div>
   <div><%= text_field_tag :caption, @sg_seat_photo.caption %></div>
+
+  <div class="se-pre-con" ></div>
+  <div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+
   <div><%= hidden_field_tag :default_photo, @sg_seat_photo.default_photo %></div>
   <div><%= hidden_field_tag :sg_seat_id, @sg_seat.id %></div>
 
-  <div><%= submit_tag "Submit Photo" %></div>
+  <div><%= submit_tag "Submit Photo", :onclick => "showSpin()" %></div>
 
 <% end %> 
+
+<script>
+
+  $(".spinner").hide();
+
+  function showSpin(){
+    $(".spinner").show();
+  };
+
+</script>

@@ -127,4 +127,13 @@ Rails.application.routes.draw do
   patch '/sections/:id/rows/:id' => 'rows#update'
   delete '/sections/:id/rows/:id' => 'rows#destroy'
 
+  get '/contact_us' => 'messages#new'
+  post '/messages' => 'messages#create'
+  get '/message_success' => 'messages#message_success'
+
+  get '/vendor_request' => 'vendors#new'
+  post '/vendors' => 'vendors#create'
+  get '/message_sent' => 'vendors#message_success'
+
+
 end

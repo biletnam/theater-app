@@ -1,0 +1,54 @@
+<% if @message.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@message.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @message.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Vendor Status Request Form</h2>
+
+<%= form_tag "/vendors", multipart: true, method: :post do %>
+
+  <div><%= label_tag "Name" %></div>
+  <div><%= text_field_tag :name, @message.name %></div>
+
+  <div><%= label_tag "Email Address" %><div>
+  <div><%= text_field_tag :email, @message.email %></div>
+
+  <div><%= label_tag "Subject" %></div>
+  <div><%= text_field_tag :subject, @message.subject %></div>
+
+  <div><%= label_tag "Venue Name" %></div>
+  <div><%= text_field_tag :venue_name, @message.venue_name %></div>
+
+  <div><%= label_tag "Venue Steet Address" %></div>
+  <div><%= text_field_tag :venue_address, @message.venue_address %></div>
+
+  <div><%= label_tag "Venue City" %></div>
+  <div><%= text_field_tag :venue_city, @message.venue_city %></div>
+
+  <div><%= label_tag "Venue State" %></div>
+  <div><%= text_field_tag :venue_state, @message.venue_state %></div>
+
+  <div><%= label_tag "Venue Zip Code" %></div>
+  <div><%= text_field_tag :venue_zip, @message.venue_zip %></div>
+
+  <div><%= label_tag "Contact Phone" %></div>
+  <div><%= text_field_tag :phone, @message.phone %></div>
+
+  <div><%= label_tag "Venue SeatGeek ID (if applicable)" %></div>
+  <div><%= text_field_tag :sg_venue_id, @message.sg_venue_id %></div>
+
+  <div><%= label_tag "Message" %></div>
+  <div><%= text_area_tag :content, nil, :size => "50 x 3" %></div>
+  
+  <div class="hidden"><%= text_field_tag :nickname %></div><br>
+ 
+ <%= button_tag "Send Message", :class => "back-button btn btn-default" %>
+
+<% end %>

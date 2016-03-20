@@ -44,6 +44,7 @@ gem 'gon'
 gem 'rabl'
 gem 'rabl-rails'
 gem 'will_paginate', '~> 3.0.6'
+gem 'mail_form'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
