@@ -12,6 +12,14 @@ Rails.application.routes.draw do
    end
   end
 
+  namespace :api do
+    namespace :v1 do
+      get '/sections' => 'sections#index'
+      get '/seats' => 'seats#index'
+      get '/venues' => 'venues#index'
+      get '/venues/:id' => 'venues#show'
+    end
+  end
 
   get '/' => 'venues#index'
   get '/all_current' => 'venues#full_index'

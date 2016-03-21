@@ -5,6 +5,42 @@
 <br>
 <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
 <br><br>
+
+<div ng-app="app">
+  {{ 1 + 1 }}
+<div id="seat" ng-controller="seatsCtrl" ng-init="setup(<%= @venue.id %>)">
+
+<div id="seating-pages">
+  <form class="form-inline">
+    <div class="form-group">
+        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+    </div>
+  </form>
+
+  <table>
+    <tr>
+      <th width="150px">Section</th>
+      <th width="40px">Row</th>
+      <th width="100px">Seat Number</th>
+    </tr>
+    <tr dir-paginate="seat in seatInfo.seats | filter:search | itemsPerPage: 10">
+      <td>{{ seat.seat_section }}</td>
+      <td>{{ seat.seat_row }}</td>
+      <td>{{ seat.seat_number }}</td>
+    </tr>
+  </table>
+  <dir-pagination-controls>
+ 
+    [direction-links="true"]
+    [boundary-links="true"]
+
+    </dir-pagination-controls>
+</div>
+
+
+</div>
+</div>
+
 <% if @venue.seating_chart %>
   <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
 
@@ -148,9 +184,10 @@
     callSeating();
   });
 </script>
-
+  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
 
 
 

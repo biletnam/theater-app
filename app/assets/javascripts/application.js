@@ -16,6 +16,6 @@
 //= require newseating
 
 //= require modernizr-2.6.2-respond-1.1.0.min
-
-
+//= require angular
+//= require app
 //= require_tree .

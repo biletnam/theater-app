@@ -33,7 +33,7 @@ Section: <%= @sg_seat.seat_section %>
   <div><%= hidden_field_tag :default_photo, @sg_seat_photo.default_photo %></div>
   <div><%= hidden_field_tag :sg_seat_id, @sg_seat.id %></div>
 
-  <div><%= submit_tag "Submit Photo", :onclick => "showSpin()" %></div>
+  <div><%= submit_tag "Submit Photo", :onclick => "showSpin()", :class => "back-button btn btn-default" %></div>
 
 <% end %> 
 
