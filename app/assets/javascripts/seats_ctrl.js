@@ -15,7 +15,6 @@
     $scope.reverse = !$scope.reverse; //if true make it false and vice versa
   };
 
-
   window.scope = $scope;
 
   });

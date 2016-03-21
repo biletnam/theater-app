@@ -142,26 +142,37 @@
   <br>
   <% if @rows[0] %>
     <h3>Current Venue Rows</h3>
-     <table>
-      <tr>
-        <th>Row Id</th>     
-        <th>Section Id</th>     
-        <th>Row Name</th>
-        <th>Number of Seats</th>
-        <th></th>
-        <th></th>
-      </tr>
-    <% @rows.each do |row| %>
-      <tr>
-        <td width="100px"><%= row.id %></td>     
-        <td width="100px"><%= row.section_id %></td>     
-        <td width="100px"><%= row.name %></td>
-        <td width="150px"><%= row.number_seats %></td>
-        <td><a href="/sections/<%= row.section_id %>/rows/<%= row.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Row</a></td>
-        <td><a data-confirm="Are you sure you want to delete this section?" data-method="delete" href="/sections/<%= row.section_id %>/rows/<%= row.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">Delete Row</a></td>
-      </tr>
-    <% end %>
-    </table>
+     <br>
+     <div id="row-pages">
+       <form class="form-inline">
+         <div class="form-group">
+             <input type="text" ng-model="searchRow" class="form-control" placeholder="search rows">
+         </div>
+       </form>
+
+       <table class="table table-striped">
+         <tr>
+           <th width="150px" ng-click="sort('id')">Row ID <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+           <th width="150px" ng-click="sort('section_id')">Section ID <span class="glyphicon sort-icon" ng-show="sortKey=='section_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+           <th width="100px" ng-click="sort('name')">Row Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+           <th width="120px" ng-click="sort('number_seats')">Number of Seats <span class="glyphicon sort-icon" ng-show="sortKey=='number_seats'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+           <th width="100px"></th>
+           <th width="100px"></th>
+         </tr>
+         <tr dir-paginate="row in seatInfo.rows | orderBy:sortKey:reverse | filter:searchRow | itemsPerPage: 10" pagination-id="rows">
+           <td>{{ row.id }}</td>
+           <td>{{ row.section_id }}</td>
+           <td>{{ row.name }}</td>
+           <td>{{ row.number_seats }}</td>
+           <td>Edit Row</td>
+           <td>Delete Row</td>
+         </tr>
+       </table>
+       <dir-pagination-controls pagination-id="rows">
+         [direction-links="true"]
+         [boundary-links="true"]
+       </dir-pagination-controls>
+     </div>
   <% else %>
     <h3>Current Venue Rows</h3>
     <p>No rows have been added.</p>
