@@ -1,4 +1,5 @@
 json.id @venue.id
+json.name @venue.name
 json.street_address @venue.street_address
 json.city @venue.city
 json.state @venue.state
@@ -49,6 +50,7 @@ json.sections @venue.sections.each do |section|
         json.caption sp.caption
         json.user_id sp.user_id
         json.image sp.image
+        json.seat_id sp.seat_id
       end
     end
   end

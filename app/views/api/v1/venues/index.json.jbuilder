@@ -50,6 +50,7 @@ json.venues @venues.each do |v|
           json.caption sp.caption
           json.user_id sp.user_id
           json.image sp.image
+          json.seat_id sp.seat_id
         end
       end
     end

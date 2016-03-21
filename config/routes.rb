@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get '/seats' => 'seats#index'
       get '/venues' => 'venues#index'
       get '/venues/:id' => 'venues#show'
+      get '/sg_db_venues/:id' => 'sg_db_venues#show'
     end
   end
 

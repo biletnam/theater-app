@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319055205) do
+ActiveRecord::Schema.define(version: 20160321060834) do
 
   create_table "event_seats", force: :cascade do |t|
     t.string   "status",             limit: 255
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20160319055205) do
     t.integer  "stage_x_offset", limit: 4
     t.integer  "stage_y_offset", limit: 4
     t.boolean  "seating_chart",                default: false
+    t.string   "twitter_handle", limit: 255
   end
 
   create_table "sg_reviews", force: :cascade do |t|
