@@ -1,4 +1,9 @@
 <%= include_gon %>
+
+<div ng-app="app">
+  {{ 1 + 1 }}
+<div id="seat" ng-controller="seatsCtrl" ng-init="setup(<%= @venue.id %>)">
+
 <div class="se-pre-con"></div>
 <h3><%= @venue.name %></h3>
 <h1>Seating Chart</h1>
@@ -6,73 +11,41 @@
 <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
 <br><br>
 
-<div ng-app="app">
-  {{ 1 + 1 }}
-<div id="seat" ng-controller="seatsCtrl" ng-init="setup(<%= @venue.id %>)">
-
-<div id="seating-pages">
-  <form class="form-inline">
-    <div class="form-group">
-        <input type="text" ng-model="search" class="form-control" placeholder="search seats">
-    </div>
-  </form>
-
-  <table>
-    <tr>
-      <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-    </tr>
-    <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10">
-      <td>{{ seat.seat_section }}</td>
-      <td>{{ seat.seat_row }}</td>
-      <td>{{ seat.seat_number }}</td>
-    </tr>
-  </table>
-  <dir-pagination-controls>
- 
-    [direction-links="true"]
-    [boundary-links="true"]
-
-    </dir-pagination-controls>
-</div>
-
-</div>
-</div>
-
 <% if @venue.seating_chart %>
   <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
 
   <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
   <h3>Current Seating Information</h3>
-    <div>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"btn btn-default btn-xs active" %>
-    </div>
-    <br>
-    <div id="venue-seats-table">
-      <table>
-        <tr>
-          <th>Section</th>
-          <th>Row</th>
-          <th>Seat Number</th>
-          <th>Views</th>
-        </tr>
-      <% @seats.each do |seat| %>
-        <tr>
-          <td width="150px"><%= seat.seat_section %></td>
-          <td width="40px"><%= seat.seat_row %></td>
-          <td width="100px"><%= seat.seat_number %></td>
-          <td width="60px"><%= link_to "photos", "/seats/#{seat.id}/seat_photos/" %></td>    
-          <td width="100px"><%= link_to "add photo", "/seats/#{seat.id}/seat_photos/new" if user_signed_in? %></td> 
-          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-             <td><%= link_to "edit seat", "/venues/#{@venue.id}/seats/#{seat.id}/edit", :class =>"btn btn-default btn-xs active" %></td>
-             <td><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/<%= seat.venue_id %>/seats/<%= seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete seat</a></td>
-          <% end %> 
-        </tr>
-      <% end %>
-      </table>
-      <div class="pagination-bar"><%= will_paginate @seats %></div>
-    </div>
+      <br>
+      <div id="seating-pages">
+        <form class="form-inline">
+          <div class="form-group">
+              <input type="text" ng-model="search" class="form-control" placeholder="search seats">
+          </div>
+        </form>
+
+        <table class="table table-striped">
+          <tr>
+            <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px">Seat Photos</th>
+            <th width="100px">Add Your Own!</th>
+          </tr>
+          <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10">
+            <td>{{ seat.seat_section }}</td>
+            <td>{{ seat.seat_row }}</td>
+            <td>{{ seat.seat_number }}</td>
+            <td>view photos</td>
+            <td>add photo</td>
+          </tr>
+        </table>
+        <dir-pagination-controls>
+          [direction-links="true"]
+          [boundary-links="true"]
+        </dir-pagination-controls>
+      </div>
+
   <% end %>
 <% else %>
   <h3>Seating Chart Not Currently Available for This Venue</h3>
@@ -84,29 +57,34 @@
   <% end %>
   <% if @seats[0] %>
     <h3>Available seat information listed below</h3>
-    <div id="venue-seats-table">
-      <table>
+    <br>
+    <div id="seating-pages">
+      <form class="form-inline">
+        <div class="form-group">
+            <input type="text" ng-model="search" class="form-control" placeholder="search seats">
+        </div>
+      </form>
+
+      <table class="table table-striped">
         <tr>
-          <th>Section</th>
-          <th>Row</th>
-          <th>Seat Number</th>
-          <th>Views</th>
+          <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th width="100px">Seat Photos</th>
+          <th width="100px">Add Your Own!</th>
         </tr>
-      <% @seats.each do |seat| %>
-        <tr>
-          <td width="100px"><%= seat.seat_section %></td>
-          <td width="40px"><%= seat.seat_row %></td>
-          <td width="100px"><%= seat.seat_number %></td>
-          <td width="60px"><%= link_to "photos", "/seats/#{seat.id}/seat_photos/" %></td>    
-          <td width="100px"><%= link_to "add photo", "/seats/#{seat.id}/seat_photos/new" if user_signed_in? %></td> 
-          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-             <td><%= link_to "edit seat", "/venues/#{@venue.id}/seats/#{seat.id}/edit", :class =>"btn btn-default btn-xs active" %></td>
-             <td><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/<%= seat.venue_id %>/seats/<%= seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">delete seat</a></td>
-          <% end %> 
+        <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10">
+          <td>{{ seat.seat_section }}</td>
+          <td>{{ seat.seat_row }}</td>
+          <td>{{ seat.seat_number }}</td>
+          <td>view photos</td>
+          <td>add photo</td>
         </tr>
-      <% end %>
       </table>
-      <div class="pagination-bar"><%= will_paginate @seats %></div>
+      <dir-pagination-controls>
+        [direction-links="true"]
+        [boundary-links="true"]
+      </dir-pagination-controls>
     </div>
   <% end %>
 <% end %>
@@ -175,6 +153,9 @@
     <p>No rows have been added.</p>
   <% end %>
 <% end %>
+
+</div>
+</div>
 
 <script>
   $(function(){
