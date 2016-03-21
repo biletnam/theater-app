@@ -19,11 +19,11 @@
 
   <table>
     <tr>
-      <th width="150px">Section</th>
-      <th width="40px">Row</th>
-      <th width="100px">Seat Number</th>
+      <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
     </tr>
-    <tr dir-paginate="seat in seatInfo.seats | filter:search | itemsPerPage: 10">
+    <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10">
       <td>{{ seat.seat_section }}</td>
       <td>{{ seat.seat_row }}</td>
       <td>{{ seat.seat_number }}</td>
