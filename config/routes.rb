@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   patch '/venues/:id' => 'venues#update'
   delete '/venues/:id' => 'venues#destroy'
 
+  get '/home' => 'venues#home'
+
   get '/venue_name_search' => 'venues#venue_name_search'
   post '/venue_name_search_result' => 'venues#venue_name_search_result'
   get '/venue_zip_search' => 'venues#venue_zip_search'

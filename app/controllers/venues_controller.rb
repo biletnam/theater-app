@@ -3,6 +3,9 @@ class VenuesController < ApplicationController
 before_action :authenticate_admin!, only: [:destroy, :full_index]
 before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
 
+  def home
+  end
+
   def index   
     @all_seating_venues = []
 
