@@ -1,6 +1,5 @@
 <%= include_gon %>
 <div ng-app="app">
-  {{ 1 + 1 }}
 <div id="sg_seat" ng-controller="sgSeatsCtrl" ng-init="setup(<%= @sg_db_venue.id %>)">
 
 <div class="se-pre-con"></div>
@@ -9,15 +8,18 @@
 <br>
 <a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
 <br><br>
+
 <% if @sg_db_venue.seating_chart %>
   <canvas id="seating" width="700" height="1000">This browser does not support the canvas element</canvas>
 
+  <h3>Seating Information</h3>
   <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
-    <h3>Current Seating Information</h3>
     <div>
       <%= link_to "Add Seat", "/sg_db_venues/#{@sg_db_venue.id}/sg_seats/new", :class =>"back-button btn btn-default" %>
     </div>
+  <% end %>
 
+  <% if @sg_seats[0] %>  
     <br>
     <div id="sg-seating-pages">
       <form class="form-inline">
@@ -33,7 +35,7 @@
           <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
           <th width="100px">Seat Photos</th>
           <th width="100px">Add Your Own!</th>
-        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+        <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
           <th width="100px"></th>
         <% end %>
         </tr>
@@ -53,7 +55,6 @@
         [boundary-links="true"]
       </dir-pagination-controls>
     </div>
-    
   <% end %>
 <% else %>
   <h3>Seating Chart Not Currently Available for This Venue</h3>
@@ -65,7 +66,7 @@
   <% end %>
 
   <% if @sg_seats[0] %>
-    <h5>Available seat information listed below</h5>    
+    <h3>Available seat information listed below</h3>    
     <br>
     <div id="sg-seating-pages">
       <form class="form-inline">
