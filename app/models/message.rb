@@ -7,7 +7,7 @@ class Message < MailForm::Base
 
   def headers 
     {
-      :subject => "Contact Form",
+      :subject => "Contact Message",
       :to => ENV["admin_email"],
       :from => %("#{name}" <#{email}>)
 

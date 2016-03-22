@@ -15,7 +15,7 @@ class Vendor < MailForm::Base
 
   def headers 
     {
-      :subject => "Contact Form",
+      :subject => "Vendor Request",
       :to => ENV["admin_email"],
       :from => %("#{name}" <#{email}>)    
     }

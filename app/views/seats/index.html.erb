@@ -16,7 +16,7 @@
   <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
   <h3>Current Seating Information</h3>
     <div>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"btn btn-default btn-xs active" %> 
+      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
     </div>
 
     <br>
@@ -34,13 +34,20 @@
           <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
           <th width="100px">Seat Photos</th>
           <th width="100px">Add Your Own!</th>
+        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+          <th width="100px"></th>
+        <% end %>
         </tr>
         <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
           <td>{{ seat.seat_section }}</td>
           <td>{{ seat.seat_row }}</td>
           <td>{{ seat.seat_number }}</td>
-          <td>View Photos</td>
-          <td>Add Photo</td>
+          <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
+          <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
+        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+          <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+        <% end %>
+      
         </tr>
       </table>
       <dir-pagination-controls pagination-id="seats">
@@ -55,7 +62,7 @@
   <br>
   <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
     <div>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"btn btn-default btn-xs active" %> 
+      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
     </div>
   <% end %>
   <% if @seats[0] %>
@@ -75,13 +82,19 @@
           <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
           <th width="100px">Seat Photos</th>
           <th width="100px">Add Your Own!</th>
+        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+          <th width="100px"></th>
+        <% end %>
         </tr>
         <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
           <td>{{ seat.seat_section }}</td>
           <td>{{ seat.seat_row }}</td>
           <td>{{ seat.seat_number }}</td>
-          <td>View Photos</td>
-          <td>Add Photo</td>
+          <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
+          <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
+        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+          <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+        <% end %>
         </tr>
       </table>
       <dir-pagination-controls pagination-id="seats">
@@ -97,7 +110,7 @@
    <% if @sections[0] %>
     <h3>Current Venue Sections</h3>
     <div>
-      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">Add Section</a>
+      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
     </div>
     <br>
     <div id="section-pages">
@@ -120,9 +133,9 @@
           <td>{{ section.id }}</td>
           <td>{{ section.name }}</td>
           <td>{{ section.number_rows }}</td>
-          <td>Add Row</td>
-          <td>Edit Section</td>
-          <td>Delete Section</td>
+          <td><a href="/sections/{{ section.id }}/rows/new">Add Row</a></td>
+          <td><a href="/venues/{{ section.venue_id }}/sections/{{ section.id }}/edit">Edit Section</a></td>
+          <td><a data-confirm="Are you sure you want to delete this section?" data-method: "delete" href="/venues/{{ section.venue_id }}/sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
         </tr>
       </table>
       <dir-pagination-controls pagination-id="sections">
@@ -133,7 +146,7 @@
   <% else %>
     <h3>Current Venue Sections</h3>
     <div>
-      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">Add Section</a>
+      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
      </div>
     <br>
     <p>No sections have been added</p>
@@ -163,8 +176,8 @@
            <td>{{ row.section_id }}</td>
            <td>{{ row.name }}</td>
            <td>{{ row.number_seats }}</td>
-           <td>Edit Row</td>
-           <td>Delete Row</td>
+           <td><a href="/sections/{{ row.section_id }}/rows/{{ row.id }}/edit">Edit Row</a></td>
+           <td><a data-confirm="Are you sure you want to delete this row?" data-method: "delete" href="/sections/{{ row.section_id }}/rows/{{ row.id }}" rel="nofollow">Delete Row</td>
          </tr>
        </table>
        <dir-pagination-controls pagination-id="rows">

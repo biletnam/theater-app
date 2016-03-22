@@ -136,6 +136,21 @@ Rails.application.routes.draw do
   patch '/sections/:id/rows/:id' => 'rows#update'
   delete '/sections/:id/rows/:id' => 'rows#destroy'
 
+  get '/sg_db_venues/:id/sg_sections' => 'sg_sections#index'
+  get '/sg_db_venues/:id/sg_sections/new' => 'sg_sections#new'
+  post '/sg_db_venues/:id/sg_sections' => 'sg_sections#create'
+  get '/sg_db_venues/:id/sg_sections/:id/edit' => 'sg_sections#edit'
+  patch '/sg_db_venues/:id/sg_sections/:id' => 'sg_sections#update'
+  delete '/sg_db_venues/:id/sg_sections/:id' => 'sg_sections#destroy'
+
+  get '/sg_sections/:id/sg_rows' => 'sg_rows#index'
+  get '/sg_sections/:id/sg_rows/new' => 'sg_rows#new'
+  post '/sg_sections/:id/sg_rows/' => 'sg_rows#create'
+  get '/sg_sections/:id/sg_rows/:id' => 'sg_rows#show'
+  get '/sg_sections/:id/sg_rows/:id/edit' => 'sg_rows#edit'
+  patch '/sg_sections/:id/sg_rows/:id' => 'sg_rows#update'
+  delete '/sg_sections/:id/sg_rows/:id' => 'sg_rows#destroy'
+
   get '/contact_us' => 'messages#new'
   post '/messages' => 'messages#create'
   get '/message_success' => 'messages#message_success'
