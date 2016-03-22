@@ -12,11 +12,11 @@ Section: <%= @sg_seat.seat_section %>
 
 <% if user_signed_in? %>
   <br>
-  <p><a href="/sg_seats/<%= @sg_seat.id%>/sg_seat_photos/new" rel="nofollow" role="button" class="btn btn-default btn-xs active">Add Seat Photo</a>
+  <p><a href="/sg_seats/<%= @sg_seat.id%>/sg_seat_photos/new" rel="nofollow" role="button" class="btn btn-default back-button">Add Seat Photo</a>
   <a href="/sg_db_venues/<%= @sg_seat.venue_id %>/seats" role="button" class="back-button btn btn-default">Back to Seating Chart</a>
   <% if current_user.admin || current_user.id == @sg_seat.sg_db_venue.user_id %>
-    <%= link_to "Edit Seat", "/sg_db_venues/#{@sg_seat.sg_db_venue_id}/sg_seats/#{@sg_seat.id}/edit", :class =>"btn btn-default btn-xs active" %>
-    <a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/<%= @sg_seat.sg_db_venue_id %>/sg_seats/<%= @sg_seat.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">Delete Seat</a></p>
+    <%= link_to "Edit Seat", "/sg_db_venues/#{@sg_seat.sg_db_venue_id}/sg_seats/#{@sg_seat.id}/edit", :class =>"btn btn-default back-button" %>
+    <a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/<%= @sg_seat.sg_db_venue_id %>/sg_seats/<%= @sg_seat.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Seat</a></p>
   <% end %>
 <% end %>
 

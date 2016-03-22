@@ -4,6 +4,6 @@
 <h4>Description: </h4><%= @scheduled_event.event.description %>
 <h4>Date: <%= @scheduled_event.friendly_date %></h4>
 <h4>Time: <%= @scheduled_event.friendly_time %></h4>
-<%= link_to "Buy Tickets", @scheduled_event.buy_ticket_link, :class =>"btn btn-default btn-xs active" %>
-<a data-confirm="Are you sure you want to edit this scheduled event?" href="/venues/<%= @scheduled_event.venue_id %>/events/<%= @scheduled_event.event_id %>/scheduled_events/<%= @scheduled_event.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Scheduled Event</a>
-<a data-confirm="Are you sure you want to delete this scheduled event?" data-method="delete" href="/venues/<%= @scheduled_event.venue_id %>/events/<%= @scheduled_event.event_id %>/scheduled_events/<%= @scheduled_event.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">Delete Scheduled Event</a>
+<%= link_to "Buy Tickets", @scheduled_event.buy_ticket_link, :class =>"btn btn-default back-button" %>
+<a data-confirm="Are you sure you want to edit this scheduled event?" href="/venues/<%= @scheduled_event.venue_id %>/events/<%= @scheduled_event.event_id %>/scheduled_events/<%= @scheduled_event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Scheduled Event</a>
+<a data-confirm="Are you sure you want to delete this scheduled event?" data-method="delete" href="/venues/<%= @scheduled_event.venue_id %>/events/<%= @scheduled_event.event_id %>/scheduled_events/<%= @scheduled_event.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Scheduled Event</a>

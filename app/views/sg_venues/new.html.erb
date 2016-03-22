@@ -29,7 +29,7 @@
   <div><%= text_field_tag :longitude, @sg_venue.longitude %></div>
 
   <div><%= label_tag "Phone Number:" %></div>
-  <div><%= text_field_tag :phone, nil, placeholder: "XXX-XXX-XXXX" %></div>
+  <div><%= text_field_tag :phone, nil, placeholder: "(XXX) XXX-XXXX" %></div>
 
   <div><%= label_tag "Website:" %></div>
   <div><%= text_field_tag :website %></div>
@@ -43,7 +43,7 @@
   <div><%= label_tag "SeatGeek Venue Id:" %></div>
   <div><%= text_field_tag :sg_venue_id, @sg_venue.sg_venue_id %></div>
 
-  <div><%= submit_tag "Submit" %></div>
+  <div><%= button_tag "Submit", :class => "back-button btn btn-default" %></div>
 
 <% end %>
 

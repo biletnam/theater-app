@@ -20,39 +20,39 @@
 
 <h4>Seating Information Not Currently Available</h4>
 
-<% if current_user && current_user.admin %>
-  <%= link_to "Create Venue Using SG Information", "/sg_venues/new/#{@sg_venue.id}", :class =>"btn btn-default btn-xs active" %>
+<% if current_user && current_user.admin || current_user && current_user.id == @sg_venue.user_id %>
+  <%= link_to "Create Venue Using SG Information", "/sg_venues/new/#{@sg_venue.id}", :class =>"btn btn-default back-button" %>
 <% end %>
-
+<br><br>
 <h3>Upcoming Events</h3>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Show</th>
     <th>Date</th>
     <th>Time</th>
+    <th>Get Tickets!</th>
   </tr>
 <% @sg_events.each do |sg_event| %>
   <tr>
-    <td><%= sg_event["title"] %></td>
-    
+    <td><%= sg_event["title"] %></td>  
     <td><%= sg_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %></td>
     <td><%= sg_event["datetime_local"].to_datetime.strftime("%I:%M %p") %></td>
     <td><%= link_to "Buy Tickets", sg_event["url"] %></td>
   </tr>
 <% end %>
 </table>
-
+<br>
 <h3>Venue Reviews</h3>
   <p>No reviews for this venue at this time</p>
-
+<br>
 <h3>Restaurants Nearby</h3>
-
+<br>
 <div id="map" style="width: 500px; height: 400px">
 </div>
 
 <div id="restaurant-results">
-
+<br>
 <% @gp_restaurants.each do |gp_restaurant| %>
   <div>
     <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 

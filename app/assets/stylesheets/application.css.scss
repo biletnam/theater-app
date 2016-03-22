@@ -1322,10 +1322,11 @@ p.lead {
 
 
 .back-button {
-  height: 40px;
+  height: 35px;
   background-color: DeepSkyBlue;
   color: white;
-  line-height: 26px;
+  line-height: 21px;
+  // font-size: 14px;
 }
 
 .back-button:hover {
@@ -1397,4 +1398,15 @@ p.lead {
   color: #31363a;
 }
 
+.gp-review {
+  background-color: #ddd;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
 

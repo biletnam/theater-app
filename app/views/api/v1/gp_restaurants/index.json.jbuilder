@@ -1,0 +1,15 @@
+json.restaurants @gp_api_restaurants_response["results"].each do |r|
+  json.place_id r["place_id"]
+  json.name r["name"]
+  json.lat r["geometry"]["location"]["lat"]
+  json.lng r["geometry"]["location"]["lng"]
+  json.icon r["icon"]
+  json.photo_array r["photos"]
+  json.types r["types"]
+  json.vicinity r["vicinity"]
+  json.opening_hours_array r["opening_hours"]["weekday_text"]
+  json.reviews_array r["reviews"]
+  json.formatted_address r["formatted_address"]
+  json.price_level r["price_level"]
+  json.rating r["rating"]
+end

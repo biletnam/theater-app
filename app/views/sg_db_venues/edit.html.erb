@@ -36,7 +36,7 @@
   <div><%= text_field_tag :longitude, @sg_db_venue.longitude %></div>
 
   <div><%= label_tag "Phone Number:" %></div>
-  <div><%= text_field_tag :phone, @sg_db_venue.phone, placeholder: "XXX-XXX-XXXX" %></div>
+  <div><%= text_field_tag :phone, @sg_db_venue.phone, placeholder: "(XXX) XXX-XXXX" %></div>
 
   <div><%= label_tag "Website:" %></div>
   <div><%= text_field_tag :website, @sg_db_venue.website %></div>
@@ -50,7 +50,7 @@
   <div><%= label_tag "Sg Venue Id:" %></div>
   <div><%= text_field_tag :sg_venue_id, @sg_db_venue.sg_venue_id %></div>
 
-  <div><%= submit_tag "Update" %></div>
+  <div><%= button_tag "Update", :class => "back-button btn btn-default" %></div>
 
 <% end %>
 

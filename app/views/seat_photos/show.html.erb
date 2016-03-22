@@ -12,8 +12,8 @@
 <br><br>
 <% if current_user && current_user.admin || current_user && current_user.id == @seat_photo.user_id %> 
   <div>
-    <a data-confirm="Are you sure you want to edit this photo? Photo file cannot be edited. To change photo, please delete the entry and reupload the image and caption information" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>/edit" rel="nofollow" role="button" class="btn btn-default btn-xs active">Edit Seat Photo Info </a>
-    <a data-confirm="Are you sure you want to delete this photo file?" data-method="delete" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>" rel="nofollow" role="button" class="btn btn-default btn-xs active">Delete Seat Photo </a>
+    <a data-confirm="Are you sure you want to edit this photo? Photo file cannot be edited. To change photo, please delete the entry and reupload the image and caption information" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Seat Photo Info </a>
+    <a data-confirm="Are you sure you want to delete this photo file?" data-method="delete" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Seat Photo </a>
   </div>
 <% end %>
 

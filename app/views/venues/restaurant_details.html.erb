@@ -73,9 +73,9 @@
   <div>
   <% if @google_restaurant["reviews"] %>
     <% @google_restaurant["reviews"].each do |review| %>
-      <%= review["text"] %>
-      <hr>
-      
+      <div class="gp-review">
+        " <%= review["text"] %> "
+      </div>      
     <% end %>
   <% else %>
     <p>Reviews unavailable</p>
