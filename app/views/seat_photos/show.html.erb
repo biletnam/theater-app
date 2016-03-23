@@ -4,10 +4,10 @@
   <br><br>
   <div id="seat-info" class="col-md-6 row">
   
-    <h5>Section: <%= @seat.seat_section %><br>
+    <h3>Section: <%= @seat.seat_section %><br>
     <br>Row: <%= @seat.seat_row %><br>
     <br>Seat: <%= @seat.seat_number %><br>
-    <br>Caption: <em><%= @seat_photo.caption %></em></h5>
+    <br>Caption: <em><%= @seat_photo.caption %></em></h3>
   <br>
   <div id="sp-buttons">
     <% if current_user && current_user.admin || current_user && current_user.id == @seat_photo.user_id %> 
