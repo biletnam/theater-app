@@ -8,13 +8,16 @@
   <% else %>
     <% @sg_zip_theater_venues.uniq.each do |sg_zip_theater_venue| %>
       <% if sg_zip_theater_venue.class == SgVenue %>
+      <div id="search-results">
         <h3><%= link_to sg_zip_theater_venue.name, "/sg_venues/#{sg_zip_theater_venue.id}" %></h3>
         <%= sg_zip_theater_venue.street_address %>, <%= sg_zip_theater_venue.city_state %>
+      </div>
       <% elsif sg_zip_theater_venue.class == Venue %>
+      <div id="search-results">
         <h3><%= link_to sg_zip_theater_venue.name, "/venues/#{sg_zip_theater_venue.id}" %></h3>
         <%= sg_zip_theater_venue.full_address %>
+      </div>
       <% end %>
-      <hr>
     <% end %>
     <% if @sg_zip_theater_venues == [] %>
       <p><%= @no_result_message %></p>

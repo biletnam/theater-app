@@ -9,32 +9,34 @@
   </div>
 <% end %>
 
-<h2>Add New Photo for Seat</h2>
-<h3>
-Section: <%= @seat.seat_section %>
-<br>Row: <%= @seat.seat_row %>
-<br>Seat: <%= @seat.seat_number %>
-<br></h3>
+<div id="update-sp">
+  <h2>Add New Seat Photo</h2>
+  <h3>
+  Section: <%= @seat.seat_section %>
+  <br>Row: <%= @seat.seat_row %>
+  <br>Seat: <%= @seat.seat_number %>
+  <br></h3>
 
-<%= form_tag "/seats/#{@seat.id}/seat_photos", multipart: true, method: :post do %>
+  <%= form_tag "/seats/#{@seat.id}/seat_photos", multipart: true, method: :post do %>
 
-  <div><%= label_tag "Upload Image" %></div>
-  <div><%= file_field_tag :image %></div><br>
-  <div><%= label_tag "Photo caption" %></div>
-  <div><%= text_field_tag :caption, @seat_photo.caption %></div>
+    <div><%= label_tag "Upload Image" %></div>
+    <div><%= file_field_tag :image %></div><br>
+    <div><%= label_tag "Photo caption" %></div>
+    <div><%= text_field_tag :caption, @seat_photo.caption %></div>
 
-  <div class="se-pre-con" ></div>
-  <div class="spinner">
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
-  </div>
+    <div class="se-pre-con" ></div>
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
 
-  <div><%= hidden_field_tag :default_photo, @seat_photo.default_photo %></div>
-  <div><%= hidden_field_tag :seat_id, @seat.id %></div>
-  <div><%= submit_tag "Submit Photo", :onclick => "showSpin()", :class => "back-button btn btn-default" %></div>
+    <div><%= hidden_field_tag :default_photo, @seat_photo.default_photo %></div>
+    <div><%= hidden_field_tag :seat_id, @seat.id %></div>
+    <div><%= submit_tag "Submit Photo", :onclick => "showSpin()", :class => "back-button btn btn-default" %></div>
 
-<% end %> 
+  <% end %> 
+</div>
 
 <script>
 

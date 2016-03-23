@@ -11,13 +11,16 @@
   <% @zip_events.each do |zip_event| %>
     <% if zip_event.class == ScheduledEvent %>
       <% if zip_event.friendly_date > Time.now %>
+      <div id="search-results">
         <h3><%= link_to zip_event.event.name, "/venues/#{zip_event.venue_id}/events/#{zip_event.event.id}" %></h3>
         <strong><%= zip_event.venue.name %></strong>
         <br><%= zip_event.venue.full_address %>
         <br><%= zip_event.friendly_date %> || <%= zip_event.friendly_time %>
-        <hr>
+        <br><%= link_to "Ticket Info", zip_event.buy_ticket_link %>
+      </div>
       <% end %>
     <% else %>
+    <div id="search-results">
       <h3><%= link_to zip_event.name, "/sg_venues/#{zip_event.sg_venue_id}" %></h3>
       <strong><%= zip_event.venue_name %></strong>
       <br><%= zip_event.full_address %>
@@ -26,7 +29,7 @@
         <br>Average Price: <%= number_to_currency(zip_event.average_price) %>
       <% end %>
       <br><%= link_to "Ticket Info", zip_event.buy_ticket_link %>
-      <hr>
+    </div>
     <% end %>
   <% end %>
 <% else %>

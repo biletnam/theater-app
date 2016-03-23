@@ -35,7 +35,6 @@
       <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_reviews/new" role="button" class="back-button btn btn-default">Add Review</a>
 
       <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
-        <%= link_to "Add New Event", "/sg_db_venues/#{@sg_db_venue.id}/sg_events/new", :class =>"btn btn-default back-button" %>
         <a data-confirm="Are you sure you want to edit this venue?" href="/sg_db_venues/<%= @sg_db_venue.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Venue</a>
         <a data-confirm="Are you sure you want to delete this venue?" data-method="delete" href="/sg_db_venues/<%= @sg_db_venue.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Venue</a>
       <% end %>

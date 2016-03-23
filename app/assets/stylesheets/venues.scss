@@ -165,7 +165,88 @@
   li {
     border: solid 1px #bbb;
   }
+
+  h1 {
+    text-align: center;
+  }
+
+  #gp-photos {
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  #gp-info-hours-map {
+    // position: relative;
+    h3 {
+      text-align: center;
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    #map-div-rest {
+      // position: absolute;
+      float: right;
+      margin-top: 20px;
+    }
+
+    #gp-loc-hours {
+      // position: absolute;
+      float: left;
+
+      .address-gp {
+        text-align: center;
+      }
+
+      #hours-margin {
+        margin-bottom: -15px;
+      }
+    }
+  }
+
+  #reg-venue-reviews {
+    h3 {
+      text-align: center;
+    }
+
+    .gp-review {
+      background: rgba(0, 191, 255, 0.3);
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    .address-gp {
+      text-align: center;
+    }
+  }
   
+  // #map-div-rest {
+  //   background: rgba(221, 221, 221, 0.4);
+  //   padding: 25px 20px 20px 20px;
+  //   border-top-right-radius: 10px;
+  //   border-top-left-radius: 10px;
+  // }
+
+  // #map {
+  //   margin: auto;
+  //   text-align: center;
+  //   background: rgba(221, 221, 221, 0.4);
+  //   padding: 25px 20px 20px 20px;
+  //   border-top-right-radius: 10px;
+  //   border-top-left-radius: 10px;
+  // }
 }
 
 #reg-venues-show {
@@ -226,6 +307,10 @@
       text-align: center;
     }
 
+   p {
+      text-align: center;
+    }
+
     .gp-review {
       background: rgba(0, 191, 255, 0.3);
     }
@@ -235,9 +320,6 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 
-    p {
-      text-align: center;
-    }
   }
 
   #reg-venue-restaurants {
@@ -260,6 +342,53 @@
       // position: absolute;
       float: left;
     }
+  }
+}
+
+#search-results {
+  background: rgba(221, 221, 221, 0.4);
+  padding: 5px 20px 20px 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-top: 15px;
+}
+
+#event-show {
+  #event-info {
+    h2 {
+      text-align: center;
+    }
+    
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    #event-buttons {
+      text-align: center;
+    }
+  }
+
+  #sched-event-info {
+    h3 {
+      text-align: center;
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  #new-sched-event {
+    h3 {
+      text-align: center;
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
   }
 }
 

@@ -9,22 +9,24 @@
   </div>
 <% end %>
 
-<h2>Update Seat Photo</h2>
+<div id="update-sp">
+  <h2>Update Seat Photo</h2>
 
-<%= form_tag "/seats/#{@seat.id}/seat_photos/#{@seat_photo.id}", method: :patch do %>
-  
-  <h3>Section: <%= @seat.seat_section %>
-  <br>Row: <%= @seat.seat_row %>
-  <br>Seat: <%= @seat.seat_number %></h3>
+  <%= form_tag "/seats/#{@seat.id}/seat_photos/#{@seat_photo.id}", method: :patch do %>
+    
+    <h3>Section: <%= @seat.seat_section %>
+    <br>Row: <%= @seat.seat_row %>
+    <br>Seat: <%= @seat.seat_number %></h3>
+    <br>
+    <div><%= label_tag "Photo caption" %></div>
+    <div><%= text_field_tag :caption, @seat_photo.caption %></div>
+    <div><%= hidden_field_tag :default_photo, @seat_photo.default_photo %></div>
+    <div><%= hidden_field_tag :seat_id, @seat.id %></div>
 
-  <div><%= label_tag "Photo caption" %></div>
-  <div><%= text_field_tag :caption, @seat_photo.caption %></div>
-  <div><%= hidden_field_tag :default_photo, @seat_photo.default_photo %></div>
-  <div><%= hidden_field_tag :seat_id, @seat.id %></div>
+    <div><%= label_tag "Uploaded Image" %></div>
+    <%= image_tag @seat_photo.image.thumb.url %>
+    <br><br>
+    <div><%= submit_tag "Update", :class => "back-button btn btn-default" %></div>
 
-  <h5>Uploaded Image: </h5>
-  <%= image_tag @seat_photo.image.thumb.url %>
-  <br><br>
-  <div><%= submit_tag "Update", :class => "back-button btn btn-default" %></div>
-
-<% end %> 
+  <% end %> 
+</div>

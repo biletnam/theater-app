@@ -20,9 +20,9 @@
     <% if @sg_venue.website != "" %>
       <h5 class="website"><%= link_to "Venue Website", @sg_venue.website %></h5>
     <% end %>
-
+    
     <h4>Seating Information Not Currently Available</h4>
-
+    <br>
     <% if current_user && current_user.admin || current_user && current_user.id == @sg_venue.user_id %>
       <%= link_to "Create Venue Using SG Information", "/sg_venues/new/#{@sg_venue.id}", :class =>"btn btn-default back-button" %>
     <% end %>

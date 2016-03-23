@@ -1,3 +1,102 @@
 // Place all the styles related to the sg_seat_photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#seat-photo-index {
+  h1 {
+    text-align: center;
+  }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 35px 30px 40px 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+      // position: absolute;
+
+    #seat-info {
+      float: left;
+    }
+
+    #photo-display {
+      // position: absolute;
+      float: right;
+    }
+
+  #carousel-example-generic {
+    // background-color: white;
+    
+    img {
+      // max-height: 200px;
+      max-width: 500px;
+      display: block;
+      margin: auto;
+      margin-top: 20px;
+      border: solid 2px #bbb;
+      border-radius: 3px;
+    }
+
+    width: 600px;
+    height: 520px;
+    padding: 10px;
+    border-top: 3px solid #bbb;
+    border-bottom: 3px solid #bbb;
+    // border-radius: 3px;
+    display: block;
+    margin: auto;
+  
+    .carousel-caption {
+      background-color: "transparent";
+      font-style: italic;
+      position: static;
+      padding: 0 20px;
+      margin-top: 12px;
+      // margin-top: 36%;
+      text-align: center;
+    }
+  }
+
+  .carousel-control {
+    margin-top: 200px;
+  }
+
+  li {
+    border: solid 1px #bbb;
+  }
+}
+
+#seat-photo-show {
+  h2 {
+    text-align: center;
+  }
+
+  background: rgba(221, 221, 221, 0.4);
+  padding: 35px 30px 40px 30px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+    // position: absolute;
+
+    #seat-info {
+      float: left;
+    }
+
+    #uploaded-photo {
+      // position: absolute;
+      float: right;
+
+      img {
+      // max-height: 200px;
+      max-width: 500px;
+      display: block;
+      // margin: auto;
+      // margin-top: 20px;
+      border: solid 6px #31363a;
+      border-radius: 3px;
+    }
+  }
+}
+
+#update-sp {
+  h2 {
+    text-align: center;
+  }
+}

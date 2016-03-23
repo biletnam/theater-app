@@ -10,74 +10,84 @@
   </div>
 <% end %>
 
-<h2><%= @event.name %> at <%= @event.venue.name %></h2>
-<br>
-<a href="/venues/<%= @event.venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
+<div id="event-show">
+  <div id="event-info">
+    <h2><%= @event.name %> at <%= @event.venue.name %></h2>
+    <br>
 
-<% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
-  <a data-confirm="Are you sure you want to edit this event?" href="/venues/<%= @event.venue_id %>/events/<%= @event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Event</a>
-  <a data-confirm="Are you sure you want to delete this event?" data-method="delete" href="/venues/<%= @event.venue_id %>/events/<%= @event.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Event</a>
-<% end %>
-<br><br>
-<h4>Event Type: </h4> <%= @event.event_type %>
-<% if @event.featured_performers != "" %>
-  <h4>Featured Performers: </h4> <%= @event.featured_performers %>
-<% end %>
-<h4>Description: </h4><%= @event.description %>
+    <div id="event-buttons">
+      <a href="/venues/<%= @event.venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
 
-<h3>Scheduled Events</h3>
-
-<% if @scheduled_events[0] %>
-  <table class="table table-striped">
-    <tr>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Get Tickets!</th>
-    <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
-      <th></th>
-      <th></th>
+      <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
+        <a data-confirm="Are you sure you want to edit this event?" href="/venues/<%= @event.venue_id %>/events/<%= @event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Event</a>
+        <a data-confirm="Are you sure you want to delete this event?" data-method="delete" href="/venues/<%= @event.venue_id %>/events/<%= @event.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Event</a>
+      <% end %>
+    </div>
+    <br>
+    <h4>Event Type: </h4> <%= @event.event_type %>
+    <% if @event.featured_performers != "" %>
+      <h4>Featured Performers: </h4> <%= @event.featured_performers %>
     <% end %>
-    </tr>
-<% else %>
-  <p>No events currently scheduled</p>
-<% end %>
+    <h4>Description: </h4><%= @event.description %>
+  </div>
+  <br>
+  <div id="sched-event-info">
+    <h3>Scheduled Events</h3>
 
-  <% @scheduled_events.each do |scheduled_event| %>
-    <% if scheduled_event.date_time >= Time.now %>
-      <tr>
-        <td><%= scheduled_event.friendly_date %></td>
-        <td><%= scheduled_event.friendly_time %></td>
-        <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link if scheduled_event.buy_ticket_link != "" %></td>
+    <% if @scheduled_events[0] %>
+      <table class="table table-striped">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Get Tickets!</th>
         <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
-          <td><a data-confirm="Are you sure you want to edit this scheduled event?" href="/venues/<%= scheduled_event.venue_id %>/events/<%= scheduled_event.event_id %>/scheduled_events/<%= scheduled_event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit</a></td>
-          <td><a data-confirm="Are you sure you want to delete this scheduled event?" data-method="delete" href="/venues/<%= scheduled_event.venue_id %>/events/<%= scheduled_event.event_id %>/scheduled_events/<%= scheduled_event.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete</a></td>
+          <th></th>
+          <th></th>
         <% end %>
-      </tr>
+        </tr>
+    <% else %>
+      <p>No events currently scheduled</p>
     <% end %>
-  <% end %>
-</table>
 
-<% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
-
-  <h3>Please Add Individual Scheduled Event Details</h3>
-
-  <%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events", method: :post do %>
-
-  <div>
-    <%= label_tag "Date/Time of Event:" %>
-    <%= datetime_select :scheduled_event, :date_time, ampm: true %>
+      <% @scheduled_events.each do |scheduled_event| %>
+        <% if scheduled_event.date_time >= Time.now %>
+          <tr>
+            <td><%= scheduled_event.friendly_date %></td>
+            <td><%= scheduled_event.friendly_time %></td>
+            <td><%= link_to "Buy Tickets", scheduled_event.buy_ticket_link if scheduled_event.buy_ticket_link != "" %></td>
+            <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
+              <td><a data-confirm="Are you sure you want to edit this scheduled event?" href="/venues/<%= scheduled_event.venue_id %>/events/<%= scheduled_event.event_id %>/scheduled_events/<%= scheduled_event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit</a></td>
+              <td><a data-confirm="Are you sure you want to delete this scheduled event?" data-method="delete" href="/venues/<%= scheduled_event.venue_id %>/events/<%= scheduled_event.event_id %>/scheduled_events/<%= scheduled_event.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete</a></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
   </div>
+  <br>
+  <div id="new-sched-event">
+    <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
 
-  <div>
-    <%= label_tag "Buy Tickets Link:" %>
-    <%= text_field_tag :buy_ticket_link, @scheduled_event.buy_ticket_link %>
+      <h3>Please Add Individual Scheduled Event Details</h3>
+
+      <%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events", method: :post do %>
+
+      <div>
+        <%= label_tag "Date/Time of Event:" %>
+        <%= datetime_select :scheduled_event, :date_time, ampm: true %>
+      </div>
+
+      <div>
+        <%= label_tag "Buy Tickets Link:" %>
+        <%= text_field_tag :buy_ticket_link, @scheduled_event.buy_ticket_link %>
+      </div>
+
+      <div id="submit-new"><%= submit_tag "Submit Scheduled Event", :class => "back-button btn btn-default" %></div>
+
+      <% end %>
+    <% end %>
   </div>
-
-  <div id="submit-new"><%= submit_tag "Submit Scheduled Event" %></div>
-
-  <% end %>
-<% end %>
-
+</div>
 
 
 
