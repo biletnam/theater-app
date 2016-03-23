@@ -1,95 +1,123 @@
-<h1><%= @sg_db_venue.name %></h1>
-<br>
-<div id="venue-default-photo">
-  <% if @sg_db_venue.image != "" %>
-    <%= image_tag @sg_db_venue.image, :style => 'max-height: 300px;' %>
-  <% else %>
-    <%= image_tag('image-unavailable.png') %>
-  <% end %>
-</div>
-
-<div id="venue-info">
-  <h5 id="address">Address: <%= @sg_db_venue.full_address %></h5>
-  <% if @sg_db_venue.phone %>
-    <h5 id="phone">Phone Number: <%= @sg_db_venue.phone %></h5>
-  <% end %>
-  <% if @sg_db_venue.website != "" %>
-    <h5 id="website"><%= link_to "Venue Website", @sg_db_venue.website %></h5>
-  <% end %>
-</div>
-
-<a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_seats" role="button" class="back-button btn btn-default">Seating Chart</a>
-<a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_reviews/new" role="button" class="back-button btn btn-default">Add Review</a>
-
-<% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
-  <a data-confirm="Are you sure you want to edit this venue?" href="/sg_db_venues/<%= @sg_db_venue.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Venue</a>
-  <a data-confirm="Are you sure you want to delete this venue?" data-method="delete" href="/sg_db_venues/<%= @sg_db_venue.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Venue</a>
-<% end %>
-<br><br>
-<h3>Upcoming Events</h3>
-<% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
-  <%= link_to "Add New Event", "/sg_db_venues/#{@sg_db_venue.id}/sg_events/new", :class =>"btn btn-default back-button" %>
-<% end %>
-<br><br>
-<table class="table table-striped">
-  <tr>
-    <th>Show</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Get Tickets!</th>
-  </tr>
-<% @sg_events.each do |sg_event| %>
-  <tr>
-    <td><%= sg_event["title"] %></td> 
-    <td><%= sg_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %></td>
-    <td><%= sg_event["datetime_local"].to_datetime.strftime("%I:%M %p") %></td>
-    <td><%= link_to "Buy Tickets", sg_event["url"] %></td>
-  </tr>
-<% end %>
-</table>
-<br>
-<h3>Venue Reviews</h3>
-
-<% if @sg_reviews == [] %>
-  <p>No reviews for this venue at this time</p>
-<% else %>
-  <% @sg_reviews.each do |sg_review| %>
-    <div> 
-      <div class="gp-review">
-      " <%= sg_review.content %> "
-      </div>
-      <% if current_user && current_user.admin || current_user && current_user.id == sg_review.user_id %>
-        <%= link_to "Edit Review", "/sg_db_venues/#{@sg_db_venue.id}/sg_reviews/#{sg_review.id}/edit", :class =>"btn btn-default back-button" %>
-        <a data-confirm="Are you sure you want to delete this review?" data-method="delete" href="/sg_db_venues/<%= sg_review.sg_db_venue_id %>/sg_reviews/<%= sg_review.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Review</a>
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
-<br>
-<h3>Restaurants Nearby</h3>
-<br>
-<div id="map" style="width: 500px; height: 400px">
-</div>
-
-<div id="restaurant-results">
-<br>
-<% @gp_restaurants.each do |gp_restaurant| %>
-  <div>
-    <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 
-    <%= gp_restaurant.vicinity %><br>
-   Price Level:
-    <% if gp_restaurant.price_level && gp_restaurant.rating %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: <%= gp_restaurant.rating %>
-    <% elsif gp_restaurant.price_level %>
-      <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: unavailable
-    <% else %>
-      unavailable || Rating: <%= gp_restaurant.rating %>
+<% if @sg_db_venue.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_db_venue.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_db_venue.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
-    <br>
-    Distance from venue: <%= Geocoder::Calculations.distance_between([@sg_db_venue.latitude,@sg_db_venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles
+    </ul>
   </div>
 <% end %>
+
+<div id="reg-venues-show">
+  <div id="venue info">
+    <h1><%= @sg_db_venue.name %></h1>
+    <br><br>
+    <div id="venue-default-photo">
+      <% if @sg_db_venue.image != "" %>
+        <%= image_tag @sg_db_venue.image, :style => 'max-height: 300px;' %>
+      <% else %>
+        <%= image_tag('image-unavailable.png') %>
+      <% end %>
+  </div>
+  <br>
+
+    <h5 id="address">Address: <%= @sg_db_venue.full_address %></h5>
+    <% if @sg_db_venue.phone %>
+      <h5 id="phone">Phone Number: <%= @sg_db_venue.phone %></h5>
+    <% end %>
+    <% if @sg_db_venue.website != "" %>
+      <h5 id="website"><%= link_to "Venue Website", @sg_db_venue.website %></h5>
+    <% end %>
+
+    <div id="ven-show-buttons">
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_seats" role="button" class="back-button btn btn-default">Seating Chart</a>
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_reviews/new" role="button" class="back-button btn btn-default">Add Review</a>
+
+    <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
+      <a data-confirm="Are you sure you want to edit this venue?" href="/sg_db_venues/<%= @sg_db_venue.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Venue</a>
+      <a data-confirm="Are you sure you want to delete this venue?" data-method="delete" href="/sg_db_venues/<%= @sg_db_venue.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Venue</a>
+    <% end %>
+    </div>
+  </div>
+  <br>
+  <div id="up-events">
+    <h3>Upcoming Events</h3>
+    <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
+      <%= link_to "Add New Event", "/sg_db_venues/#{@sg_db_venue.id}/sg_events/new", :class =>"btn btn-default back-button" %>
+    <% end %>
+    <br><br>
+    <table class="table table-striped">
+      <tr>
+        <th>Show</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Get Tickets!</th>
+      </tr>
+    <% @sg_events.each do |sg_event| %>
+      <tr>
+        <td><%= sg_event["title"] %></td> 
+        <td><%= sg_event["datetime_local"].to_datetime.strftime("%b %e, %Y") %></td>
+        <td><%= sg_event["datetime_local"].to_datetime.strftime("%I:%M %p") %></td>
+        <td><%= link_to "Buy Tickets", sg_event["url"] %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <br>
+
+  <div id="reg-venue-reviews">
+    <h3>Venue Reviews</h3>
+
+    <% if @sg_reviews == [] %>
+      <p>No reviews for this venue at this time</p>
+    <% else %>
+      <% @sg_reviews.each do |sg_review| %>
+        <div> 
+          <div class="gp-review">
+          " <%= sg_review.content %> "
+          </div>
+          <% if current_user && current_user.admin || current_user && current_user.id == sg_review.user_id %>
+            <%= link_to "Edit Review", "/sg_db_venues/#{@sg_db_venue.id}/sg_reviews/#{sg_review.id}/edit", :class =>"btn btn-default back-button" %>
+            <a data-confirm="Are you sure you want to delete this review?" data-method="delete" href="/sg_db_venues/<%= sg_review.sg_db_venue_id %>/sg_reviews/<%= sg_review.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Review</a>
+          <% end %>
+        </div>
+      <% end %>
+      <% end %>
+    </div>
+  <br>
+
+  <div id="reg-venue-restaurants" class="row" >
+    <h3>Restaurants Nearby</h3>
+    <br><br>
+    <div id="map-div" class="col-md-6 row">
+      <div id="map" style="width: 500px; height: 400px">
+      </div>
+    </div>
+
+    <div id="restaurant-results">
+    <br>
+    <% @gp_restaurants.each do |gp_restaurant| %>
+      <div>
+        <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 
+        <%= gp_restaurant.vicinity %><br>
+       Price Level:
+        <% if gp_restaurant.price_level && gp_restaurant.rating %>
+          <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: <%= gp_restaurant.rating %>
+        <% elsif gp_restaurant.price_level %>
+          <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: unavailable
+        <% else %>
+          unavailable || Rating: <%= gp_restaurant.rating %>
+        <% end %>
+        <br>
+        Distance from venue: <%= Geocoder::Calculations.distance_between([@sg_db_venue.latitude,@sg_db_venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles
+      </div>
+    <% end %>
+    </div>
+  </div>
 </div>
+
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&key=<%= ENV['google_maps_js_key'] %>"></script><script type="text/javascript">
     var venueLat = <%= @sg_db_venue.latitude %>;
