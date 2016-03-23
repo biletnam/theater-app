@@ -8,17 +8,16 @@
 <h1>Seating Chart</h1>
 <br>
 <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
+<% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
+      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
+  <% end %>
 <br><br>
 
 <% if @venue.seating_chart %>
   <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
 
   <h3>Seating Information</h3>
-  <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-    <div>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
-    </div>
-  <% end %>
   
   <% if @seats[0] %>
     <br>
@@ -60,11 +59,6 @@
 <% else %>
   <h3>Seating Chart Not Currently Available for This Venue</h3>
   <br>
-  <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-    <div>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
-    </div>
-  <% end %>
   <% if @seats[0] %>
     <h3>Available seat information listed below</h3>
     <br>
@@ -109,9 +103,6 @@
   <br>
    <% if @sections[0] %>
     <h3>Current Venue Sections</h3>
-    <div>
-      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
-    </div>
     <br>
     <div id="section-pages">
       <form class="form-inline">
@@ -145,9 +136,6 @@
     </div>
   <% else %>
     <h3>Current Venue Sections</h3>
-    <div>
-      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
-     </div>
     <br>
     <p>No sections have been added</p>
   <% end %>

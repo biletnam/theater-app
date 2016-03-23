@@ -480,7 +480,7 @@ a:hover {
 }
 
 .three {
-  background: url("richard_rodgers.png") no-repeat center center;
+  background: url("richard_rodgers_2.png") no-repeat center center;
   background-size: cover;
 }
 
@@ -1411,7 +1411,7 @@ p.lead {
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 20px;
   margin-bottom: 5px;
   border-radius: 6px;
 }
@@ -1428,6 +1428,10 @@ p.lead {
       margin-right: 0px;
       margin-left: 0px;
     }
+
+#map {
+  border: solid 6px #31363a;
+}
 
 
 // .car-button {
