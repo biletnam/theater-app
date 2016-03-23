@@ -1,23 +1,22 @@
 /*
- // * This is a manifest file that'll be compiled into application.css, which will include all the files
- // * listed below.
- // *
- // * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- // * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- // *
- // * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- // * compiled file so the styles you add here take precedence over styles defined in any styles
- // * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- // * file per style scope.
- // *
+// * This is a manifest file that'll be compiled into application.css, which will include all the files
+// * listed below.
+// *
+// * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+// * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+// *
+// * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+// * compiled file so the styles you add here take precedence over styles defined in any styles
+// * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+// * file per style scope.
+// *
 
 
- *= require animate
- *= require bootstrap.min
- *= require custom-styles
- *= require flexslider
- *= require font-awesome.min
-
+*= require animate
+*= require bootstrap.min
+*= require custom-styles
+*= require flexslider
+*= require font-awesome
 
 
  // *= require_tree .
@@ -415,6 +414,9 @@ a:hover {
 
 }
 
+.fa-angle-left, .fa-angle-right {
+  margin-top: 175px;
+}
 
 
 /* ==========================================================================
@@ -467,18 +469,18 @@ a:hover {
 }
 
 .one {
-  background: url("photo_1.jpg") no-repeat center center;
+  background: url("photo_bway.png") no-repeat center center;
   background-size: cover;
 
 }
 
 .two {
-  background: url("photo_bway.jpg") no-repeat center center;
+  background: url("photo_1.png") no-repeat center center;
   background-size: cover;
 }
 
 .three {
-  background: url("photo_3.jpg") no-repeat center center;
+  background: url("richard_rodgers.png") no-repeat center center;
   background-size: cover;
 }
 
@@ -495,11 +497,6 @@ a:hover {
   // margin-top: 10px;
 }
 
-.carousel-inner {
-  img {
-    opacity: 0.5;
-  }
-}
 
 /* ==========================================================================
    Content Styles
@@ -1410,6 +1407,7 @@ p.lead {
 
 .gp-review {
   background-color: #ddd;
+  width: 600px;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 10px;
@@ -1427,6 +1425,7 @@ p.lead {
 .h1-car {
   color: white;
 }
+
 
 // .car-button {
 //   height: 60px;
