@@ -31,6 +31,10 @@
   <div><%= hidden_field_tag :sg_venue_id, @sg_db_venue.id %></div>
   <div><%= hidden_field_tag :sg_db_venue_id, @sg_db_venue.id %></div>
 
-  <div><%= button_tag "Submit", :class => "back-button btn btn-default" %></div>
+  <div>
+    <%= button_tag "Submit", :class => "back-button btn btn-default" %>
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_seats" role="button" class="back-button btn btn-default">Back to Seating Chart</a>
+  </div>s
 
 <% end %> 

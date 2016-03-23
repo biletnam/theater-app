@@ -7,9 +7,9 @@ class SgSeatsController < ApplicationController
     @sg_seats = SgSeat.where(sg_db_venue_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
     @sg_db_venue = SgDbVenue.find(params[:id])
 
-    @sections = @sg_db_venue.sg_sections
+    @sg_sections = @sg_db_venue.sg_sections
     # gon.sections = @sections.as_json(:include => [:rows])
-    @rows = SgRow.where(sg_db_venue_id: @sg_db_venue.id)
+    @sg_rows = SgRow.where(sg_db_venue_id: @sg_db_venue.id)
 
     @seat_data = @sections.to_json({:include => {:sg_rows => {:include => {:sg_seats => {:methods => :sg_seat_photos}}}}})
     

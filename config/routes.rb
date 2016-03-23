@@ -149,7 +149,7 @@ Rails.application.routes.draw do
   get '/sg_sections/:id/sg_rows' => 'sg_rows#index'
   get '/sg_sections/:id/sg_rows/new' => 'sg_rows#new'
   post '/sg_sections/:id/sg_rows/' => 'sg_rows#create'
-  get '/sg_sections/:id/sg_rows/:id' => 'sg_rows#show'
+  # get '/sg_sections/:id/sg_rows/:id' => 'sg_rows#show'
   get '/sg_sections/:id/sg_rows/:id/edit' => 'sg_rows#edit'
   patch '/sg_sections/:id/sg_rows/:id' => 'sg_rows#update'
   delete '/sg_sections/:id/sg_rows/:id' => 'sg_rows#destroy'

@@ -69,6 +69,6 @@ class RowsController < ApplicationController
       flash[:warning] = "Unable to delete section."
       redirect_to "/venues/#{@venue.id}/seats"
     end
-
   end
+  
 end

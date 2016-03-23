@@ -37,6 +37,7 @@
           <th width="100px">Add Your Own!</th>
         <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
           <th width="100px"></th>
+          <th width="100px"></th>
         <% end %>
         </tr>
         <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
@@ -47,6 +48,7 @@
           <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
         <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
           <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}">Delete Seat</a></td>
         <% end %>
         </tr>
       </table>
@@ -78,6 +80,7 @@
           <th width="100px">Add Your Own!</th>
         <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
           <th width="100px"></th>
+          <th width="100px"></th>
         <% end %>
         </tr>
         <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
@@ -88,6 +91,7 @@
           <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
         <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
           <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Delete Seat</a></td>
         <% end %>
         </tr>
       </table>
@@ -126,7 +130,7 @@
           <td>{{ section.number_rows }}</td>
           <td><a href="/sections/{{ section.id }}/rows/new">Add Row</a></td>
           <td><a href="/venues/{{ section.venue_id }}/sections/{{ section.id }}/edit">Edit Section</a></td>
-          <td><a data-confirm="Are you sure you want to delete this section?" data-method: "delete" href="/venues/{{ section.venue_id }}/sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
+          <td><a data-confirm="Are you sure you want to delete this section?" data-method="delete" href="/venues/{{ section.venue_id }}/sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
         </tr>
       </table>
       <dir-pagination-controls pagination-id="sections">
@@ -165,7 +169,7 @@
            <td>{{ row.name }}</td>
            <td>{{ row.number_seats }}</td>
            <td><a href="/sections/{{ row.section_id }}/rows/{{ row.id }}/edit">Edit Row</a></td>
-           <td><a data-confirm="Are you sure you want to delete this row?" data-method: "delete" href="/sections/{{ row.section_id }}/rows/{{ row.id }}" rel="nofollow">Delete Row</td>
+           <td><a data-confirm="Are you sure you want to delete this row?" data-method="delete" href="/sections/{{ row.section_id }}/rows/{{ row.id }}" rel="nofollow">Delete Row</td>
          </tr>
        </table>
        <dir-pagination-controls pagination-id="rows">

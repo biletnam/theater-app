@@ -46,7 +46,7 @@
           <td><a href="/sg_seats/{{ seat.id }}/sg_seat_photos">View Photos</a></td>
           <td><a href="/sg_seats/{{ seat.id }}/sg_seat_photos/new">Add Photo</a></td>
         <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
-          <td width="100px"><a href="/sg_db_venues/{{ seat.sg_db_venue_id }}/sg_seats/{{ seat.id }}/edit">Edit Seat</a></td>
+          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/{{ seat.sg_db_venue_id }}/sg_seats/{{ seat.id }}/edit">Edit Seat</a></td>
         <% end %>
         </tr>
       </table>
@@ -78,6 +78,7 @@
           <th width="100px">Add Your Own!</th>
         <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
           <th width="100px"></th>
+          <th width="100px"></th>
         <% end %>
         </tr>
         <tr dir-paginate="seat in sgSeatInfo.sg_seats | orderBy:sortKey:reverse | filter:sgSearch | itemsPerPage: 10" pagination-id="sg-seats">
@@ -88,6 +89,7 @@
           <td><a href="/sg_seats/{{ seat.id }}/sg_seat_photos/new">Add Photo</a></td>
         <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
           <td width="100px"><a href="/sg_db_venues/{{ seat.sg_db_venue_id }}/sg_seats/{{ seat.id }}/edit">Edit Seat</a></td>
+          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/sg_db_venues/{{ seat.sg_db_venue_id }}/sg_seats/{{ seat.id }}">Delete Seat</a></td>
         <% end %>
         </tr>
       </table>
@@ -102,7 +104,7 @@
 
 <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
   <br>
-   <% if @sg_sections %>
+   <% if @sg_sections[0] %>
     <h3>Current Venue Sections</h3>
     <br>
     <div id="sg-section-pages">
@@ -121,13 +123,13 @@
           <th width="100px"></th>
           <th width="100px"></th>
         </tr>
-        <tr dir-paginate="section in sgSeatInfo.sections | orderBy:sortKey:reverse | filter:searchSgSection | itemsPerPage: 10" pagination-id="sg-sections">
+        <tr dir-paginate="section in sgSeatInfo.sg_sections | orderBy:sortKey:reverse | filter:searchSgSection | itemsPerPage: 10" pagination-id="sg-sections">
           <td>{{ section.id }}</td>
           <td>{{ section.name }}</td>
           <td>{{ section.number_rows }}</td>
           <td><a href="/sg_sections/{{ section.id }}/sg_rows/new">Add Row</td>
           <td><a href="/sg_db_venues/{{ section.sg_db_venue_id }}/sg_sections/{{ section.id }}/edit">Edit Section</a></td>
-          <td><a data-confirm="Are you sure you want to delete this section?" data-method: "delete" href="/sg_db_venues/{{ section.sg_db_venue_id }}/sg_sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
+          <td><a data-confirm="Are you sure you want to delete this section?" data-method="delete" href="/sg_db_venues/{{ section.sg_db_venue_id }}/sg_sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
         </tr>
       </table>
       <dir-pagination-controls pagination-id="sg-sections">
@@ -141,7 +143,7 @@
     <p>No sections have been added</p>
   <% end %>
   <br>
-  <% if @sg_rows %>
+  <% if @sg_rows[0] %>
     <h3>Current Venue Rows</h3>
      <br>
      <div id="sg-row-pages">
@@ -160,13 +162,13 @@
            <th width="100px"></th>
            <th width="100px"></th>
          </tr>
-         <tr dir-paginate="row in sgSeatInfo.rows | orderBy:sortKey:reverse | filter:searchSgRow | itemsPerPage: 10" pagination-id="sg-rows">
+         <tr dir-paginate="row in sgSeatInfo.sg_rows | orderBy:sortKey:reverse | filter:searchSgRow | itemsPerPage: 10" pagination-id="sg-rows">
            <td>{{ row.id }}</td>
            <td>{{ row.sg_section_id }}</td>
            <td>{{ row.name }}</td>
            <td>{{ row.number_seats }}</td>
            <td><a href="/sg_sections/{{ row.sg_section_id }}/sg_rows/{{ row.id }}/edit">Edit Row</a></td>
-           <td><a data-confirm="Are you sure you want to delete this row?" data-method: "delete" href="/sg_sections/{{ row.sg_section_id }}/sg_rows/{{ row.id }}" rel="nofollow">Delete Row</td>
+           <td><a data-confirm="Are you sure you want to delete this row?" data-method="delete" href="/sg_sections/{{ row.sg_section_id }}/sg_rows/{{ row.id }}" rel="nofollow">Delete Row</td>
          </tr>
        </table>
        <dir-pagination-controls pagination-id="sg-rows">

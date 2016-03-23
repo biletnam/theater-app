@@ -1,0 +1,31 @@
+<% if @sg_row && @sg_row.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_row.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_row.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Edit Row Information for <%= @sg_db_venue.name %></h2>
+
+<%= form_tag "/sg_sections/#{@sg_section.id}/sg_rows/edit", method: :patch do %>
+
+  <div><%= label_tag "Row Name" %></div>
+  <div><%= text_field_tag :name, @sg_row.name %></div>
+  <div><%= label_tag "Number of Seats" %></div>
+  <div><%= text_field_tag :number_seats, @sg_row.number_seats %></div>
+  <div><%= label_tag "Section X Offset Value" %></div>
+  <div><%= text_field_tag :x_offset, @sg_row.x_offset %></div>
+  <div><%= label_tag "Section Y Offset Value" %></div>
+  <div><%= text_field_tag :y_offset, @sg_row.y_offset %></div>
+  <div><%= label_tag "Venue Id:" %></div>
+  <div><%= text_field_tag :sg_db_venue_id, @sg_db_venue.id %></div>
+  <div><%= label_tag "Section Id:" %></div>
+  <div><%= text_field_tag :sg_section_id, @sg_section.id %></div>
+  <div><%= submit_tag "Update", :class => "back-button btn btn-default" %></div>
+
+<% end %> 

@@ -1,0 +1,29 @@
+<% if @sg_section && @sg_section.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sg_section.errors.count, "error") %></h2>
+ 
+    <ul>
+    <% @sg_section.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Edit Section Information for <%= @sg_db_venue.name %></h2>
+
+<%= form_tag "/sg_db_venues/#{@sg_db_venue.id}/sg_sections/edit", method: :patch do %>
+
+  <div><%= label_tag "Section Name" %></div>
+  <div><%= text_field_tag :name, @sg_section.name %></div>
+  <div><%= label_tag "Number of Rows" %></div>
+  <div><%= text_field_tag :number_rows, @sg_section.number_rows %></div>
+  <div><%= label_tag "Section X Offset Value" %></div>
+  <div><%= text_field_tag :x_offset, @sg_section.x_offset %></div>
+  <div><%= label_tag "Section Y Offset Value" %></div>
+  <div><%= text_field_tag :y_offset, @sg_section.y_offset %></div>
+  <div><%= label_tag "Venue Id:" %></div>
+  <div><%= text_field_tag :sg_db_venue_id, @sg_db_venue.id %></div>
+  <div><%= submit_tag "Update", :class => "back-button btn btn-default" %></div>
+
+<% end %> 
