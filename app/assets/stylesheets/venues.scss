@@ -217,5 +217,31 @@
     border-top-left-radius: 10px;
   }
 
+  #reg-venue-reviews {
+    h3 {
+      text-align: center;
+    }
+
+    .gp-review {
+      background: rgba(0, 191, 255, 0.4);
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 20px 20px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  #reg-venue-restaurants {
+    h3 {
+      text-align: center;
+    }
+
+    background: rgba(221, 221, 221, 0.4);
+    padding: 25px 30px 20px 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+  }
 }
 
