@@ -32,8 +32,8 @@
 
   <div>
     <%= submit_tag "Submit", :class => "back-button btn btn-default" %>
-    <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
-    <a href="/venues/<%= @venue.id %>/seats" role="button" class="back-button btn btn-default">Back to Seating Chart</a>
+    <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
+    <a href="/venues/<%= @venue.id %>/seats" role="button" class="back-button btn btn-default">Seating Chart <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
   </div>
 
 <% end %> 

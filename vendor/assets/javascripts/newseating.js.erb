@@ -10,7 +10,7 @@ $(function() {
     var seatFillColor = "#626c72";
     var radius = 5;
 
-    var unavailableImage = "<%= asset_path('image-unavailable.png') %>";
+    var unavailableImage = "<%= asset_path('no_photos_200.png') %>";
     // console.log(sections[0].rows.count);
 
     var canvas = document.getElementById("seating");
@@ -46,7 +46,7 @@ $(function() {
           }
 
           if(unavailableImage){
-            noImg.src = "<%= asset_path('image-unavailable.png') %>";
+            noImg.src = "<%= asset_path('no_photos_200.png') %>";
           }
           
           chair.graphics.beginFill(seatColor).drawCircle(xCircle,yCircle,radius);

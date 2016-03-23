@@ -17,7 +17,7 @@
       <% if @venue.image != "" %>
         <%= image_tag @venue.image, :style => 'max-height: 300px;' %>
       <% else %>
-        <%= image_tag('image-unavailable.png') %>
+        <%= image_tag('no_photos_200.png') %>
       <% end %>
     </div>
     <br>
@@ -111,21 +111,25 @@
 
     <div class="col-md-6 row" id="restaurant-results">
     <br>
-    <% @gp_restaurants.each do |gp_restaurant| %>
-      <div>
-        <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 
-        <%= gp_restaurant.vicinity %><br>
-       Price Level:
-        <% if gp_restaurant.price_level && gp_restaurant.rating %>
-          <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: <%= gp_restaurant.rating %>
-        <% elsif gp_restaurant.price_level %>
-          <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: unavailable
-        <% else %>
-          unavailable || Rating: <%= gp_restaurant.rating %>
-        <% end %>
-        <br>
-        Distance from venue: <%= Geocoder::Calculations.distance_between([@venue.latitude,@venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles
-      </div>
+    <% if @gp_restaurants && @gp_restaurants != [] %>
+      <% @gp_restaurants.each do |gp_restaurant| %>
+        <div>
+          <h4><%= link_to gp_restaurant.name, "/restaurant_details/#{gp_restaurant.place_id}" %></h4> 
+          <%= gp_restaurant.vicinity %><br>
+         Price Level:
+          <% if gp_restaurant.price_level && gp_restaurant.rating %>
+            <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: <%= gp_restaurant.rating %>
+          <% elsif gp_restaurant.price_level %>
+            <%= @price_level * gp_restaurant.price_level.to_i %> || Rating: unavailable
+          <% else %>
+            unavailable || Rating: <%= gp_restaurant.rating %>
+          <% end %>
+          <br>
+          Distance from venue: <%= Geocoder::Calculations.distance_between([@venue.latitude,@venue.longitude], [gp_restaurant.lat,gp_restaurant.lng]).round(3) %> miles
+        </div>
+      <% end %>
+    <% else %>
+        <p>Restaurant information currently not available</p>
     <% end %>
     </div>
   </div>

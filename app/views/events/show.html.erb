@@ -16,7 +16,7 @@
     <br>
 
     <div id="event-buttons">
-      <a href="/venues/<%= @event.venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
+      <a href="/venues/<%= @event.venue.id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
 
       <% if current_user && current_user.admin || current_user && current_user.id == @event.venue.user_id %>
         <a data-confirm="Are you sure you want to edit this event?" href="/venues/<%= @event.venue_id %>/events/<%= @event.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Event</a>

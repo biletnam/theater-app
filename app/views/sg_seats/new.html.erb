@@ -33,8 +33,8 @@
 
   <div>
     <%= button_tag "Submit", :class => "back-button btn btn-default" %>
-    <a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default">Back to Venue</a>
-    <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_seats" role="button" class="back-button btn btn-default">Back to Seating Chart</a>
-  </div>s
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+    <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_seats" role="button" class="back-button btn btn-default">Seating Chart <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+  </div>
 
 <% end %> 

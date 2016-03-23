@@ -40,7 +40,7 @@
       <% if @sg_seat_photos[0] %>
         <img src="<%= @sg_seat_photos[0].image.medium.url %>">
       <% else %>
-        <%= image_tag('image-unavailable.png') %>
+        <%= image_tag('no_photos_500.png') %>
       <% end %>
       <% if @sg_seat_photos && @sg_seat_photos[0] && @sg_seat_photos[0].caption %>
         <div class="carousel-caption"><%= @sg_seat_photos[0].caption %></div>
