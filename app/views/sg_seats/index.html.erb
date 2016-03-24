@@ -7,7 +7,7 @@
 <h3><%= @sg_db_venue.name %></h3>
 <h1>Seating Chart</h1>
 <br>
-<a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
+<a href="/sg_db_venues/<%= @sg_db_venue.id %>" role="button" class="back-button btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Venue</a>
 <% if current_user && current_user.admin || current_user && current_user.id == @sg_db_venue.user_id %>
       <a href="/sg_db_venues/<%= @sg_db_venue.id %>/sg_sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
       <%= link_to "Add Seat", "/sg_db_venues/#{@sg_db_venue.id}/sg_seats/new", :class =>"back-button btn btn-default" %>

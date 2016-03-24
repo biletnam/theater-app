@@ -1,7 +1,7 @@
 <div id="venue-zip-search-result">
 <h2>Venues near "<%= @zip_for_sg %>"</h2>
 <br>
-<a href="/venue_name_search" role="button" class="back-button btn btn-default">Search <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
+<a href="/venue_name_search" role="button" class="back-button btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Search</a>
 <br>
   <% if @zip_for_sg == "" %>
     <p><%= @no_result_message %></p>
