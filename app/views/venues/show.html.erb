@@ -41,7 +41,6 @@
     <% end %>
   </div>
   </div>
-
   <br>
   <div id="up-events">
     <h3>Upcoming Events</h3>
@@ -80,7 +79,6 @@
   </table>
   </div>
   <br>
-
   <div id="reg-venue-reviews">
     <h3>Venue Reviews</h3>
     <% if @reviews[0] %>
@@ -100,7 +98,6 @@
     <% end %>
   </div>
   <br>
-
   <div id="reg-venue-restaurants" class="row" >
     <h3>Restaurants Nearby</h3>
     <br><br>
@@ -135,57 +132,56 @@
   </div>
 </div>
 
-
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&key=<%= ENV['google_maps_js_key'] %>"></script>
 <script type="text/javascript">
-    var venueLat = <%= @venue.latitude %>;
-    var venueLon = <%= @venue.longitude %>;
-    var markers = [];
+  var venueLat = <%= @venue.latitude %>;
+  var venueLon = <%= @venue.longitude %>;
+  var markers = [];
 
-    <% @gp_restaurants.each do |gp_restaurant| %>
-      var hash = {
-        "title": '<%= gp_restaurant.name %>',
-        "lat": '<%= gp_restaurant.lat %>',
-        "lng": '<%= gp_restaurant.lng %>',
-        "description": '<%= gp_restaurant.name %> <br><%= gp_restaurant.vicinity %>'
+  <% @gp_restaurants.each do |gp_restaurant| %>
+    var hash = {
+      "title": '<%= gp_restaurant.name %>',
+      "lat": '<%= gp_restaurant.lat %>',
+      "lng": '<%= gp_restaurant.lng %>',
+      "description": '<%= gp_restaurant.name %> <br><%= gp_restaurant.vicinity %>'
+    };
+
+    markers.push(hash);
+  <% end %>
+
+  window.onload = function () {
+      LoadMap();
+  }
+  function LoadMap() {
+      var mapOptions = {
+          center: new google.maps.LatLng(venueLat, venueLon),
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-      markers.push(hash);
-    <% end %>
+      //Create and open InfoWindow.
+      var infoWindow = new google.maps.InfoWindow();
 
-    window.onload = function () {
-        LoadMap();
-    }
-    function LoadMap() {
-        var mapOptions = {
-            center: new google.maps.LatLng(venueLat, venueLon),
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      for (var i = 0; i < markers.length; i++) {
+          var data = markers[i];
+          var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+          var marker = new google.maps.Marker({
+              position: myLatlng,
+              map: map,
+              title: data.title
+          });
 
-        //Create and open InfoWindow.
-        var infoWindow = new google.maps.InfoWindow();
-
-        for (var i = 0; i < markers.length; i++) {
-            var data = markers[i];
-            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: data.title
-            });
-
-            //Attach click event to the marker.
-            (function (marker, data) {
-                google.maps.event.addListener(marker, "click", function (e) {
-                    //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                    infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
-                    infoWindow.open(map, marker);
-                });
-            })(marker, data);
-        }
-    }
+          //Attach click event to the marker.
+          (function (marker, data) {
+              google.maps.event.addListener(marker, "click", function (e) {
+                  //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                  infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
+                  infoWindow.open(map, marker);
+              });
+          })(marker, data);
+      }
+  }
 </script>
 
 

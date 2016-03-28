@@ -1,6 +1,5 @@
 class SgSeatsController < ApplicationController
 
-  # before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -8,7 +7,6 @@ class SgSeatsController < ApplicationController
     @sg_db_venue = SgDbVenue.find(params[:id])
 
     @sg_sections = @sg_db_venue.sg_sections
-    # gon.sections = @sections.as_json(:include => [:rows])
     @sg_rows = SgRow.where(sg_db_venue_id: @sg_db_venue.id)
 
     @seat_data = @sections.to_json({:include => {:sg_rows => {:include => {:sg_seats => {:methods => :sg_seat_photos}}}}})

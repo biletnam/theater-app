@@ -37,9 +37,11 @@
   
   <div><%= label_tag "User Id:" %></div>
   <div><%= text_field_tag :user_id, current_user.id %></div>
-  <div><%= hidden_field_tag :id, @sg_venue.id %></div>
+
   <div><%= label_tag "SeatGeek Venue Id:" %></div>
   <div><%= text_field_tag :sg_venue_id, @sg_venue.sg_venue_id %></div>
+
+  <div><%= hidden_field_tag :id, @sg_venue.id %></div>
 
   <div><%= button_tag "Submit", :class => "back-button btn btn-default" %></div>
 

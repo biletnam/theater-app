@@ -8,25 +8,23 @@
     <br>Row: <%= @seat.seat_row %><br>
     <br>Seat: <%= @seat.seat_number %><br>
     <br>Caption: <em><%= @seat_photo.caption %></em></h3>
-  <br>
-  <div id="sp-buttons">
-    <% if current_user && current_user.admin || current_user && current_user.id == @seat_photo.user_id %> 
-      <div>
-        <a data-confirm="Are you sure you want to edit this photo? Photo file cannot be edited. To change photo, please delete the entry and reupload the image and caption information" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Seat Photo Info </a>
-        <a data-confirm="Are you sure you want to delete this photo file?" data-method="delete" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Seat Photo </a>
-        <a href="/venues/<%= @seat.venue_id %>/seats/" role="button" class="back-button btn btn-default">Seating Chart <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
-        <a href="/venues/<%= @seat.venue_id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
-      </div>
-    <% end %>
-  </div>
-  
+    <br>
+    <div id="sp-buttons">
+      <% if current_user && current_user.admin || current_user && current_user.id == @seat_photo.user_id %> 
+        <div>
+          <a data-confirm="Are you sure you want to edit this photo? Photo file cannot be edited. To change photo, please delete the entry and reupload the image and caption information" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>/edit" rel="nofollow" role="button" class="btn btn-default back-button">Edit Seat Photo Info </a>
+          <a data-confirm="Are you sure you want to delete this photo file?" data-method="delete" href="/seats/<%= @seat.id %>/seat_photos/<%= @seat_photo.id %>" rel="nofollow" role="button" class="btn btn-default back-button">Delete Seat Photo </a>
+          <a href="/venues/<%= @seat.venue_id %>/seats/" role="button" class="back-button btn btn-default">Seating Chart <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></a>
+          <a href="/venues/<%= @seat.venue_id %>" role="button" class="back-button btn btn-default">Venue <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+        </div>
+      <% end %>
+    </div>
   </div>
   <br>
   <div id="uploaded-photo">
     <%= image_tag @seat_photo.image.medium.url %>
   </div>
   <br><br>
-
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>

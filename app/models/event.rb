@@ -5,5 +5,4 @@ class Event < ActiveRecord::Base
 
   validates :name, :event_type, :description, presence: true
 
-
 end

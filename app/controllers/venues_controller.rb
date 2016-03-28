@@ -25,11 +25,6 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
     end
 
     @sorted_seating_venues = @all_seating_venues.sort! { |a,b| a.name.downcase <=> b.name.downcase }
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @venue }
-    end
   end
 
   def full_index
@@ -82,12 +77,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       @events = Event.where(venue_id: @venue.id)
       @scheduled_events = ScheduledEvent.order_by_date_venue(@venue.id)
       @reviews = Review.where(venue_id: params[:id])
-      # @restaurants = Restaurant.where(venue_id: params[:id])
       @twitter = @venue.twitter_handle
-
-      # @client = GooglePlaces::Client.new(ENV["google_places_key"])
-      # @google_restaurants = @client.spots(@venue.latitude, @venue.longitude, :types => 'restaurant', :distance => 2778 )
-      gon.google_restaurants = @google_restaurants
 
       gp_api_restaurants_response = Unirest.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@venue.latitude},#{@venue.longitude}&rankby=distance&type=restaurant&key=#{ENV["google_places_key"]}").body
       @gp_restaurants = []
@@ -141,7 +131,6 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
   def event_search
 
     @zip_for_sg = params[:search]
-    # @page_number = params[:page_number]
 
     sg_zip_theater_events_response = Unirest.get("https://api.seatgeek.com/2/events?taxonomies.name=theater&postal_code=#{@zip_for_sg}&range=10mi&per_page=100&page=1").body
     
@@ -171,10 +160,7 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
       end
     end
 
-    # @sg_db_venues = SgDbVenue.all
-
     render :event_search
-
   end
 
   def venue_name_search_result # name search and events including zipcode searched but not in radius
@@ -269,10 +255,6 @@ before_action :authenticate_vendor!, only: [:new, :create, :edit, :update]
         @photo_url_array << photo_url
       end
     end
-
-    gon.restaurant_lat = @google_restaurant["geometry"]["location"]["lat"]
-    gon.restaurant_lon = @google_restaurant["geometry"]["location"]["lng"]
-    gon.restaurant_place_id = @restaurant_place_id
   end
 
 end

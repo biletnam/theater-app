@@ -1,6 +1,5 @@
 class SeatsController < ApplicationController
 
-  # before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_vendor!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -8,11 +7,9 @@ class SeatsController < ApplicationController
     @venue = Venue.find(params[:id])
 
     @sections = @venue.sections
-    # gon.sections = @sections.as_json(:include => [:rows])
     @rows = Row.where(venue_id: @venue.id)
 
     @seat_data = @sections.to_json({:include => {:rows => {:include => {:seats => {:methods => :seat_photos}}}}})
-    gon.seat_data = @seatdata
     
     if @venue.stage_height && @venue.stage_width && @venue.stage_x_offset && @venue.stage_y_offset
       @stage_height = @venue.stage_height

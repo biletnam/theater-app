@@ -3,14 +3,8 @@ class SgVenue < ActiveRecord::Base
   attr_reader :id
   attr_accessor :name, :street_address, :city_state, :zip_code, :latitude, :longitude, :phone, :website, :image, :sg_venue_id, :user_id 
 
-  # has_many :events
-  # has_many :seats
   has_many :sg_reviews
-  # has_many :restaurants
-
   belongs_to :user
-
-  # validates :name, :street_address, :city_state, :zip_code, :latitude, :longitude, presence: true
   
   def initialize(hash)
     @id = hash["id"]
@@ -22,7 +16,6 @@ class SgVenue < ActiveRecord::Base
     @longitude = hash["location"]["lon"]
     @sg_venue_id = hash["id"]
   end
-
   
   def full_address
     "#{street_address}, #{city_state} #{zip_code}"

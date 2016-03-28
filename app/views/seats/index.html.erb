@@ -1,189 +1,189 @@
 <%= include_gon %>
 
 <div ng-app="app">
-<div id="seat" ng-controller="seatsCtrl" ng-init="setup(<%= @venue.id %>)">
+  <div id="seat" ng-controller="seatsCtrl" ng-init="setup(<%= @venue.id %>)">
 
-<div class="se-pre-con"></div>
-<h3><%= @venue.name %></h3>
-<h1>Seating Chart</h1>
-<br>
-<a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Venue</a>
-<% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-      <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
-      <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
-  <% end %>
-<br><br>
-
-<% if @venue.seating_chart %>
-  <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
-
-  <h3>Seating Information</h3>
-  
-  <% if @seats[0] %>
-    <br>
-    <div id="seating-pages">
-      <form class="form-inline">
-        <div class="form-group">
-            <input type="text" ng-model="search" class="form-control" placeholder="search seats">
-        </div>
-      </form>
-
-      <table class="table table-striped">
-        <tr>
-          <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px">Seat Photos</th>
-          <th width="100px">Add Your Own!</th>
-        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-          <th width="100px"></th>
-          <th width="100px"></th>
-        <% end %>
-        </tr>
-        <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
-          <td>{{ seat.seat_section }}</td>
-          <td>{{ seat.seat_row }}</td>
-          <td>{{ seat.seat_number }}</td>
-          <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
-          <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
-        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-          <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
-          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}">Delete Seat</a></td>
-        <% end %>
-        </tr>
-      </table>
-      <dir-pagination-controls pagination-id="seats">
-        [direction-links="true"]
-        [boundary-links="true"]
-      </dir-pagination-controls>
-    </div>
-  <% end %>
-<% else %>
-  <h3>Seating Chart Not Currently Available for This Venue</h3>
+  <div class="se-pre-con"></div>
+  <h3><%= @venue.name %></h3>
+  <h1>Seating Chart</h1>
   <br>
-  <% if @seats[0] %>
-    <h3>Available seat information listed below</h3>
-    <br>
-    <div id="seating-pages">
-      <form class="form-inline">
-        <div class="form-group">
-            <input type="text" ng-model="search" class="form-control" placeholder="search seats">
-        </div>
-      </form>
+  <a href="/venues/<%= @venue.id %>" role="button" class="back-button btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Venue</a>
+  <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+        <a href="/venues/<%= @venue.id %>/sections/new" rel="nofollow" role="button" class="back-button btn btn-default">Add Section</a>
+        <%= link_to "Add Seat", "/venues/#{@venue.id}/seats/new", :class =>"back-button btn btn-default" %> 
+    <% end %>
+  <br><br>
 
-      <table class="table table-striped">
-        <tr>
-          <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px">Seat Photos</th>
-          <th width="100px">Add Your Own!</th>
-        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-          <th width="100px"></th>
-          <th width="100px"></th>
-        <% end %>
-        </tr>
-        <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
-          <td>{{ seat.seat_section }}</td>
-          <td>{{ seat.seat_row }}</td>
-          <td>{{ seat.seat_number }}</td>
-          <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
-          <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
-        <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-          <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
-          <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Delete Seat</a></td>
-        <% end %>
-        </tr>
-      </table>
-      <dir-pagination-controls pagination-id="seats">
-        [direction-links="true"]
-        [boundary-links="true"]
-      </dir-pagination-controls>
-    </div>
-  <% end %>
-<% end %>
+  <% if @venue.seating_chart %>
+    <canvas id="seating" width="1200" height="700">This browser does not support the canvas element</canvas>
 
-<% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
-  <br>
-   <% if @sections[0] %>
-    <h3>Current Venue Sections</h3>
-    <br>
-    <div id="section-pages">
-      <form class="form-inline">
-        <div class="form-group">
-            <input type="text" ng-model="searchSection" class="form-control" placeholder="search sections">
-        </div>
-      </form>
+    <h3>Seating Information</h3>
+    
+    <% if @seats[0] %>
+      <br>
+      <div id="seating-pages">
+        <form class="form-inline">
+          <div class="form-group">
+              <input type="text" ng-model="search" class="form-control" placeholder="search seats">
+          </div>
+        </form>
 
-      <table class="table table-striped">
-        <tr>
-          <th width="150px" ng-click="sort('id')">Section ID <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px" ng-click="sort('name')">Section Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="120px" ng-click="sort('number_rows')">Number of Rows <span class="glyphicon sort-icon" ng-show="sortKey=='number_rows'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-          <th width="100px"></th>
-          <th width="100px"></th>
-          <th width="100px"></th>
-        </tr>
-        <tr dir-paginate="section in seatInfo.sections | orderBy:sortKey:reverse | filter:searchSection | itemsPerPage: 10" pagination-id="sections">
-          <td>{{ section.id }}</td>
-          <td>{{ section.name }}</td>
-          <td>{{ section.number_rows }}</td>
-          <td><a href="/sections/{{ section.id }}/rows/new">Add Row</a></td>
-          <td><a href="/venues/{{ section.venue_id }}/sections/{{ section.id }}/edit">Edit Section</a></td>
-          <td><a data-confirm="Are you sure you want to delete this section?" data-method="delete" href="/venues/{{ section.venue_id }}/sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
-        </tr>
-      </table>
-      <dir-pagination-controls pagination-id="sections">
-        [direction-links="true"]
-        [boundary-links="true"]
-      </dir-pagination-controls>
-    </div>
+        <table class="table table-striped">
+          <tr>
+            <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px">Seat Photos</th>
+            <th width="100px">Add Your Own!</th>
+          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+            <th width="100px"></th>
+            <th width="100px"></th>
+          <% end %>
+          </tr>
+          <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
+            <td>{{ seat.seat_section }}</td>
+            <td>{{ seat.seat_row }}</td>
+            <td>{{ seat.seat_number }}</td>
+            <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
+            <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
+          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+            <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+            <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}">Delete Seat</a></td>
+          <% end %>
+          </tr>
+        </table>
+        <dir-pagination-controls pagination-id="seats">
+          [direction-links="true"]
+          [boundary-links="true"]
+        </dir-pagination-controls>
+      </div>
+    <% end %>
   <% else %>
-    <h3>Current Venue Sections</h3>
+    <h3>Seating Chart Not Currently Available for This Venue</h3>
     <br>
-    <p>No sections have been added</p>
-  <% end %>
-  <br>
-  <% if @rows[0] %>
-    <h3>Current Venue Rows</h3>
-     <br>
-     <div id="row-pages">
-       <form class="form-inline">
-         <div class="form-group">
-             <input type="text" ng-model="searchRow" class="form-control" placeholder="search rows">
-         </div>
-       </form>
+    <% if @seats[0] %>
+      <h3>Available seat information listed below</h3>
+      <br>
+      <div id="seating-pages">
+        <form class="form-inline">
+          <div class="form-group">
+              <input type="text" ng-model="search" class="form-control" placeholder="search seats">
+          </div>
+        </form>
 
-       <table class="table table-striped">
-         <tr>
-           <th width="150px" ng-click="sort('id')">Row ID <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-           <th width="150px" ng-click="sort('section_id')">Section ID <span class="glyphicon sort-icon" ng-show="sortKey=='section_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-           <th width="100px" ng-click="sort('name')">Row Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-           <th width="120px" ng-click="sort('number_seats')">Number of Seats <span class="glyphicon sort-icon" ng-show="sortKey=='number_seats'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-           <th width="100px"></th>
-           <th width="100px"></th>
-         </tr>
-         <tr dir-paginate="row in seatInfo.rows | orderBy:sortKey:reverse | filter:searchRow | itemsPerPage: 10" pagination-id="rows">
-           <td>{{ row.id }}</td>
-           <td>{{ row.section_id }}</td>
-           <td>{{ row.name }}</td>
-           <td>{{ row.number_seats }}</td>
-           <td><a href="/sections/{{ row.section_id }}/rows/{{ row.id }}/edit">Edit Row</a></td>
-           <td><a data-confirm="Are you sure you want to delete this row?" data-method="delete" href="/sections/{{ row.section_id }}/rows/{{ row.id }}" rel="nofollow">Delete Row</td>
-         </tr>
-       </table>
-       <dir-pagination-controls pagination-id="rows">
-         [direction-links="true"]
-         [boundary-links="true"]
-       </dir-pagination-controls>
-     </div>
-  <% else %>
-    <h3>Current Venue Rows</h3>
-    <p>No rows have been added.</p>
+        <table class="table table-striped">
+          <tr>
+            <th width="150px" ng-click="sort('seat_section')">Section <span class="glyphicon sort-icon" ng-show="sortKey=='seat_section'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px" ng-click="sort('seat_row')">Row <span class="glyphicon sort-icon" ng-show="sortKey=='seat_row'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="120px" ng-click="sort('seat_number')">Seat Number <span class="glyphicon sort-icon" ng-show="sortKey=='seat_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px">Seat Photos</th>
+            <th width="100px">Add Your Own!</th>
+          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+            <th width="100px"></th>
+            <th width="100px"></th>
+          <% end %>
+          </tr>
+          <tr dir-paginate="seat in seatInfo.seats | orderBy:sortKey:reverse | filter:search | itemsPerPage: 10" pagination-id="seats">
+            <td>{{ seat.seat_section }}</td>
+            <td>{{ seat.seat_row }}</td>
+            <td>{{ seat.seat_number }}</td>
+            <td><a href="/seats/{{ seat.id }}/seat_photos">View Photos</a></td>
+            <td><a href="/seats/{{ seat.id }}/seat_photos/new">Add Photo</td>
+          <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+            <td width="100px"><a href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Edit Seat</a></td>
+            <td width="100px"><a data-confirm="Are you sure you want to delete this seat?" data-method="delete" href="/venues/{{ seat.venue_id }}/seats/{{ seat.id }}/edit">Delete Seat</a></td>
+          <% end %>
+          </tr>
+        </table>
+        <dir-pagination-controls pagination-id="seats">
+          [direction-links="true"]
+          [boundary-links="true"]
+        </dir-pagination-controls>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-</div>
+  <% if current_user && current_user.admin || current_user && current_user.id == @venue.user_id %>
+    <br>
+     <% if @sections[0] %>
+      <h3>Current Venue Sections</h3>
+      <br>
+      <div id="section-pages">
+        <form class="form-inline">
+          <div class="form-group">
+              <input type="text" ng-model="searchSection" class="form-control" placeholder="search sections">
+          </div>
+        </form>
+
+        <table class="table table-striped">
+          <tr>
+            <th width="150px" ng-click="sort('id')">Section ID <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px" ng-click="sort('name')">Section Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="120px" ng-click="sort('number_rows')">Number of Rows <span class="glyphicon sort-icon" ng-show="sortKey=='number_rows'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+            <th width="100px"></th>
+            <th width="100px"></th>
+            <th width="100px"></th>
+          </tr>
+          <tr dir-paginate="section in seatInfo.sections | orderBy:sortKey:reverse | filter:searchSection | itemsPerPage: 10" pagination-id="sections">
+            <td>{{ section.id }}</td>
+            <td>{{ section.name }}</td>
+            <td>{{ section.number_rows }}</td>
+            <td><a href="/sections/{{ section.id }}/rows/new">Add Row</a></td>
+            <td><a href="/venues/{{ section.venue_id }}/sections/{{ section.id }}/edit">Edit Section</a></td>
+            <td><a data-confirm="Are you sure you want to delete this section?" data-method="delete" href="/venues/{{ section.venue_id }}/sections/{{ section.id }}" rel="nofollow">Delete Section</a></td>
+          </tr>
+        </table>
+        <dir-pagination-controls pagination-id="sections">
+          [direction-links="true"]
+          [boundary-links="true"]
+        </dir-pagination-controls>
+      </div>
+    <% else %>
+      <h3>Current Venue Sections</h3>
+      <br>
+      <p>No sections have been added</p>
+    <% end %>
+    <br>
+    <% if @rows[0] %>
+      <h3>Current Venue Rows</h3>
+       <br>
+       <div id="row-pages">
+         <form class="form-inline">
+           <div class="form-group">
+               <input type="text" ng-model="searchRow" class="form-control" placeholder="search rows">
+           </div>
+         </form>
+
+         <table class="table table-striped">
+           <tr>
+             <th width="150px" ng-click="sort('id')">Row ID <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+             <th width="150px" ng-click="sort('section_id')">Section ID <span class="glyphicon sort-icon" ng-show="sortKey=='section_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+             <th width="100px" ng-click="sort('name')">Row Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+             <th width="120px" ng-click="sort('number_seats')">Number of Seats <span class="glyphicon sort-icon" ng-show="sortKey=='number_seats'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+             <th width="100px"></th>
+             <th width="100px"></th>
+           </tr>
+           <tr dir-paginate="row in seatInfo.rows | orderBy:sortKey:reverse | filter:searchRow | itemsPerPage: 10" pagination-id="rows">
+             <td>{{ row.id }}</td>
+             <td>{{ row.section_id }}</td>
+             <td>{{ row.name }}</td>
+             <td>{{ row.number_seats }}</td>
+             <td><a href="/sections/{{ row.section_id }}/rows/{{ row.id }}/edit">Edit Row</a></td>
+             <td><a data-confirm="Are you sure you want to delete this row?" data-method="delete" href="/sections/{{ row.section_id }}/rows/{{ row.id }}" rel="nofollow">Delete Row</td>
+           </tr>
+         </table>
+         <dir-pagination-controls pagination-id="rows">
+           [direction-links="true"]
+           [boundary-links="true"]
+         </dir-pagination-controls>
+       </div>
+    <% else %>
+      <h3>Current Venue Rows</h3>
+      <p>No rows have been added.</p>
+    <% end %>
+  <% end %>
+
+  </div>
 </div>
 
 <script>

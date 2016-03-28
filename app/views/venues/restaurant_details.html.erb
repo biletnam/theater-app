@@ -54,10 +54,8 @@
   <br>
 
   <div id="gp-info-hours-map" class="row">
-
     <div id="gp-loc-hours" class="col-md-6 row">
       <h3>Location</h3>
-
         <h5 class="address-gp" id="hours-margin"><%= @google_restaurant["formatted_address"] %></h5>
         <h5 class="address-gp" id="hours-margin"><%= @google_restaurant["formatted_phone_number"] %></h5>
       <br>
@@ -75,7 +73,6 @@
       <div id="map"></div>
     </div>
   </div>
-
   <br>
   <div id="reg-venue-reviews">
       <h3>Reviews</h3>
@@ -97,36 +94,36 @@
   <br>
 </div>
 
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @google_restaurant["geometry"]["location"]["lat"] %>, lng: <%= @google_restaurant["geometry"]["location"]["lng"] %>},
+      zoom: 17
+    });
 
-  <script>
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: <%= @google_restaurant["geometry"]["location"]["lat"] %>, lng: <%= @google_restaurant["geometry"]["location"]["lng"] %>},
-        zoom: 17
-      });
+    var infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
 
-      var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+      placeId: '<%= @restaurant_place_id %>'
+    }, function(place, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+            'Place ID: ' + place.place_id + '<br>' +
+            place.formatted_address + '</div>');
+          infowindow.open(map, this);
+        });
+      }
+    });
+  }
+</script>
 
-      service.getDetails({
-        placeId: '<%= @restaurant_place_id %>'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-              'Place ID: ' + place.place_id + '<br>' +
-              place.formatted_address + '</div>');
-            infowindow.open(map, this);
-          });
-        }
-      });
-    }
-  </script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['google_maps_js_key'] %>&libraries=places&callback=initMap">
-  </script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['google_maps_js_key'] %>&libraries=places&callback=initMap">
+</script>
 

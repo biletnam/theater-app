@@ -12,7 +12,6 @@ class GpRestaurant
     @photo_array = hash["photos"]
     @types = hash["types"]
     @vicinity = hash["vicinity"]
-    # @opening_hours_array = hash["opening_hours"]["weekday_text"]
     @reviews_array = hash["reviews"]
     @formatted_address = hash["formatted_address"]
     @phone = hash["formatted_phone_number"]

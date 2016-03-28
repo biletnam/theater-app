@@ -10,8 +10,8 @@
 <% end %>
 
   <h2>Add New Seat Photo</h2>
-  <h3>
-  Section: <%= @sg_seat.seat_section %>
+
+  <h3>Section: <%= @sg_seat.seat_section %>
   <br>Row: <%= @sg_seat.seat_row %>
   <br>Seat: <%= @sg_seat.seat_number %>
   <br></h3>
@@ -36,7 +36,6 @@
     <div><%= submit_tag "Submit Photo", :onclick => "showSpin()", :class => "back-button btn btn-default" %></div>
 
   <% end %> 
-</div>
 
 <script>
 

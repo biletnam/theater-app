@@ -1,4 +1,4 @@
 $(window).load(function() {
     // Animate loader off screen
-    $(".se-pre-con").fadeOut("fast");;
-  });
+  $(".se-pre-con").fadeOut("fast");;
+});

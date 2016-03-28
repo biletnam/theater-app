@@ -12,8 +12,7 @@
 
 <h3>Edit Scheduled Event Details</h3>
 
-  <%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events/#{@scheduled_event.id}", method: :patch do %>
-
+<%= form_tag "/venues/#{@event.venue.id}/events/#{@event.id}/scheduled_events/#{@scheduled_event.id}", method: :patch do %>
   <div>
     <%= label_tag "Date/Time of Event:" %>
     <%= datetime_select :scheduled_event, :date_time, ampm: true %>
@@ -25,5 +24,4 @@
   </div>
 
   <div id="submit-new"><%= submit_tag "Update Scheduled Event", :class => "back-button btn btn-default" %></div>
-
-  <% end %>
+<% end %>

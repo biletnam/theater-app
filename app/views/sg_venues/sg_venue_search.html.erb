@@ -3,8 +3,6 @@
 <% @sg_zip_theater_venues.uniq.each do |sg_zip_theater_venue| %>
   <h3><%= link_to sg_zip_theater_venue["name"], "/sg_venues/#{sg_zip_theater_venue["id"]}" %></h3>
   <%= sg_zip_theater_venue["address"] %>, <%= sg_zip_theater_venue["extended_address"] %>
-
   <hr>
-
 <% end %>
 

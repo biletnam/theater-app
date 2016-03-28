@@ -1,11 +1,8 @@
 class SgScheduledEvent < ActiveRecord::Base
 
-attr_reader :id
-attr_accessor :sg_event_id, :sg_venue_id, :venue_name, :street_address, :city_state, :zip_code, :buy_ticket_link, :name, :date_time, :lowest_price, :highest_price, :average_price
+  attr_reader :id
+  attr_accessor :sg_event_id, :sg_venue_id, :venue_name, :street_address, :city_state, :zip_code, :buy_ticket_link, :name, :date_time, :lowest_price, :highest_price, :average_price
 
-  # has_many :event_seats
-  # has_many :seats, through: :event_seats
-  # belongs_to :event
   belongs_to :sg_venue
 
   def initialize(hash)
@@ -22,7 +19,6 @@ attr_accessor :sg_event_id, :sg_venue_id, :venue_name, :street_address, :city_st
     @lowest_price = hash["stats"]["lowest_price"]
     @highest_price = hash["stats"]["highest_price"]
     @average_price = hash["stats"]["average_price"]
-
   end  
 
   def full_address
@@ -41,11 +37,4 @@ attr_accessor :sg_event_id, :sg_venue_id, :venue_name, :street_address, :city_st
     end
   end
 
-  # def self.order_by_date_venue(sg_venue_id)
-  #   order(:date_time).where(sg_venue_id: venue_id)
-  # end
-
-  # def self.order_by_date_event(sg_event_id)
-  #   order(:date_time).where(sg_event_id: event_id)
-  # end
 end

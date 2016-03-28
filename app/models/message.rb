@@ -10,7 +10,6 @@ class Message < MailForm::Base
       :subject => "Contact Message",
       :to => ENV["admin_email"],
       :from => %("#{name}" <#{email}>)
-
     }
   end
 
