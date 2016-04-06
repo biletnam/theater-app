@@ -50,5 +50,9 @@ test:
 production:
   <<: *default
   database: theater-app_production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   username: theater-app
   password: <%= ENV['THEATER-APP_DATABASE_PASSWORD'] %>
+

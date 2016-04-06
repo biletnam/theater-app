@@ -47,6 +47,9 @@ gem 'rabl-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem 'mail_form'
 
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
