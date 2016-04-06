@@ -407,7 +407,7 @@ a:hover {
 }
 
 #content2 {
-  background: url(../img/grid_noise.png) repeat;
+  background: image-url(../img/grid_noise.png) repeat;
   background-color: #ebebeb;
 }
 
@@ -820,7 +820,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: image-url(../img/testimonial-bg.jpg) no-repeat;
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;
@@ -831,7 +831,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 } 
 
 .signup {
-  background: url(../img/grid_noise.png) repeat;
+  background: image-url(../img/grid_noise.png) repeat;
   background-color: #ebebeb;
   padding: 40px;
   margin-top: 22px;
@@ -908,7 +908,7 @@ ul.social-icons-signup li a:hover {
    Latest Work and Portfolio Styles
    ========================================================================== */
 #latest-work {
-  background: url(../img/grid_noise.png) repeat;
+  background: image-url(../img/grid_noise.png) repeat;
   background-color: #ebebeb;
 }
 
@@ -971,7 +971,7 @@ ul.icons li {
    Testimonial styles
    ========================================================================== */
 #testimonial {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: image-url(../img/testimonial-bg.jpg) no-repeat;
   background-size: cover;
 }
 
